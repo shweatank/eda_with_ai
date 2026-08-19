@@ -1,0 +1,62 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x59fbbd2d3ce0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x59fbbd2d3e70 .scope module, "all_gates" "all_gates" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "and_y";
+    .port_info 3 /OUTPUT 1 "or_y";
+    .port_info 4 /OUTPUT 1 "not_y";
+    .port_info 5 /OUTPUT 1 "nand_y";
+    .port_info 6 /OUTPUT 1 "nor_y";
+    .port_info 7 /OUTPUT 1 "xor_y";
+    .port_info 8 /OUTPUT 1 "xnor_y";
+o0x768068ce50a8 .functor BUFZ 1, C4<z>; HiZ drive
+o0x768068ce5108 .functor BUFZ 1, C4<z>; HiZ drive
+L_0x59fbbd2e6070 .functor AND 1, o0x768068ce50a8, o0x768068ce5108, C4<1>, C4<1>;
+L_0x59fbbd2e6100 .functor OR 1, o0x768068ce50a8, o0x768068ce5108, C4<0>, C4<0>;
+L_0x59fbbd2e61c0 .functor NOT 1, o0x768068ce50a8, C4<0>, C4<0>, C4<0>;
+L_0x59fbbd2e6230 .functor AND 1, o0x768068ce50a8, o0x768068ce5108, C4<1>, C4<1>;
+L_0x59fbbd2e6360 .functor NOT 1, L_0x59fbbd2e6230, C4<0>, C4<0>, C4<0>;
+L_0x59fbbd2e63d0 .functor OR 1, o0x768068ce50a8, o0x768068ce5108, C4<0>, C4<0>;
+L_0x59fbbd2e6510 .functor NOT 1, L_0x59fbbd2e63d0, C4<0>, C4<0>, C4<0>;
+L_0x59fbbd2e6580 .functor XOR 1, o0x768068ce50a8, o0x768068ce5108, C4<0>, C4<0>;
+L_0x59fbbd2e6640 .functor XOR 1, o0x768068ce50a8, o0x768068ce5108, C4<0>, C4<0>;
+L_0x59fbbd2e66e0 .functor NOT 1, L_0x59fbbd2e6640, C4<0>, C4<0>, C4<0>;
+v0x59fbbd298620_0 .net *"_ivl_10", 0 0, L_0x59fbbd2e63d0;  1 drivers
+v0x59fbbd2e56f0_0 .net *"_ivl_16", 0 0, L_0x59fbbd2e6640;  1 drivers
+v0x59fbbd2e57d0_0 .net *"_ivl_6", 0 0, L_0x59fbbd2e6230;  1 drivers
+v0x59fbbd2e5890_0 .net "a", 0 0, o0x768068ce50a8;  0 drivers
+v0x59fbbd2e5950_0 .net "and_y", 0 0, L_0x59fbbd2e6070;  1 drivers
+v0x59fbbd2e5a10_0 .net "b", 0 0, o0x768068ce5108;  0 drivers
+v0x59fbbd2e5ad0_0 .net "nand_y", 0 0, L_0x59fbbd2e6360;  1 drivers
+v0x59fbbd2e5b90_0 .net "nor_y", 0 0, L_0x59fbbd2e6510;  1 drivers
+v0x59fbbd2e5c50_0 .net "not_y", 0 0, L_0x59fbbd2e61c0;  1 drivers
+v0x59fbbd2e5d10_0 .net "or_y", 0 0, L_0x59fbbd2e6100;  1 drivers
+v0x59fbbd2e5dd0_0 .net "xnor_y", 0 0, L_0x59fbbd2e66e0;  1 drivers
+v0x59fbbd2e5e90_0 .net "xor_y", 0 0, L_0x59fbbd2e6580;  1 drivers
+S_0x59fbbd298490 .scope module, "cocotb_iverilog_dump" "cocotb_iverilog_dump" 4 1;
+ .timescale -9 -12;
+    .scope S_0x59fbbd298490;
+T_0 ;
+    %vpi_call/w 4 3 "$dumpfile", "sim_build/all_gates.fst" {0 0 0};
+    %vpi_call/w 4 4 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x59fbbd2d3e70 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/Desktop/RTL_Verification_API/projects/all_gates/all_gates.sv";
+    "sim_build/cocotb_iverilog_dump.v";

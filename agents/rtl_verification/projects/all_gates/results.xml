@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787124183" />
+    <testcase name="test_all_gate_combinations" classname="test_all_gates" file="/home/mirafra/Desktop/RTL_Verification_API/projects/all_gates/test_all_gates.py" lineno="5" time="0.0036382675170898438" sim_time_ns="4.001" ratio_time="1099.6992335517693" />
+  </testsuite>
+</testsuites>
