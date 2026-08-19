@@ -1,0 +1,24 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787120967" />
+    <testcase name="test_and" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="67" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_or" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="76" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_not" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="85" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_xor" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="92" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_nand" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="101" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_nor" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="110" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_xnor" classname="test_gates" file="/Users/sonam/Documents/logic_gates/test_gates.py" lineno="119" time="0.00029587745666503906" sim_time_ns="4.0" ratio_time="13519.110394842868" />
+  </testsuite>
+</testsuites>
