@@ -1,0 +1,30 @@
+$date
+	Tue Aug 18 15:40:46 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module nor_gate $end
+$var wire 1 ! a $end
+$var wire 1 " b $end
+$var wire 1 # y $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1#
+0"
+0!
+$end
+#1000
+0#
+1"
+#2000
+0"
+1!
+#3000
+1"
+#4000
