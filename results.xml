@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787122092" />
+    <testcase name="test_or_gate_basic" classname="test_or" file="/home/mirafra/or_gate/test_or.py" lineno="5" time="0.0009653568267822266" sim_time_ns="8.0" ratio_time="8287.091133613238" />
+  </testsuite>
+</testsuites>
