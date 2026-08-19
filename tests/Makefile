@@ -4,6 +4,7 @@ VERILOG_SOURCES = $(PWD)/rtl/basic_gates.sv
 
 .PHONY: and or not nand nor clean
 
+
 and:
 	TOPLEVEL=and_gate \
 	MODULE=test_and_gate \
