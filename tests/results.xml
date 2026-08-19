@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787131498" />
+    <testcase name="test_half_adder" classname="test_and_gate" file="/home/mirafra/verilog_projects/eda_with_ai/tests/test/test_and_gate.py" lineno="4" time="0.0021131038665771484" sim_time_ns="4.0" ratio_time="1892.950016924292" />
+  </testsuite>
+</testsuites>

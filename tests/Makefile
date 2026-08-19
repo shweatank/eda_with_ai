@@ -1,13 +1,50 @@
 SIM = icarus
 
-TOPLEVEL_LANG = verilog
+VERILOG_SOURCES = $(PWD)/rtl/basic_gates.sv
 
-VERILOG_SOURCES = $(PWD)/basic_gates.sv
+.PHONY: and or not nand nor clean
 
-COCOTB_TOPLEVEL = and_gate
+and:
+	TOPLEVEL=and_gate \
+	MODULE=test_and_gate \
+	PYTHONPATH=$(PWD)/test \
+	VERILOG_SOURCES=$(VERILOG_SOURCES) \
+	SIM=$(SIM) \
+	make -f $(shell cocotb-config --makefiles)/Makefile.sim
 
-COCOTB_TEST_MODULES = test_half_adder
+or:
+	TOPLEVEL=or_gate \
+	MODULE=test_or_gate \
+	PYTHONPATH=$(PWD)/test \
+	VERILOG_SOURCES=$(VERILOG_SOURCES) \
+	SIM=$(SIM) \
+	make -f $(shell cocotb-config --makefiles)/Makefile.sim
 
-COMPILE_ARGS += -g2012
+not:
+	TOPLEVEL=not_gate \
+	MODULE=test_not_gate \
+	PYTHONPATH=$(PWD)/test \
+	VERILOG_SOURCES=$(VERILOG_SOURCES) \
+	SIM=$(SIM) \
+	make -f $(shell cocotb-config --makefiles)/Makefile.sim
 
-include $(shell cocotb-config --makefiles)/Makefile.sim
+nand:
+	TOPLEVEL=nand_gate \
+	MODULE=test_nand_gate \
+	PYTHONPATH=$(PWD)/test \
+	VERILOG_SOURCES=$(VERILOG_SOURCES) \
+	SIM=$(SIM) \
+	make -f $(shell cocotb-config --makefiles)/Makefile.sim
+
+nor:
+	TOPLEVEL=nor_gate \
+	MODULE=test_nor_gate \
+	PYTHONPATH=$(PWD)/test \
+	VERILOG_SOURCES=$(VERILOG_SOURCES) \
+	SIM=$(SIM) \
+	make -f $(shell cocotb-config --makefiles)/Makefile.sim
+
+clean:
+	rm -rf sim_build
+	rm -f results.xml
+	rm -f *.vcd
