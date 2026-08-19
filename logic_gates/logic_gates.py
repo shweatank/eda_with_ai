@@ -1,0 +1,123 @@
+import cocotb
+from cocotb.triggers import Timer
+
+
+@cocotb.test()
+async def test_and_gate(dut):
+    dut.a.value = 0
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.and_y.value == 0
+    print("PASS: 0 AND 0 = 0")
+
+    dut.a.value = 0
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.and_y.value == 0
+    print("PASS: 0 AND 1 = 0")
+
+    dut.a.value = 1
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.and_y.value == 0
+    print("PASS: 1 AND 0 = 0")
+
+    dut.a.value = 1
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.and_y.value == 1
+    print("PASS: 1 AND 1 = 1")
+
+
+@cocotb.test()
+async def test_or_gate(dut):
+    dut.a.value = 0
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.or_y.value == 0
+    print("PASS: 0 OR 0 = 0")
+
+    dut.a.value = 0
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.or_y.value == 1
+    print("PASS: 0 OR 1 = 1")
+
+    dut.a.value = 1
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.or_y.value == 1
+    print("PASS: 1 OR 0 = 1")
+
+    dut.a.value = 1
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.or_y.value == 1
+    print("PASS: 1 OR 1 = 1")
+
+
+@cocotb.test()
+async def test_not_gate(dut):
+    dut.a.value = 0
+    await Timer(1, units="ns")
+    assert dut.not_y.value == 1
+    print("PASS: NOT 0 = 1")
+
+    dut.a.value = 1
+    await Timer(1, units="ns")
+    assert dut.not_y.value == 0
+    print("PASS: NOT 1 = 0")
+
+
+@cocotb.test()
+async def test_nand_gate(dut):
+    dut.a.value = 0
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.nand_y.value == 1
+    print("PASS: 0 NAND 0 = 1")
+
+    dut.a.value = 0
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.nand_y.value == 1
+    print("PASS: 0 NAND 1 = 1")
+
+    dut.a.value = 1
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.nand_y.value == 1
+    print("PASS: 1 NAND 0 = 1")
+
+    dut.a.value = 1
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.nand_y.value == 0
+    print("PASS: 1 NAND 1 = 0")
+
+
+@cocotb.test()
+async def test_nor_gate(dut):
+    dut.a.value = 0
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.nor_y.value == 1
+    print("PASS: 0 NOR 0 = 1")
+
+    dut.a.value = 0
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.nor_y.value == 0
+    print("PASS: 0 NOR 1 = 0")
+
+    dut.a.value = 1
+    dut.b.value = 0
+    await Timer(1, units="ns")
+    assert dut.nor_y.value == 0
+    print("PASS: 1 NOR 0 = 0")
+
+    dut.a.value = 1
+    dut.b.value = 1
+    await Timer(1, units="ns")
+    assert dut.nor_y.value == 0
+    print("PASS: 1 NOR 1 = 0")

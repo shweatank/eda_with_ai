@@ -1,0 +1,45 @@
+$date
+	Wed Aug 19 09:26:04 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module logic_gates $end
+$var wire 1 ! a $end
+$var wire 1 " and_y $end
+$var wire 1 # b $end
+$var wire 1 $ nand_y $end
+$var wire 1 % nor_y $end
+$var wire 1 & not_y $end
+$var wire 1 ' or_y $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0'
+1&
+1%
+1$
+0#
+0"
+0!
+$end
+#1000
+0%
+1'
+1#
+#2000
+0&
+0#
+1!
+#3000
+0$
+1"
+1#
+#4000
