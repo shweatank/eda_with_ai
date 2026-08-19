@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RTL AND Gate</title>
+</head>
+
+<body>
+
+<h1>RTL AND Gate</h1>
+
+<label>A:</label>
+<select id="a">
+    <option value="0">0</option>
+    <option value="1">1</option>
+</select>
+
+<br><br>
+
+<label>B:</label>
+<select id="b">
+    <option value="0">0</option>
+    <option value="1">1</option>
+</select>
+
+<br><br>
+
+<button onclick="runSimulation()">Run RTL Simulation</button>
+
+<h2>Result</h2>
+
+<p id="result">Waiting...</p>
+
+<script>
+
+async function runSimulation() {
+
+    const a = Number(document.getElementById("a").value);
+    const b = Number(document.getElementById("b").value);
+
+    const response = await fetch("/run", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            a: a,
+            b: b
+        })
+    });
+
+    const data = await response.json();
+
+    document.getElementById("result").innerText =
+        `A = ${data.a}, B = ${data.b}, Y = ${data.y}, Status = ${data.status}`;
+}
+
+</script>
+
+</body>
+</html>

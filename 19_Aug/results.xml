@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787122068" />
+    <testcase name="test_and_gate" classname="test_and" file="/home/mirafra/vlsi/test_and.py" lineno="6" time="0.0002689361572265625" sim_time_ns="1.0" ratio_time="3718.354609929078" />
+  </testsuite>
+</testsuites>
