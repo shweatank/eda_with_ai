@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+venv/
+.env
+.env.*
+
+# Generated simulator output
+sim_build/
+*.vcd
+results.xml
+xt2/
