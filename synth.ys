@@ -1,0 +1,4 @@
+# synth.ys
+read_verilog logic_model.sv
+synth -top logic_model
+write_verilog netlist_logic_model.v

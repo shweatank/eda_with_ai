@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logic Gates Test Runner</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --panel: #171a23;
+    --border: #2a2e3a;
+    --text: #e6e8ee;
+    --muted: #8b90a0;
+    --accent: #6ee7b7;
+    --fail: #f87171;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  p.subtitle {
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 28px;
+    font-size: 14px;
+  }
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  button {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  button.primary {
+    background: var(--accent);
+    color: #0f1117;
+    font-weight: 600;
+    border: none;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .card-header h3 {
+    margin: 0;
+    font-size: 16px;
+  }
+  .status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .status.idle { background: #2a2e3a; color: var(--muted); }
+  .status.running { background: #3730a3; color: #c7d2fe; }
+  .status.pass { background: #064e3b; color: var(--accent); }
+  .status.fail { background: #450a0a; color: var(--fail); }
+
+  .pass-lines {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: pre-wrap;
+    margin: 8px 0;
+  }
+  .analysis {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text);
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  .analysis-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .run-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .error-text {
+    color: var(--fail);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Logic Gates Test Runner</h1>
+<p class="subtitle">Runs each gate's cocotb simulation and shows the AI-generated explanation.</p>
+
+<div class="toolbar">
+  <button class="primary" id="runAllBtn">Run All Gates</button>
+</div>
+
+<div class="grid" id="gateGrid"></div>
+
+<script>
+const grid = document.getElementById("gateGrid");
+const runAllBtn = document.getElementById("runAllBtn");
+let gates = [];
+
+async function loadGates() {
+  const res = await fetch("/api/gates");
+  gates = await res.json();
+  renderCards();
+}
+
+function renderCards() {
+  grid.innerHTML = "";
+  gates.forEach(g => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = `card-${g.toplevel}`;
+    card.innerHTML = `
+      <div class="card-header">
+        <h3>${g.label}</h3>
+        <span class="status idle" id="status-${g.toplevel}">Idle</span>
+      </div>
+      <div class="pass-lines" id="passlines-${g.toplevel}"></div>
+      <div class="analysis" id="analysis-${g.toplevel}" style="display:none;">
+        <div class="analysis-label">Gemini analysis</div>
+        <div id="analysistext-${g.toplevel}"></div>
+      </div>
+      <button class="run-btn" onclick="runGate('${g.toplevel}', '${g.testcase}')">Run ${g.label}</button>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function setStatus(toplevel, statusClass, statusText) {
+  const el = document.getElementById(`status-${toplevel}`);
+  el.className = `status ${statusClass}`;
+  el.textContent = statusText;
+}
+
+async function runGate(toplevel, testcase) {
+  setStatus(toplevel, "running", "Running…");
+  document.getElementById(`passlines-${toplevel}`).textContent = "";
+  document.getElementById(`analysis-${toplevel}`).style.display = "none";
+
+  try {
+    const res = await fetch(`/api/run/${toplevel}/${testcase}`);
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.detail || "Unknown error");
+    }
+    const data = await res.json();
+
+    setStatus(toplevel, data.success ? "pass" : "fail", data.success ? "Pass" : "Fail");
+
+    if (data.pass_lines.length > 0) {
+      document.getElementById(`passlines-${toplevel}`).textContent = data.pass_lines.join("\n");
+    } else if (!data.success) {
+      // No PASS lines and it failed -- show raw output so the error is visible
+      document.getElementById(`passlines-${toplevel}`).innerHTML =
+        `<span class="error-text">${data.raw_output.slice(-1500)}</span>`;
+    }
+
+    if (data.analysis) {
+      document.getElementById(`analysistext-${toplevel}`).textContent = data.analysis;
+      document.getElementById(`analysis-${toplevel}`).style.display = "block";
+    }
+  } catch (e) {
+    setStatus(toplevel, "fail", "Error");
+    document.getElementById(`passlines-${toplevel}`).innerHTML =
+      `<span class="error-text">${e.message}</span>`;
+  }
+}
+
+runAllBtn.addEventListener("click", async () => {
+  runAllBtn.disabled = true;
+  for (const g of gates) {
+    await runGate(g.toplevel, g.testcase);
+  }
+  runAllBtn.disabled = false;
+});
+
+loadGates();
+</script>
+
+</body>
+</html>
