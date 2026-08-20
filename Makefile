@@ -29,11 +29,21 @@
 #include $(shell cocotb-config --makefiles)/Makefile.sim
 
 # Makefile for adder
+#TOPLEVEL_LANG = verilog
+#SIM ?= icarus
+#
+#VERILOG_SOURCES = $(PWD)/subs.v
+#TOPLEVEL = subs
+#MODULE = test_subs
+#
+#include $(shell cocotb-config --makefiles)/Makefile.sim
+
+# Makefile for adder
 TOPLEVEL_LANG = verilog
 SIM ?= icarus
 
-VERILOG_SOURCES = $(PWD)/subs.v
-TOPLEVEL = subs
-MODULE = test_subs
+VERILOG_SOURCES = $(PWD)/alu.v
+TOPLEVEL = alu
+MODULE = test_alu
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
