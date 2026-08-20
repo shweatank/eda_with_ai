@@ -1,0 +1,36 @@
+digraph "all_gates" {
+label="all_gates";
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="a", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="b", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="y_and", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="y_nand", color="black", fontcolor="black" ];
+n5 [ shape=octagon, label="y_nor", color="black", fontcolor="black" ];
+n6 [ shape=octagon, label="y_not", color="black", fontcolor="black" ];
+n7 [ shape=octagon, label="y_or", color="black", fontcolor="black" ];
+n8 [ shape=octagon, label="y_xor", color="black", fontcolor="black" ];
+c10 [ shape=record, label="{{<p1> a|<p2> b}|u_and\nand_gate|{<p9> y}}" ];
+c11 [ shape=record, label="{{<p1> a|<p2> b}|u_nand\nnand_gate|{<p9> y}}" ];
+c12 [ shape=record, label="{{<p1> a|<p2> b}|u_nor\nnor_gate|{<p9> y}}" ];
+c13 [ shape=record, label="{{<p1> a}|u_not\nnot_gate|{<p9> y}}" ];
+c14 [ shape=record, label="{{<p1> a|<p2> b}|u_or\nor_gate|{<p9> y}}" ];
+c15 [ shape=record, label="{{<p1> a|<p2> b}|u_xor\nxor_gate|{<p9> y}}" ];
+n1:e -> c10:p1:w [color="black", label=""];
+n1:e -> c11:p1:w [color="black", label=""];
+n1:e -> c12:p1:w [color="black", label=""];
+n1:e -> c13:p1:w [color="black", label=""];
+n1:e -> c14:p1:w [color="black", label=""];
+n1:e -> c15:p1:w [color="black", label=""];
+n2:e -> c10:p2:w [color="black", label=""];
+n2:e -> c11:p2:w [color="black", label=""];
+n2:e -> c12:p2:w [color="black", label=""];
+n2:e -> c14:p2:w [color="black", label=""];
+n2:e -> c15:p2:w [color="black", label=""];
+c10:p9:e -> n3:w [color="black", label=""];
+c11:p9:e -> n4:w [color="black", label=""];
+c12:p9:e -> n5:w [color="black", label=""];
+c13:p9:e -> n6:w [color="black", label=""];
+c14:p9:e -> n7:w [color="black", label=""];
+c15:p9:e -> n8:w [color="black", label=""];
+}
