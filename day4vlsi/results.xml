@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787206896" />
+    <testcase name="test_logic_or_and" classname="testbench_logic_or_and" file="/home/mirafra/vlsi/eda_with_ai/day4vlsi/testbench_logic_or_and.py" lineno="5" time="0.0011031627655029297" sim_time_ns="8.0" ratio_time="7251.876377782581" />
+  </testsuite>
+</testsuites>
