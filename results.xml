@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787221552" />
+    <testcase name="test_edge_cases" classname="test_subs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_subs.py" lineno="27" time="0.0008029937744140625" sim_time_ns="18.0" ratio_time="22416.11401425178" />
+    <testcase name="test_random" classname="test_subs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_subs.py" lineno="40" time="0.012928009033203125" sim_time_ns="2000.0" ratio_time="154702.8622012393" />
+    <testcase name="test_signed_edge_cases" classname="test_subs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_subs.py" lineno="57" time="0.00023508071899414062" sim_time_ns="18.0" ratio_time="76569.44421906694" />
+  </testsuite>
+</testsuites>
