@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787226324" />
+    <testcase name="test_unsigned_div" classname="test_unsigned_div" file="/home/mirafra/vlsi/Arithmetic/unsigned_div/test_unsigned_div.py" lineno="4" time="0.002820730209350586" sim_time_ns="1.0" ratio_time="354.51813033555914">
+      <failure error_type="ValueError" error_msg="Can't convert LogicArray to int: it contains non-0/1 values" />
+    </testcase>
+  </testsuite>
+</testsuites>

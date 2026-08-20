@@ -1,0 +1,39 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x562b5467bd90 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x562b5467bf20 .scope module, "signed_sum" "signed_sum" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 9 "sum";
+v0x562b5468d7e0_0 .net/s *"_ivl_0", 8 0, L_0x562b546c4a00;  1 drivers
+v0x562b5468dbd0_0 .net/s *"_ivl_2", 8 0, L_0x562b546c4ad0;  1 drivers
+o0x7fc1e6861078 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x562b546c46b0_0 .net/s "a", 7 0, o0x7fc1e6861078;  0 drivers
+o0x7fc1e68610a8 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x562b546c4770_0 .net/s "b", 7 0, o0x7fc1e68610a8;  0 drivers
+v0x562b546c4850_0 .net/s "sum", 8 0, L_0x562b546c4bd0;  1 drivers
+L_0x562b546c4a00 .extend/s 9, o0x7fc1e6861078;
+L_0x562b546c4ad0 .extend/s 9, o0x7fc1e68610a8;
+L_0x562b546c4bd0 .arith/sum 9, L_0x562b546c4a00, L_0x562b546c4ad0;
+    .scope S_0x562b5467bf20;
+T_0 ;
+    %vpi_call/w 3 10 "$dumpfile", "dump_signed_sum.vcd" {0 0 0};
+    %vpi_call/w 3 11 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x562b5467bf20 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/Arithmetic/signed_sum/signed_sum.sv";

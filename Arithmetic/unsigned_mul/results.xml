@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787223901" />
+    <testcase name="test_unsigned_mul" classname="test_unsigned_mul" file="/home/mirafra/vlsi/Arithmetic/unsigned_mul/test_unsigned_mul.py" lineno="4" time="0.0007700920104980469" sim_time_ns="6.0" ratio_time="7791.276780185758" />
+  </testsuite>
+</testsuites>

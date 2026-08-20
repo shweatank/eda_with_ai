@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787215270" />
+    <testcase name="test_sum" classname="test_sum" file="/home/mirafra/vlsi/Arithmetic/sum/test_sum.py" lineno="21" time="0.0008146762847900391" sim_time_ns="4.0" ratio_time="4909.925665788704">
+      <failure error_type="AssertionError" error_msg="Expected -2, got 254" />
+    </testcase>
+  </testsuite>
+</testsuites>

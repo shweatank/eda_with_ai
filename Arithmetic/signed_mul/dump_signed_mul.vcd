@@ -1,0 +1,42 @@
+$date
+	Thu Aug 20 16:42:49 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module signed_mul $end
+$var wire 8 ! a [7:0] $end
+$var wire 8 " b [7:0] $end
+$var wire 16 # product [15:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 #
+b11111111 "
+b11111111 !
+$end
+#1000
+b11 "
+b1111111111110001 #
+b11111011 !
+#2000
+b1001 "
+b1001000 #
+b1000 !
+#3000
+b11110111 "
+b1001000 #
+b11111000 !
+#4000
+b10 "
+b11111110 #
+b1111111 !
+#5000
+b11111111 "
+b10000000 #
+b10000000 !
+#6000

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787220004" />
+    <testcase name="test_signed_sum" classname="test_signed_sum" file="/home/mirafra/vlsi/Arithmetic/signed_sum/test_signed_sum.py" lineno="21" time="0.0012984275817871094" sim_time_ns="6.0" ratio_time="4620.973925817114" />
+  </testsuite>
+</testsuites>
