@@ -1,0 +1,40 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x559366bcbd90 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x559366bcbf20 .scope module, "combo_logic" "combo_logic" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "c";
+    .port_info 3 /OUTPUT 1 "y";
+o0x7f62e6ab3048 .functor BUFZ 1, C4<z>; HiZ drive
+o0x7f62e6ab3078 .functor BUFZ 1, C4<z>; HiZ drive
+L_0x559366c14060 .functor AND 1, o0x7f62e6ab3048, o0x7f62e6ab3078, C4<1>, C4<1>;
+o0x7f62e6ab30a8 .functor BUFZ 1, C4<z>; HiZ drive
+L_0x559366c14150 .functor OR 1, L_0x559366c14060, o0x7f62e6ab30a8, C4<0>, C4<0>;
+v0x559366bf2370_0 .net *"_ivl_0", 0 0, L_0x559366c14060;  1 drivers
+v0x559366c13c80_0 .net "a", 0 0, o0x7f62e6ab3048;  0 drivers
+v0x559366c13d40_0 .net "b", 0 0, o0x7f62e6ab3078;  0 drivers
+v0x559366c13e10_0 .net "c", 0 0, o0x7f62e6ab30a8;  0 drivers
+v0x559366c13ed0_0 .net "y", 0 0, L_0x559366c14150;  1 drivers
+    .scope S_0x559366bcbf20;
+T_0 ;
+    %vpi_call/w 3 13 "$dumpfile", "dump.vcd" {0 0 0};
+    %vpi_call/w 3 14 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x559366bcbf20 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/Music/Combinationalcircuit/combo_logic.sv";

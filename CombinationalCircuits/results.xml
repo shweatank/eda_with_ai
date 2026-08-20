@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787206078" />
+    <testcase name="test_combo_logic" classname="test_combo" file="/home/mirafra/Music/Combinationalcircuit/test_combo.py" lineno="4" time="0.000640869140625" sim_time_ns="8.0" ratio_time="12483.047619047618" />
+  </testsuite>
+</testsuites>
