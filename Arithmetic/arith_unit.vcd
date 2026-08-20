@@ -1,0 +1,29 @@
+$date
+	Thu Aug 20 17:26:51 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module arith_unit $end
+$var wire 8 ! a [7:0] $end
+$var wire 8 " b [7:0] $end
+$var parameter 32 # OP $end
+$var parameter 32 $ WIDTH $end
+$var reg 16 % y [15:0] $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1000 $
+b10 #
+$end
+#0
+$dumpvars
+b100000000000000 %
+b10000000 "
+b10000000 !
+$end
+#1001

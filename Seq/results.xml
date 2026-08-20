@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787217655" />
+    <testcase name="test_add" classname="test_add" file="/home/mirafra/Desktop/eda_with_ai/Seq/test_add.py" lineno="4" time="8.64587688446045" sim_time_ns="65536.001" ratio_time="7580.029403123963" />
+  </testsuite>
+</testsuites>
