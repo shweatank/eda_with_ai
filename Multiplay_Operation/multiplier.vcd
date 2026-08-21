@@ -1,0 +1,57 @@
+$date
+	Fri Aug 21 10:00:58 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_multiplier $end
+$var wire 8 ! product [7:0] $end
+$var wire 1 " overflow $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % is_signed $end
+$scope module uut $end
+$var wire 4 & a [3:0] $end
+$var wire 4 ' b [3:0] $end
+$var wire 1 % is_signed $end
+$var wire 8 ( unsigned_prod [7:0] $end
+$var wire 8 ) signed_prod [7:0] $end
+$var wire 8 * product [7:0] $end
+$var reg 1 " overflow $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b110 *
+b110 )
+b110 (
+b10 '
+b11 &
+0%
+b10 $
+b11 #
+0"
+b110 !
+$end
+#10
+1"
+b11110 !
+b11110 *
+b11110 (
+b11111110 )
+b1111 #
+b1111 &
+#20
+0"
+b11111010 !
+b11111010 *
+1%
+b11010 (
+b11111010 )
+b1101 #
+b1101 &
+#30
