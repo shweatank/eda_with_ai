@@ -1,0 +1,61 @@
+$date
+	Fri Aug 21 11:50:42 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_alu $end
+$var wire 8 ! result [7:0] $end
+$var wire 1 " overflow $end
+$var wire 1 # div_by_zero $end
+$var wire 1 $ cout_bout $end
+$var reg 4 % a [3:0] $end
+$var reg 4 & b [3:0] $end
+$var reg 1 ' cin $end
+$var reg 1 ( is_signed $end
+$var reg 3 ) opcode [2:0] $end
+$scope module uut $end
+$var wire 4 * a [3:0] $end
+$var wire 4 + b [3:0] $end
+$var wire 1 ' cin $end
+$var wire 1 ( is_signed $end
+$var wire 3 , opcode [2:0] $end
+$var wire 5 - sub_ext [4:0] $end
+$var wire 8 . mul_unsigned [7:0] $end
+$var wire 8 / mul_signed [7:0] $end
+$var wire 4 0 div_r [3:0] $end
+$var wire 4 1 div_q [3:0] $end
+$var wire 1 # div_by_zero $end
+$var wire 5 2 add_ext [4:0] $end
+$var reg 1 $ cout_bout $end
+$var reg 1 " overflow $end
+$var reg 8 3 result [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1000 3
+b1000 2
+b111 1
+b0 0
+b111 /
+b111 .
+b10110 -
+b1 ,
+b1 +
+b111 *
+b1 )
+1(
+0'
+b1 &
+b111 %
+0$
+0#
+1"
+b1000 !
+$end
+#10
