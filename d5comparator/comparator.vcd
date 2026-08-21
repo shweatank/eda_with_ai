@@ -1,0 +1,61 @@
+$date
+	Fri Aug 21 15:17:10 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module comparator $end
+$var wire 8 ! a [7:0] $end
+$var wire 8 " b [7:0] $end
+$var wire 1 # less $end
+$var wire 1 $ greater $end
+$var wire 1 % equal $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1%
+0$
+0#
+b0 "
+b0 !
+$end
+#1000
+b101 "
+1%
+0$
+b101 !
+#2000
+0%
+1$
+b1010 !
+#3000
+1#
+b1010 "
+0%
+0$
+b101 !
+#4000
+b0 "
+1$
+0#
+b11111111 !
+#5000
+1#
+b11111111 "
+0%
+0$
+b0 !
+#6000
+1%
+0#
+b11111111 !
+#7000
+b10000000 "
+0%
+1#
+b1111111 !
+#8000

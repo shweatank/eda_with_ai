@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Decoder 2-to-4 Simulation</title>
+</head>
+<body>
+    <h1>Run 2-to-4 Decoder Simulation</h1>
+    <button onclick="runDecoder()">Run Decoder</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function runDecoder() {
+            const response = await fetch("/run_decoder", { method: "POST" });
+            const data = await response.json();
+            document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>

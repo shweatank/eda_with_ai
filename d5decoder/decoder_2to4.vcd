@@ -1,0 +1,29 @@
+$date
+	Fri Aug 21 16:08:01 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module decoder_2to4 $end
+$var wire 2 ! a [1:0] $end
+$var reg 4 " y [3:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 "
+b0 !
+$end
+#1000
+b10 "
+b1 !
+#2000
+b100 "
+b10 !
+#3000
+b1000 "
+b11 !
+#4000

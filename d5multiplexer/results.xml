@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787302004" />
+    <testcase name="test_mux4" classname="testbench_multiplexer" file="/home/mirafra/vlsi/eda_with_ai/d5multiplexer/testbench_multiplexer.py" lineno="4" time="0.0009520053863525391" sim_time_ns="8.0" ratio_time="8403.31379914851" />
+  </testsuite>
+</testsuites>

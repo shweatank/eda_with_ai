@@ -1,0 +1,39 @@
+$date
+	Fri Aug 21 14:26:43 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module logic_gates $end
+$var wire 1 ! a $end
+$var wire 1 " b $end
+$var reg 1 # and_out $end
+$var reg 1 $ nand_out $end
+$var reg 1 % nor_out $end
+$var reg 1 & or_out $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0&
+1%
+1$
+0#
+0"
+0!
+$end
+#1000
+0%
+1&
+1"
+#2000
+0"
+1!
+#3000
+0$
+1#
+1"
+#4000
