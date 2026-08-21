@@ -1,0 +1,32 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5593af167d90 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x5593af167f20 .scope module, "mux_3bit" "mux_3bit" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 3 "a";
+    .port_info 1 /INPUT 3 "b";
+    .port_info 2 /INPUT 1 "sel";
+    .port_info 3 /OUTPUT 3 "y";
+o0x7f4d81a38018 .functor BUFZ 3, C4<zzz>; HiZ drive
+v0x5593af179bd0_0 .net "a", 2 0, o0x7f4d81a38018;  0 drivers
+o0x7f4d81a38048 .functor BUFZ 3, C4<zzz>; HiZ drive
+v0x5593af1af400_0 .net "b", 2 0, o0x7f4d81a38048;  0 drivers
+o0x7f4d81a38078 .functor BUFZ 1, C4<z>; HiZ drive
+v0x5593af1af4e0_0 .net "sel", 0 0, o0x7f4d81a38078;  0 drivers
+v0x5593af1af5b0_0 .net "y", 2 0, L_0x5593af1af740;  1 drivers
+L_0x5593af1af740 .functor MUXZ 3, o0x7f4d81a38018, o0x7f4d81a38048, o0x7f4d81a38078, C4<>;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/Arithmetic/mux_3bit/mux.sv";

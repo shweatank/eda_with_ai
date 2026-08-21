@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787292719" />
+    <testcase name="test_arithmetic_select" classname="test_arithmetic" file="/home/mirafra/vlsi/Arithmetic/Arithmetic_all/test_arithmetic.py" lineno="78" time="0.0013730525970458984" sim_time_ns="17.0" ratio_time="12381.171731203334" />
+  </testsuite>
+</testsuites>

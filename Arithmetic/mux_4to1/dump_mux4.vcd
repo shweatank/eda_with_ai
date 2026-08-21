@@ -1,0 +1,62 @@
+$date
+	Fri Aug 21 12:47:41 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module mux4_tb $end
+$var wire 4 ! d [3:0] $end
+$var wire 2 " sel [1:0] $end
+$var wire 1 # y $end
+$scope module dut $end
+$var wire 4 $ d [3:0] $end
+$var wire 2 % sel [1:0] $end
+$var reg 1 # y $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 %
+b1 $
+1#
+b0 "
+b1 !
+$end
+#1000
+b1 "
+b1 %
+b10 !
+b10 $
+#2000
+b10 "
+b10 %
+b100 !
+b100 $
+#3000
+b11 "
+b11 %
+b1000 !
+b1000 $
+#4000
+0#
+b0 "
+b0 %
+b1010 !
+b1010 $
+#5000
+1#
+b1 "
+b1 %
+#6000
+0#
+b10 "
+b10 %
+#7000
+1#
+b11 "
+b11 %
+#8000

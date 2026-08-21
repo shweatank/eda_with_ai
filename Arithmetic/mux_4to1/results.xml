@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787296661" />
+    <testcase name="test_mux4_select" classname="test_mux4" file="/home/mirafra/vlsi/Arithmetic/mux_4to1/test_mux4.py" lineno="5" time="0.001215219497680664" sim_time_ns="8.0" ratio_time="6583.172846772612" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arithmetic RTL Runner</title>
+    <style>
+        :root { color-scheme: light; font-family: system-ui, sans-serif; }
+        body { margin: 0; min-height: 100vh; background: #eef2f3; color: #172126; }
+        main { width: min(760px, calc(100% - 32px)); margin: 48px auto; }
+        h1 { margin-bottom: 8px; }
+        .panel { padding: 24px; background: #fff; border: 1px solid #d5dfe1; border-radius: 8px; }
+        .inputs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        label { display: grid; gap: 6px; font-weight: 600; }
+        input, select, button { box-sizing: border-box; width: 100%; padding: 10px; font: inherit; }
+        input, select { border: 1px solid #aebdc0; border-radius: 4px; }
+        button { margin-top: 20px; border: 0; border-radius: 4px; background: #176b87; color: #fff; cursor: pointer; }
+        button:disabled { opacity: .6; cursor: wait; }
+        #result { margin: 20px 0 0; padding: 14px; background: #f3f7f7; border-radius: 4px; white-space: pre-wrap; }
+        @media (max-width: 560px) { .inputs { grid-template-columns: 1fr; } main { margin: 24px auto; } }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Arithmetic RTL Runner</h1>
+    <p>Send values from this page to the Flask API and evaluate the SystemVerilog module.</p>
+    <section class="panel">
+        <form id="arithmetic-form">
+            <div class="inputs">
+                <label>Unsigned A (0-255)<input name="a_u" type="number" min="0" max="255" value="12" required></label>
+                <label>Unsigned B (0-255)<input name="b_u" type="number" min="0" max="255" value="5" required></label>
+                <label>Signed A (-128 to 127)<input name="a_s" type="number" min="-128" max="127" value="-12" required></label>
+                <label>Signed B (-128 to 127)<input name="b_s" type="number" min="-128" max="127" value="5" required></label>
+                <label>Operation
+                    <select name="op">
+                        <option value="0">Sum</option>
+                        <option value="1">Subtract</option>
+                        <option value="2">Multiply</option>
+                        <option value="3">Divide</option>
+                        <option value="4">Remainder</option>
+                    </select>
+                </label>
+            </div>
+            <button type="submit">Run RTL simulation</button>
+        </form>
+        <div id="result" role="status">Enter values and run the simulation.</div>
+    </section>
+</main>
+<script>
+    const form = document.getElementById("arithmetic-form");
+    const result = document.getElementById("result");
+    const button = form.querySelector("button");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const values = Object.fromEntries(new FormData(form));
+        const payload = Object.fromEntries(
+            Object.entries(values).map(([key, value]) => [key, Number(value)])
+        );
+
+        button.disabled = true;
+        result.textContent = "Running RTL simulation...";
+        try {
+            const response = await fetch("/api/arithmetic", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Request failed");
+            result.textContent = `Operation: ${data.operation}\nUnsigned result: ${data.u_result}\nSigned result: ${data.s_result}\nStatus: ${data.status}`;
+        } catch (error) {
+            result.textContent = `Error: ${error.message}`;
+        } finally {
+            button.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>
