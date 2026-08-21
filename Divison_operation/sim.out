@@ -1,0 +1,77 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x555f260fdb80 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x555f260fdd10 .scope module, "tb_divider" "tb_divider" 3 22;
+ .timescale 0 0;
+P_0x555f260fdea0 .param/l "WIDTH" 0 3 23, +C4<00000000000000000000000000000100>;
+v0x555f26116ec0_0 .var "a", 3 0;
+v0x555f26116fa0_0 .var "b", 3 0;
+v0x555f26117070_0 .net "div_by_zero", 0 0, L_0x555f26117310;  1 drivers
+v0x555f26117170_0 .net "quotient", 3 0, L_0x555f26117590;  1 drivers
+v0x555f26117240_0 .net "remainder", 3 0, L_0x555f261177f0;  1 drivers
+S_0x555f260c2cf0 .scope module, "uut" "divider" 3 29, 3 2 0, S_0x555f260fdd10;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 4 "quotient";
+    .port_info 3 /OUTPUT 4 "remainder";
+    .port_info 4 /OUTPUT 1 "div_by_zero";
+P_0x555f260c2ed0 .param/l "WIDTH" 0 3 2, +C4<00000000000000000000000000000100>;
+L_0x7f749384f018 .functor BUFT 1, C4<0000>, C4<0>, C4<0>, C4<0>;
+v0x555f260c2f70_0 .net/2u *"_ivl_0", 3 0, L_0x7f749384f018;  1 drivers
+v0x555f261166e0_0 .net *"_ivl_10", 3 0, L_0x555f26117720;  1 drivers
+L_0x7f749384f060 .functor BUFT 1, C4<1111>, C4<0>, C4<0>, C4<0>;
+v0x555f261167c0_0 .net/2u *"_ivl_4", 3 0, L_0x7f749384f060;  1 drivers
+v0x555f261168b0_0 .net *"_ivl_6", 3 0, L_0x555f261174a0;  1 drivers
+v0x555f26116990_0 .net "a", 3 0, v0x555f26116ec0_0;  1 drivers
+v0x555f26116ac0_0 .net "b", 3 0, v0x555f26116fa0_0;  1 drivers
+v0x555f26116ba0_0 .net "div_by_zero", 0 0, L_0x555f26117310;  alias, 1 drivers
+v0x555f26116c60_0 .net "quotient", 3 0, L_0x555f26117590;  alias, 1 drivers
+v0x555f26116d40_0 .net "remainder", 3 0, L_0x555f261177f0;  alias, 1 drivers
+L_0x555f26117310 .cmp/eq 4, v0x555f26116fa0_0, L_0x7f749384f018;
+L_0x555f261174a0 .arith/div 4, v0x555f26116ec0_0, v0x555f26116fa0_0;
+L_0x555f26117590 .functor MUXZ 4, L_0x555f261174a0, L_0x7f749384f060, L_0x555f26117310, C4<>;
+L_0x555f26117720 .arith/mod 4, v0x555f26116ec0_0, v0x555f26116fa0_0;
+L_0x555f261177f0 .functor MUXZ 4, L_0x555f26117720, v0x555f26116ec0_0, L_0x555f26117310, C4<>;
+    .scope S_0x555f260fdd10;
+T_0 ;
+    %vpi_call/w 3 36 "$dumpfile", "divider.vcd" {0 0 0};
+    %vpi_call/w 3 37 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x555f260fdd10 {0 0 0};
+    %vpi_call/w 3 39 "$display", "Time\011a    b    | quotient remainder div_zero" {0 0 0};
+    %vpi_call/w 3 40 "$display", "--------------------------------------------" {0 0 0};
+    %pushi/vec4 7, 0, 4;
+    %store/vec4 v0x555f26116ec0_0, 0, 4;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v0x555f26116fa0_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call/w 3 44 "$display", "%0t\011%b  %b    | %b        %b         %b", $time, v0x555f26116ec0_0, v0x555f26116fa0_0, v0x555f26117170_0, v0x555f26117240_0, v0x555f26117070_0 {0 0 0};
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v0x555f26116ec0_0, 0, 4;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v0x555f26116fa0_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call/w 3 48 "$display", "%0t\011%b  %b    | %b        %b         %b", $time, v0x555f26116ec0_0, v0x555f26116fa0_0, v0x555f26117170_0, v0x555f26117240_0, v0x555f26117070_0 {0 0 0};
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v0x555f26116ec0_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x555f26116fa0_0, 0, 4;
+    %delay 10, 0;
+    %vpi_call/w 3 52 "$display", "%0t\011%b  %b    | %b        %b         %b", $time, v0x555f26116ec0_0, v0x555f26116fa0_0, v0x555f26117170_0, v0x555f26117240_0, v0x555f26117070_0 {0 0 0};
+    %vpi_call/w 3 54 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "divider.sv";
