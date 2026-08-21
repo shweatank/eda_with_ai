@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2-to-4 Decoder</title>
+    <style>
+        body { margin: 0; padding: 40px 16px; background: #eef2f3; color: #172126; font: 16px system-ui, sans-serif; }
+        main { max-width: 520px; margin: auto; }
+        .panel { padding: 24px; background: white; border: 1px solid #d5dfe1; border-radius: 8px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        select, button { width: 100%; box-sizing: border-box; padding: 10px; font: inherit; }
+        select { border: 1px solid #aebdc0; border-radius: 4px; }
+        button { margin-top: 16px; border: 0; border-radius: 4px; background: #176b87; color: white; cursor: pointer; }
+        button:disabled { opacity: .6; cursor: wait; }
+        #result { margin-top: 20px; padding: 14px; background: #f3f7f7; border-radius: 4px; white-space: pre-line; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>2-to-4 Decoder</h1>
+    <section class="panel">
+        <form id="decoder-form">
+            <label for="a">Input A</label>
+            <select id="a" name="a">
+                <option value="0">00</option>
+                <option value="1">01</option>
+                <option value="2">10</option>
+                <option value="3">11</option>
+            </select>
+            <button type="submit">Run decoder</button>
+        </form>
+        <div id="result" role="status">Choose an input and run the decoder.</div>
+    </section>
+</main>
+<script>
+    const form = document.getElementById("decoder-form");
+    const result = document.getElementById("result");
+    const button = form.querySelector("button");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        button.disabled = true;
+        result.textContent = "Running RTL simulation...";
+
+        try {
+            const response = await fetch("/api/decoder", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ a: Number(form.a.value) })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Request failed");
+            result.textContent = `Input: ${data.a.toString(2).padStart(2, "0")}\nOutput: ${data.y_binary}\nStatus: ${data.status}`;
+        } catch (error) {
+            result.textContent = `Error: ${error.message}`;
+        } finally {
+            button.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

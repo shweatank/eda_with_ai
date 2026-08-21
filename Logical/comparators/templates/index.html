@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>8-bit Comparator</title>
+    <style>
+        body { margin: 0; padding: 40px 16px; background: #eef2f3; color: #172126; font: 16px system-ui, sans-serif; }
+        main { max-width: 560px; margin: auto; }
+        .panel { padding: 24px; background: white; border: 1px solid #d5dfe1; border-radius: 8px; }
+        .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        label { display: grid; gap: 6px; font-weight: 600; }
+        input, button { width: 100%; box-sizing: border-box; padding: 10px; font: inherit; }
+        input { border: 1px solid #aebdc0; border-radius: 4px; }
+        button { margin-top: 20px; border: 0; border-radius: 4px; background: #176b87; color: white; cursor: pointer; }
+        button:disabled { opacity: .6; cursor: wait; }
+        #result { margin-top: 20px; padding: 14px; background: #f3f7f7; border-radius: 4px; white-space: pre-line; }
+        @media (max-width: 500px) { .inputs { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<main>
+    <h1>8-bit Comparator</h1>
+    <section class="panel">
+        <form id="comparator-form">
+            <div class="inputs">
+                <label for="a">A (0-255)<input id="a" name="a" type="number" min="0" max="255" value="42" required></label>
+                <label for="b">B (0-255)<input id="b" name="b" type="number" min="0" max="255" value="42" required></label>
+            </div>
+            <button type="submit">Run comparator</button>
+        </form>
+        <div id="result" role="status">Enter values and run the comparator.</div>
+    </section>
+</main>
+<script>
+    const form = document.getElementById("comparator-form");
+    const result = document.getElementById("result");
+    const button = form.querySelector("button");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        button.disabled = true;
+        result.textContent = "Running RTL simulation...";
+        try {
+            const response = await fetch("/api/comparator", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ a: Number(form.a.value), b: Number(form.b.value) })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Request failed");
+            result.textContent = `A = ${data.a}\nB = ${data.b}\nEqual: ${data.equal}\nGreater: ${data.greater}\nLess: ${data.less}\nRTL status: ${data.status}\nAI verdict: ${data.ai_analysis.verdict}\nAI source: ${data.ai_analysis.source}\nAI analysis: ${data.ai_analysis.message}`;
+        } catch (error) {
+            result.textContent = `Error: ${error.message}`;
+        } finally {
+            button.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

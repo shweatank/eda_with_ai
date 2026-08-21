@@ -1,0 +1,15 @@
+{"timestamp": "2026-08-21T09:53:45.043251+00:00", "a": 42, "b": 42, "rtl_output": {"equal": 1, "greater": 0, "less": 0}, "expected": {"equal": 1, "greater": 0, "less": 0}}
+{"timestamp": "2026-08-21T09:58:01.099191+00:00", "a": 23, "b": 4, "rtl_output": {"equal": 0, "greater": 1, "less": 0}, "expected": {"equal": 0, "greater": 1, "less": 0}}
+{"timestamp": "2026-08-21T09:58:35.510636+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:37.923194+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:38.855556+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:39.990151+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:40.760438+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:41.702731+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:47.563662+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:50.561012+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:51.615189+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:52.998726+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:53.661573+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:58:54.827849+00:00", "a": 23, "b": 255, "rtl_output": {"equal": 0, "greater": 0, "less": 1}, "expected": {"equal": 0, "greater": 0, "less": 1}}
+{"timestamp": "2026-08-21T09:59:11.783054+00:00", "a": 255, "b": 255, "rtl_output": {"equal": 1, "greater": 0, "less": 0}, "expected": {"equal": 1, "greater": 0, "less": 0}}

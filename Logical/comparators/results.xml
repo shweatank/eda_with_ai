@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787306030" />
+    <testcase name="test_comparator" classname="test_comparator" file="/home/mirafra/vlsi/Logical/comparators/test_comparator.py" lineno="72" time="0.0006422996520996094" sim_time_ns="8.0" ratio_time="12455.24573125464" />
+  </testsuite>
+</testsuites>

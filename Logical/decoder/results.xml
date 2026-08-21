@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787304868" />
+    <testcase name="test_decoder_2to4" classname="test_decoder" file="/home/mirafra/vlsi/Logical/decoder/test_decoder.py" lineno="69" time="0.00040340423583984375" sim_time_ns="4.0" ratio_time="9915.612293144208" />
+  </testsuite>
+</testsuites>
