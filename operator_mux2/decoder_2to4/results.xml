@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787308141" />
+    <testcase name="decoder_2to4" classname="decoder_2to4" file="/home/sam/git_folder/eda_with_ai/operator_mux2/decoder_2to4.py" lineno="4" time="0.0009949207305908203" sim_time_ns="4.0" ratio_time="4020.4208003834174" />
+  </testsuite>
+</testsuites>

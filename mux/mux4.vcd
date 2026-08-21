@@ -1,0 +1,67 @@
+$date
+	Fri Aug 21 07:23:07 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module mux4 $end
+$var wire 4 ! d [3:0] $end
+$var wire 2 " sel [1:0] $end
+$var reg 1 # y $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1#
+b0 "
+b1 !
+$end
+#1000
+b1 "
+b10 !
+#2000
+b10 "
+b100 !
+#3000
+b11 "
+b1000 !
+#4000
+0#
+b0 "
+b1110 !
+#5000
+b1 "
+b1101 !
+#6000
+b10 "
+b1011 !
+#7000
+b11 "
+b111 !
+#8000
+1#
+b0 "
+b1111 !
+#9000
+b1 "
+#10000
+b10 "
+#11000
+b11 "
+#12000
+0#
+b0 "
+b0 !
+#13000
+b1 "
+#14000
+b10 "
+#15000
+b11 "
+#16000

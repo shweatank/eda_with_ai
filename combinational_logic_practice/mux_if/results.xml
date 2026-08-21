@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787306907" />
+    <testcase name="mux_if" classname="mux_if" file="/home/sam/git_folder/eda_with_ai/combinational_logic_practice/mux_if/mux_if.py" lineno="4" time="0.0010895729064941406" sim_time_ns="6.0" ratio_time="5506.7448577680525" />
+  </testsuite>
+</testsuites>

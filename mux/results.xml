@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787296987" />
+    <testcase name="mux4" classname="mux4" file="/home/sam/git_folder/eda_with_ai/mux/mux4.py" lineno="4" time="0.0014832019805908203" sim_time_ns="16.0" ratio_time="10787.472110593153" />
+  </testsuite>
+</testsuites>

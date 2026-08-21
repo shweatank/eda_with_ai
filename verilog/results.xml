@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1787119850" />
-    <testcase name="test_and_gate" classname="and_gate" file="/home/sam/verilog/logic_gate_project/and_gate.py" lineno="5" time="0.0014641284942626953" sim_time_ns="4.0" ratio_time="2732.0006513597136" />
+    <property name="random_seed" value="1787128976" />
+    <testcase name="test_nand_gate" classname="nand_gate" file="/home/sam/git_folder/eda_with_ai/verilog/nand_gate.py" lineno="4" time="0.002053499221801758" sim_time_ns="4.0" ratio_time="1947.8945779635435" />
   </testsuite>
 </testsuites>

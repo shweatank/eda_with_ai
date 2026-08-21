@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787308759" />
+    <testcase name="comparator" classname="comparator" file="/home/sam/git_folder/eda_with_ai/operator_mux2/comparator/comparator.py" lineno="4" time="0.0019659996032714844" sim_time_ns="8.0" ratio_time="4069.1768130002424" />
+  </testsuite>
+</testsuites>

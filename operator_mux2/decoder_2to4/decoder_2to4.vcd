@@ -1,5 +1,5 @@
 $date
-	Wed Aug 19 08:42:56 2026
+	Fri Aug 21 10:29:01 2026
 $end
 $version
 	Icarus Verilog
@@ -7,10 +7,9 @@ $end
 $timescale
 	1ps
 $end
-$scope module nand_gate $end
-$var wire 1 ! a $end
-$var wire 1 " b $end
-$var wire 1 # y $end
+$scope module decoder_2to4 $end
+$var wire 2 ! a [1:0] $end
+$var reg 4 " y [3:0] $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
@@ -18,16 +17,16 @@ $dumpall
 $end
 #0
 $dumpvars
-1#
-0"
-0!
+b1 "
+b0 !
 $end
 #1000
-1"
+b10 "
+b1 !
 #2000
-0"
-1!
+b100 "
+b10 !
 #3000
-0#
-1"
+b1000 "
+b11 !
 #4000

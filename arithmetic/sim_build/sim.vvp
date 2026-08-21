@@ -1,0 +1,55 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x5f0094e934e0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x5f0094e93670 .scope module, "arithmetic" "arithmetic" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "a";
+    .port_info 1 /INPUT 8 "b";
+    .port_info 2 /OUTPUT 8 "sum";
+    .port_info 3 /OUTPUT 8 "diff";
+    .port_info 4 /OUTPUT 16 "product";
+    .port_info 5 /OUTPUT 8 "quotient";
+    .port_info 6 /OUTPUT 8 "remainder";
+L_0x71ec5069d060 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x5f0094ebc110_0 .net *"_ivl_11", 7 0, L_0x71ec5069d060;  1 drivers
+v0x5f0094edf9b0_0 .net *"_ivl_4", 15 0, L_0x5f0094ee0560;  1 drivers
+L_0x71ec5069d018 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x5f0094edfa90_0 .net *"_ivl_7", 7 0, L_0x71ec5069d018;  1 drivers
+v0x5f0094edfb50_0 .net *"_ivl_8", 15 0, L_0x5f0094ee0650;  1 drivers
+o0x71ec506e60d8 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x5f0094edfc30_0 .net "a", 7 0, o0x71ec506e60d8;  0 drivers
+o0x71ec506e6108 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x5f0094edfd10_0 .net "b", 7 0, o0x71ec506e6108;  0 drivers
+v0x5f0094edfdf0_0 .net "diff", 7 0, L_0x5f0094ee0440;  1 drivers
+v0x5f0094edfed0_0 .net "product", 15 0, L_0x5f0094ee07a0;  1 drivers
+v0x5f0094edffb0_0 .net "quotient", 7 0, L_0x5f0094ee08e0;  1 drivers
+v0x5f0094ee0090_0 .net "remainder", 7 0, L_0x5f0094ee0ae0;  1 drivers
+v0x5f0094ee0170_0 .net "sum", 7 0, L_0x5f0094ee0330;  1 drivers
+L_0x5f0094ee0330 .arith/sum 8, o0x71ec506e60d8, o0x71ec506e6108;
+L_0x5f0094ee0440 .arith/sub 8, o0x71ec506e60d8, o0x71ec506e6108;
+L_0x5f0094ee0560 .concat [ 8 8 0 0], o0x71ec506e60d8, L_0x71ec5069d018;
+L_0x5f0094ee0650 .concat [ 8 8 0 0], o0x71ec506e6108, L_0x71ec5069d060;
+L_0x5f0094ee07a0 .arith/mult 16, L_0x5f0094ee0560, L_0x5f0094ee0650;
+L_0x5f0094ee08e0 .arith/div 8, o0x71ec506e60d8, o0x71ec506e6108;
+L_0x5f0094ee0ae0 .arith/mod 8, o0x71ec506e60d8, o0x71ec506e6108;
+    .scope S_0x5f0094e93670;
+T_0 ;
+    %vpi_call/w 3 18 "$dumpfile", "arithmetic.vcd" {0 0 0};
+    %vpi_call/w 3 19 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5f0094e93670 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/sam/git_folder/eda_with_ai/arithmetic.sv";

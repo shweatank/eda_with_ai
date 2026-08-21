@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787295777" />
+    <testcase name="arithmetic" classname="arithmetic" file="/home/sam/git_folder/eda_with_ai/arithmetic/arithmetic.py" lineno="4" time="0.002421855926513672" sim_time_ns="25.0" ratio_time="10322.661941327033" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787305797" />
+    <testcase name="logic_gates" classname="logic_gates" file="/home/sam/git_folder/eda_with_ai/combinational_logic_practice/logic_gates/logic_gates.py" lineno="4" time="0.0015475749969482422" sim_time_ns="4.0" ratio_time="2584.6889539362196" />
+  </testsuite>
+</testsuites>
