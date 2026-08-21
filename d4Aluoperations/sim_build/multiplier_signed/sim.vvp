@@ -1,0 +1,33 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55a614334cf0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x55a614334e80 .scope module, "multiplier_signed" "multiplier_signed" 3 50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 16 "product";
+o0x7fb122463018 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55a614335060_0 .net/s "A", 7 0, o0x7fb122463018;  0 drivers
+o0x7fb122463048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55a61438d890_0 .net/s "B", 7 0, o0x7fb122463048;  0 drivers
+v0x55a61438d970_0 .net/s *"_ivl_0", 15 0, L_0x55a61438dcc0;  1 drivers
+v0x55a61438da30_0 .net/s *"_ivl_2", 15 0, L_0x55a61438dd90;  1 drivers
+v0x55a61438db10_0 .net/s "product", 15 0, L_0x55a61438de90;  1 drivers
+L_0x55a61438dcc0 .extend/s 16, o0x7fb122463018;
+L_0x55a61438dd90 .extend/s 16, o0x7fb122463048;
+L_0x55a61438de90 .arith/mult 16, L_0x55a61438dcc0, L_0x55a61438dd90;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/eda_with_ai/d4Aluoperations/arithmaticoperations.sv";

@@ -1,0 +1,158 @@
+$date
+	Thu Aug 20 17:14:34 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module subtractor_top $end
+$scope module u_sub_unsigned $end
+$var wire 8 ! A [7:0] $end
+$var wire 8 " B [7:0] $end
+$var wire 8 # y [7:0] $end
+$upscope $end
+$upscope $end
+$scope module subtractor_top $end
+$scope module u_sub_signed $end
+$var wire 8 $ A [7:0] $end
+$var wire 8 % B [7:0] $end
+$var wire 8 & y [7:0] $end
+$upscope $end
+$upscope $end
+$scope module subtractor_top $end
+$var wire 8 ' A_s [7:0] $end
+$var wire 8 ( A_u [7:0] $end
+$var wire 8 ) B_s [7:0] $end
+$var wire 8 * B_u [7:0] $end
+$var wire 8 + y_u [7:0] $end
+$var wire 8 , y_s [7:0] $end
+$scope module u_sub_signed $end
+$upscope $end
+$scope module u_sub_unsigned $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx ,
+b101 +
+b101 *
+bz )
+b1010 (
+bz '
+bx &
+bz %
+bz $
+b101 #
+b101 "
+b1010 !
+$end
+#1000
+b1010 "
+b1010 *
+b11111011 #
+b11111011 +
+b101 !
+b101 (
+#2000
+b0 "
+b0 *
+b0 #
+b0 +
+b0 !
+b0 (
+#3000
+b11111111 #
+b11111111 +
+b1 "
+b1 *
+#4000
+b11111111 "
+b11111111 *
+b0 #
+b0 +
+b11111111 !
+b11111111 (
+#5000
+b11111111 #
+b11111111 +
+b0 "
+b0 *
+#6000
+b1100100 "
+b1100100 *
+b0 #
+b0 +
+b1100100 !
+b1100100 (
+#7000
+b110010 "
+b110010 *
+b10010110 #
+b10010110 +
+b11001000 !
+b11001000 (
+#8000
+b101 &
+b101 ,
+b101 %
+b101 )
+b1010 $
+b1010 '
+#9000
+b1010 %
+b1010 )
+b11111011 &
+b11111011 ,
+b101 $
+b101 '
+#10000
+b101 %
+b101 )
+b11110001 &
+b11110001 ,
+b11110110 $
+b11110110 '
+#11000
+b11111011 %
+b11111011 )
+b1111 &
+b1111 ,
+b1010 $
+b1010 '
+#12000
+b11111011 &
+b11111011 ,
+b11110110 $
+b11110110 '
+#13000
+b0 %
+b0 )
+b0 &
+b0 ,
+b0 $
+b0 '
+#14000
+b1 %
+b1 )
+b1111111 &
+b1111111 ,
+b10000000 $
+b10000000 '
+#15000
+b11111111 %
+b11111111 )
+b10000000 &
+b10000000 ,
+b1111111 $
+b1111111 '
+#16000
+b10000000 %
+b10000000 )
+b0 &
+b0 ,
+b10000000 $
+b10000000 '
+#17000

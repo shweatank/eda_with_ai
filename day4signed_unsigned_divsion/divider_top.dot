@@ -1,0 +1,23 @@
+digraph "divider_top" {
+label="divider_top";
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="A_s", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="A_u", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="B_s", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="B_u", color="black", fontcolor="black" ];
+n5 [ shape=octagon, label="quotient_s", color="black", fontcolor="black" ];
+n6 [ shape=octagon, label="quotient_u", color="black", fontcolor="black" ];
+n7 [ shape=octagon, label="remainder_s", color="black", fontcolor="black" ];
+n8 [ shape=octagon, label="remainder_u", color="black", fontcolor="black" ];
+c13 [ shape=record, label="{{<p9> A|<p10> B}|u_div_signed\ndivider_signed|{<p11> quotient|<p12> remainder}}" ];
+c14 [ shape=record, label="{{<p9> A|<p10> B}|u_div_unsigned\ndivider_unsigned|{<p11> quotient|<p12> remainder}}" ];
+n1:e -> c13:p9:w [color="black", style="setlinewidth(3)", label=""];
+n2:e -> c14:p9:w [color="black", style="setlinewidth(3)", label=""];
+n3:e -> c13:p10:w [color="black", style="setlinewidth(3)", label=""];
+n4:e -> c14:p10:w [color="black", style="setlinewidth(3)", label=""];
+c13:p11:e -> n5:w [color="black", style="setlinewidth(3)", label=""];
+c14:p11:e -> n6:w [color="black", style="setlinewidth(3)", label=""];
+c13:p12:e -> n7:w [color="black", style="setlinewidth(3)", label=""];
+c14:p12:e -> n8:w [color="black", style="setlinewidth(3)", label=""];
+}

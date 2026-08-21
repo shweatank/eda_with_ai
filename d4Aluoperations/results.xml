@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787227704" />
+    <testcase name="test_alu" classname="testbench_arithmaticoperations" file="/home/mirafra/vlsi/eda_with_ai/d4Aluoperations/testbench_arithmaticoperations.py" lineno="128" time="0.0043828487396240234" sim_time_ns="47.0" ratio_time="10723.618995811348" />
+  </testsuite>
+</testsuites>

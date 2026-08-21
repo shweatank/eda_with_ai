@@ -1,0 +1,62 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55fd59bb10e0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x55fd59bb1270 .scope module, "divider_unsigned" "divider_unsigned" 3 4;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 8 "quotient";
+    .port_info 3 /OUTPUT 8 "remainder";
+o0x7f93b66b3018 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55fd59b73cf0_0 .net "A", 7 0, o0x7f93b66b3018;  0 drivers
+o0x7f93b66b3048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55fd59bc5140_0 .net "B", 7 0, o0x7f93b66b3048;  0 drivers
+v0x55fd59bc5220_0 .net *"_ivl_0", 31 0, L_0x55fd59bc5e80;  1 drivers
+L_0x7f93b666a0a8 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x55fd59bc52e0_0 .net/2u *"_ivl_10", 7 0, L_0x7f93b666a0a8;  1 drivers
+v0x55fd59bc53c0_0 .net *"_ivl_14", 31 0, L_0x55fd59bd6430;  1 drivers
+L_0x7f93b666a0f0 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x55fd59bc54a0_0 .net *"_ivl_17", 23 0, L_0x7f93b666a0f0;  1 drivers
+L_0x7f93b666a138 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x55fd59bc5580_0 .net/2u *"_ivl_18", 31 0, L_0x7f93b666a138;  1 drivers
+v0x55fd59bc5660_0 .net *"_ivl_20", 0 0, L_0x55fd59bd6570;  1 drivers
+v0x55fd59bc5720_0 .net *"_ivl_22", 7 0, L_0x55fd59bd66f0;  1 drivers
+L_0x7f93b666a180 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x55fd59bc5800_0 .net/2u *"_ivl_24", 7 0, L_0x7f93b666a180;  1 drivers
+L_0x7f93b666a018 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x55fd59bc58e0_0 .net *"_ivl_3", 23 0, L_0x7f93b666a018;  1 drivers
+L_0x7f93b666a060 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x55fd59bc59c0_0 .net/2u *"_ivl_4", 31 0, L_0x7f93b666a060;  1 drivers
+v0x55fd59bc5aa0_0 .net *"_ivl_6", 0 0, L_0x55fd59bd5fb0;  1 drivers
+v0x55fd59bc5b60_0 .net *"_ivl_8", 7 0, L_0x55fd59bd6120;  1 drivers
+v0x55fd59bc5c40_0 .net "quotient", 7 0, L_0x55fd59bd6240;  1 drivers
+v0x55fd59bc5d20_0 .net "remainder", 7 0, L_0x55fd59bd6870;  1 drivers
+L_0x55fd59bc5e80 .concat [ 8 24 0 0], o0x7f93b66b3048, L_0x7f93b666a018;
+L_0x55fd59bd5fb0 .cmp/ne 32, L_0x55fd59bc5e80, L_0x7f93b666a060;
+L_0x55fd59bd6120 .arith/div 8, o0x7f93b66b3018, o0x7f93b66b3048;
+L_0x55fd59bd6240 .functor MUXZ 8, L_0x7f93b666a0a8, L_0x55fd59bd6120, L_0x55fd59bd5fb0, C4<>;
+L_0x55fd59bd6430 .concat [ 8 24 0 0], o0x7f93b66b3048, L_0x7f93b666a0f0;
+L_0x55fd59bd6570 .cmp/ne 32, L_0x55fd59bd6430, L_0x7f93b666a138;
+L_0x55fd59bd66f0 .arith/mod 8, o0x7f93b66b3018, o0x7f93b66b3048;
+L_0x55fd59bd6870 .functor MUXZ 8, L_0x7f93b666a180, L_0x55fd59bd66f0, L_0x55fd59bd6570, C4<>;
+    .scope S_0x55fd59bb1270;
+T_0 ;
+    %vpi_call/w 3 14 "$dumpfile", "divider_unsigned.vcd" {0 0 0};
+    %vpi_call/w 3 15 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55fd59bb1270 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/eda_with_ai/day4signed_unsigned_divsion/signed_unsigned_divsion.sv";
