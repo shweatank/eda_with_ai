@@ -1,0 +1,98 @@
+$date
+	Fri Aug 21 14:41:55 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_combinational $end
+$var wire 1 ! m_y $end
+$var wire 4 " dec_y [3:0] $end
+$var wire 1 # cmp_lt $end
+$var wire 1 $ cmp_gt $end
+$var wire 1 % cmp_eq $end
+$var reg 8 & cmp_a [7:0] $end
+$var reg 8 ' cmp_b [7:0] $end
+$var reg 2 ( dec_a [1:0] $end
+$var reg 1 ) m_a $end
+$var reg 1 * m_b $end
+$var reg 1 + m_sel $end
+$scope module u_cmp $end
+$var wire 8 , a [7:0] $end
+$var wire 8 - b [7:0] $end
+$var wire 1 # less $end
+$var wire 1 $ greater $end
+$var wire 1 % equal $end
+$upscope $end
+$scope module u_dec $end
+$var wire 2 . a [1:0] $end
+$var reg 4 / y [3:0] $end
+$upscope $end
+$scope module u_mux $end
+$var wire 1 ) a $end
+$var wire 1 * b $end
+$var wire 1 + sel $end
+$var reg 1 ! y $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1 /
+b0 .
+bx -
+bx ,
+x+
+x*
+x)
+b0 (
+bx '
+bx &
+x%
+x$
+x#
+b1 "
+x!
+$end
+#10
+b10 "
+b10 /
+b1 (
+b1 .
+#20
+b100 "
+b100 /
+b10 (
+b10 .
+#30
+b1000 "
+b1000 /
+b11 (
+b11 .
+#40
+0!
+0+
+1*
+0)
+#50
+1!
+1+
+#60
+0%
+1$
+0#
+b10100 '
+b10100 -
+b101101 &
+b101101 ,
+#70
+1%
+b1010 '
+b1010 -
+0$
+0#
+b1010 &
+b1010 ,
+#80
