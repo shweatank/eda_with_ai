@@ -1,0 +1,27 @@
+digraph "logic_gates" {
+label="logic_gates";
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="a", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="and_out", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="b", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="nand_out", color="black", fontcolor="black" ];
+n5 [ shape=octagon, label="nor_out", color="black", fontcolor="black" ];
+n6 [ shape=octagon, label="or_out", color="black", fontcolor="black" ];
+c10 [ shape=record, label="{{<p7> A|<p8> B}|$111\n$_AND_|{<p9> Y}}" ];
+c11 [ shape=record, label="{{<p7> A|<p8> B}|$112\n$_OR_|{<p9> Y}}" ];
+c12 [ shape=record, label="{{<p7> A|<p8> B}|$113\n$_NAND_|{<p9> Y}}" ];
+c13 [ shape=record, label="{{<p7> A|<p8> B}|$114\n$_NOR_|{<p9> Y}}" ];
+n1:e -> c10:p7:w [color="black", label=""];
+n1:e -> c11:p7:w [color="black", label=""];
+n1:e -> c12:p7:w [color="black", label=""];
+n1:e -> c13:p7:w [color="black", label=""];
+c10:p9:e -> n2:w [color="black", label=""];
+n3:e -> c10:p8:w [color="black", label=""];
+n3:e -> c11:p8:w [color="black", label=""];
+n3:e -> c12:p8:w [color="black", label=""];
+n3:e -> c13:p8:w [color="black", label=""];
+c12:p9:e -> n4:w [color="black", label=""];
+c13:p9:e -> n5:w [color="black", label=""];
+c11:p9:e -> n6:w [color="black", label=""];
+}
