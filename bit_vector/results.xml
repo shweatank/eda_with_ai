@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1787223625" />
-    <testcase name="sub_signed" classname="sub_signed" file="/home/sam/bit_vector/sub_signed.py" lineno="4" time="0.0026068687438964844" sim_time_ns="8.0" ratio_time="3068.8158039143955" />
+    <property name="random_seed" value="1787292703" />
+    <testcase name="div_signed" classname="div_signed" file="/home/sam/git_folder/eda_with_ai/bit_vector/div_signed.py" lineno="4" time="0.002535104751586914" sim_time_ns="9.0" ratio_time="3550.149158280824" />
   </testsuite>
 </testsuites>

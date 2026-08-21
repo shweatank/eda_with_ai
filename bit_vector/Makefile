@@ -3,9 +3,9 @@
 TOPLEVEL_LANG = verilog
 SIM ?= icarus
 
-VERILOG_SOURCES = $(PWD)/sub_signed.sv
+VERILOG_SOURCES = $(PWD)/div_signed.sv
 
-TOPLEVEL = sub_signed
-MODULE = sub_signed
+TOPLEVEL = div_signed
+MODULE = div_signed
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
