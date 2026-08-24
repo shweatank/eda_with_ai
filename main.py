@@ -406,7 +406,6 @@ async def serve_ui():
     </html>
     """
 
-
 if __name__ == "__main__":
     import uvicorn
 
