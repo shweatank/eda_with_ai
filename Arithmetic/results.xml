@@ -1,8 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1787227011" />
-    <testcase name="test_arith" classname="test_arith" file="/home/mirafra/Desktop/eda_with_ai/Arithmetic/test_arith.py" lineno="5" time="0.0014162063598632812" sim_time_ns="1.001" ratio_time="706.8178962962962">
-      <failure message="Test failed with RANDOM_SEED=1787227011" />
-    </testcase>
+    <property name="random_seed" value="1787293174" />
+    <testcase name="test_arith" classname="test_arith" file="/home/mirafra/Desktop/eda_with_ai/Arithmetic/test_arith.py" lineno="13" time="0.02591729164123535" sim_time_ns="256.0" ratio_time="9877.575309323398" />
   </testsuite>
 </testsuites>

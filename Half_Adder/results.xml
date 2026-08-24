@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787294667" />
+    <testcase name="test_half_adder" classname="test_half_adder" file="/home/mirafra/Desktop/eda_with_ai/Half_Adder/test_half_adder.py" lineno="4" time="0.03148055076599121" sim_time_ns="256.0" ratio_time="8132.005119699483" />
+  </testsuite>
+</testsuites>

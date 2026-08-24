@@ -15,7 +15,6 @@ MODULE = test_arith
 
 # Parameters (can be overridden on command line)
 WIDTH ?= 4
-OP ?= 0   # 0=ADD, 1=SUB, 2=MUL, 3=DIV, 4=MOD, 5=A, 6=B, 7=CLEAR
 
 # Targets
 .PHONY: all sim synth netlist show-netlist show-circuit wave clean-all
@@ -38,13 +37,15 @@ show-netlist: synth
 
 # Generate circuit diagram (requires Graphviz for PNG)
 show-circuit:
-	yosys -p "read_verilog -sv arith_unit.sv; hierarchy -top arith_unit; proc; opt; techmap; opt; show -format png -prefix arith_unit"
+	yosys -p "read_verilog -sv arith_unit.sv; hierarchy -top arith_unit; proc; opt; techmap; opt; write_json arith_unit.json"
+	netlistsvg arith_unit.json -o arith_unit.svg
+
 
 # Run simulation with Cocotb
 sim:
-	@echo "Compiling with WIDTH=$(WIDTH), OP=$(OP)"
+	@echo "Compiling with WIDTH=$(WIDTH)"
 	mkdir -p sim_build
-	iverilog -g2012 -o sim_build/sim.vvp -D WIDTH=$(WIDTH) -D OP=$(OP) -s $(TOPLEVEL) $(VERILOG_SOURCES)
+	iverilog -g2012 -o sim_build/sim.vvp -D WIDTH=$(WIDTH) -s $(TOPLEVEL) $(VERILOG_SOURCES)
 	vvp sim_build/sim.vvp
 
 # Open waveform
@@ -55,8 +56,8 @@ wave: sim
 clean-all:
 	$(MAKE) clean
 	rm -f arith_unit.vcd
-	rm -f arith_unit_netlist.v
-	rm -f arith_unit.png
+	#rm -f arith_unit_netlist.v
+	#rm -f arith_unit.png
 	rm -f results.xml
 	rm -f *.dot
 	rm -f *.new
