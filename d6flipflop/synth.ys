@@ -1,0 +1,29 @@
+# Read the Verilog design
+# Define SYNTHESIS to remove simulation-only statements
+read_verilog -D SYNTHESIS flipflop.sv
+
+# Select the top-level module
+hierarchy -check -top dff_1bit
+
+# Convert processes into internal logic
+proc
+
+# Perform optimization
+opt
+
+# Identify finite state machines and optimize
+fsm
+opt
+
+# Technology-independent synthesis
+techmap
+opt
+
+# Print synthesis statistics
+stat
+
+# Generate synthesized Verilog netlist
+write_verilog -noattr dff_netlist.v
+
+# Generate a diagram of the synthesized circuit
+show -format dot -prefix dff_synth
