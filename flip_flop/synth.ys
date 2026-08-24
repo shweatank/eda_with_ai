@@ -1,0 +1,33 @@
+# ================================================================
+# Yosys synthesis script
+# ================================================================
+
+# Read RTL.
+# SYNTHESIS removes simulation-only VCD code.
+read_verilog -D SYNTHESIS dff.v
+
+# Select top module.
+hierarchy -check -top dff_1bit
+
+# Convert behavioral processes.
+proc
+
+# Optimize.
+opt
+
+# FSM processing.
+fsm
+opt
+
+# Technology-independent mapping.
+techmap
+opt
+
+# Print synthesis statistics.
+stat
+
+# Generate synthesized netlist.
+write_verilog -noattr dff_netlist.v
+
+# Generate schematic.
+show -format dot -prefix dff_synth
