@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787564748" />
+    <testcase name="test_up_down_counter" classname="test_up_down_counter" file="/home/mirafra/vlsi/Logical/up_down_counter/test_up_down_counter.py" lineno="8" time="0.007705211639404297" sim_time_ns="92.0" ratio_time="11939.970542731604" />
+  </testsuite>
+</testsuites>

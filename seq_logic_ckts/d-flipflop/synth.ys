@@ -1,0 +1,5 @@
+read_verilog -sv dflipflop.sv
+hierarchy -check -top dff_1bit
+proc; opt; fsm; opt
+techmap; opt
+write_verilog -noexpr dflipflop_netlist.v

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787569607" />
+    <testcase name="test_dff_1bit" classname="test_dflipflop" file="/home/mirafra/vlsi/seq_logic_ckts/d-flipflop/test_dflipflop.py" lineno="6" time="0.0011043548583984375" sim_time_ns="32.0" ratio_time="28976.193436960275" />
+  </testsuite>
+</testsuites>
