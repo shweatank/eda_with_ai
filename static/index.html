@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Logic Gates Test Runner</title>
+<!-- Marked.js library for rendering live Markdown -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
   :root {
     --bg: #0f1117;
@@ -105,7 +107,6 @@
     margin-top: 10px;
     max-height: 220px;
     overflow-y: auto;
-    white-space: pre-wrap;
   }
   .analysis-label {
     font-size: 11px;
@@ -122,12 +123,41 @@
     color: var(--fail);
     font-size: 13px;
   }
+
+  /* Markdown Formatting Styles */
+  .analysis p { margin: 4px 0 8px 0; }
+  .analysis ul, .analysis ol { margin: 4px 0 8px 18px; padding: 0; }
+  .analysis code {
+    background: #2a2e3a;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .analysis pre {
+    background: #0f1117;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+  .analysis table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 8px 0;
+    font-size: 12px;
+  }
+  .analysis th, .analysis td {
+    border: 1px solid var(--border);
+    padding: 6px 8px;
+    text-align: left;
+  }
+  .analysis th { background: #11131a; }
 </style>
 </head>
 <body>
 
 <h1>Logic Gates Test Runner</h1>
-<p class="subtitle">Runs each gate's cocotb simulation and shows the AI-generated explanation.</p>
+<p class="subtitle">Runs each gate's cocotb simulation and streams live AI-generated explanations.</p>
 
 <div class="toolbar">
   <button class="primary" id="runAllBtn">Run All Gates</button>
@@ -159,7 +189,7 @@ function renderCards() {
       </div>
       <div class="pass-lines" id="passlines-${g.toplevel}"></div>
       <div class="analysis" id="analysis-${g.toplevel}" style="display:none;">
-        <div class="analysis-label">Gemini analysis</div>
+        <div class="analysis-label">Gemini Analysis (Live Stream)</div>
         <div id="analysistext-${g.toplevel}"></div>
       </div>
       <button class="run-btn" onclick="runGate('${g.toplevel}', '${g.testcase}')">Run ${g.label}</button>
@@ -172,6 +202,48 @@ function setStatus(toplevel, statusClass, statusText) {
   const el = document.getElementById(`status-${toplevel}`);
   el.className = `status ${statusClass}`;
   el.textContent = statusText;
+}
+
+async function streamAnalysis(toplevel, rawOutput) {
+  const analysisDiv = document.getElementById(`analysis-${toplevel}`);
+  const textDiv = document.getElementById(`analysistext-${toplevel}`);
+
+  analysisDiv.style.display = "block";
+  textDiv.textContent = "Analyzing simulation with Gemini…";
+
+  try {
+    const res = await fetch("/api/analyze-stream", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        toplevel: toplevel,
+        raw_output: rawOutput
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.detail || "Streaming error");
+    }
+
+    textDiv.textContent = "";
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let accumulatedMarkdown = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      accumulatedMarkdown += decoder.decode(value, { stream: true });
+      // Convert Markdown to formatted HTML live
+      textDiv.innerHTML = marked.parse(accumulatedMarkdown);
+      // Auto-scroll box down as new streaming content arrives
+      analysisDiv.scrollTop = analysisDiv.scrollHeight;
+    }
+  } catch (e) {
+    textDiv.innerHTML = `<span class="error-text">Analysis streaming failed: ${e.message}</span>`;
+  }
 }
 
 async function runGate(toplevel, testcase) {
@@ -197,9 +269,9 @@ async function runGate(toplevel, testcase) {
         `<span class="error-text">${data.raw_output.slice(-1500)}</span>`;
     }
 
-    if (data.analysis) {
-      document.getElementById(`analysistext-${toplevel}`).textContent = data.analysis;
-      document.getElementById(`analysis-${toplevel}`).style.display = "block";
+    // Trigger live streaming Gemini analysis using raw_output
+    if (data.raw_output) {
+      await streamAnalysis(toplevel, data.raw_output);
     }
   } catch (e) {
     setStatus(toplevel, "fail", "Error");

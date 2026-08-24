@@ -1,0 +1,50 @@
+$date
+	Mon Aug 24 12:36:34 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module logic_model $end
+$var wire 1 ! a $end
+$var wire 1 " b $end
+$var wire 1 # c $end
+$var wire 1 $ y $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0$
+0#
+0"
+0!
+$end
+#2000
+1$
+1#
+#4000
+0$
+0#
+1"
+#6000
+1$
+1#
+#8000
+0$
+0#
+0"
+1!
+#10000
+1$
+1#
+#12000
+0#
+1"
+#14000
+1#
+#16000

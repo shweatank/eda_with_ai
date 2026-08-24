@@ -1,0 +1,47 @@
+$date
+	Mon Aug 24 12:37:08 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module multiplier $end
+$var wire 8 ! a [7:0] $end
+$var wire 8 " b [7:0] $end
+$var wire 16 # y [15:0] $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 #
+b0 "
+b0 !
+$end
+#2000
+b11111111 "
+#4000
+b0 #
+b0 "
+b11111111 !
+#6000
+b1 #
+b1 "
+b1 !
+#8000
+b1111111000000001 #
+b11111111 "
+b11111111 !
+#10000
+b100000000 #
+b10 "
+b10000000 !
+#12000
+b100000000 #
+b10000 "
+b10000 !
+#14000

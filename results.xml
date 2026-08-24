@@ -1,11 +1,75 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1787224079" />
-    <testcase name="test_add" classname="test_alu" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_alu.py" lineno="8" time="0.000720977783203125" sim_time_ns="8.0" ratio_time="11096.042328042327" />
-    <testcase name="test_sub" classname="test_alu" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_alu.py" lineno="23" time="0.0001571178436279297" sim_time_ns="8.000000000000002" ratio_time="50917.1957511381" />
-    <testcase name="test_mul" classname="test_alu" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_alu.py" lineno="38" time="0.0001289844512939453" sim_time_ns="8.0" ratio_time="62022.97966728281" />
-    <testcase name="test_div" classname="test_alu" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_alu.py" lineno="53" time="0.0001571178436279297" sim_time_ns="8.0" ratio_time="50917.19575113809" />
-    <testcase name="test_div_by_zero" classname="test_alu" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_alu.py" lineno="73" time="4.7206878662109375e-05" sim_time_ns="2.0" ratio_time="42366.707070707074" />
-    <testcase name="test_random_all_ops" classname="test_alu" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_alu.py" lineno="84" time="0.008086919784545898" sim_time_ns="1000.0000000000001" ratio_time="123656.47572157199" />
+    <property name="random_seed" value="1787565672" />
+    <testcase name="test_and" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="67" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_or" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="76" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_not" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="85" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_xor" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="92" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_nand" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="101" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_nor" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="110" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_xnor" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="119" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_logic_exhaustive" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="146" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_add_edge" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="165" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_add_random" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="178" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_sub_edge" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="203" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_sub_random" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="216" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_mul_edge" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="235" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_mul_random" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="248" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_div_edge" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="267" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_div_by_zero" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="284" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_div_random" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="293" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_alu_add" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="319" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_alu_sub" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="333" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_alu_mul" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="347" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_alu_div" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="361" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_alu_div_by_zero" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="379" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_alu_random" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="389" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_dff_1bit" classname="test_all_designs" file="/Users/sonam/Documents/eda_with_ai/eda_with_ai/test_all_designs.py" lineno="428" time="0.0013229846954345703" sim_time_ns="32.0" ratio_time="24187.732564426024" />
   </testsuite>
 </testsuites>
