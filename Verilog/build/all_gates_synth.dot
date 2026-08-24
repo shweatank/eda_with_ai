@@ -1,0 +1,38 @@
+digraph "all_gates" {
+label="all_gates";
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="xor_y", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="xor_b", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="xor_a", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="or_y", color="black", fontcolor="black" ];
+n5 [ shape=octagon, label="or_b", color="black", fontcolor="black" ];
+n6 [ shape=octagon, label="or_a", color="black", fontcolor="black" ];
+n7 [ shape=octagon, label="not_y", color="black", fontcolor="black" ];
+n8 [ shape=octagon, label="not_a", color="black", fontcolor="black" ];
+n9 [ shape=octagon, label="nand_y", color="black", fontcolor="black" ];
+n10 [ shape=octagon, label="nand_b", color="black", fontcolor="black" ];
+n11 [ shape=octagon, label="nand_a", color="black", fontcolor="black" ];
+n12 [ shape=octagon, label="and_y", color="black", fontcolor="black" ];
+n13 [ shape=octagon, label="and_b", color="black", fontcolor="black" ];
+n14 [ shape=octagon, label="and_a", color="black", fontcolor="black" ];
+c18 [ shape=record, label="{{<p15> a|<p16> b}|xor_instance\nxor_gate|{<p17> y}}" ];
+c19 [ shape=record, label="{{<p15> a|<p16> b}|or_instance\nor_gate|{<p17> y}}" ];
+c20 [ shape=record, label="{{<p15> a}|not_instance\nnot_gate|{<p17> y}}" ];
+c21 [ shape=record, label="{{<p15> a|<p16> b}|nand_instance\nnand_gate|{<p17> y}}" ];
+c22 [ shape=record, label="{{<p15> a|<p16> b}|and_instance\nand_gate|{<p17> y}}" ];
+c18:p17:e -> n1:w [color="black", label=""];
+n10:e -> c21:p16:w [color="black", label=""];
+n11:e -> c21:p15:w [color="black", label=""];
+c22:p17:e -> n12:w [color="black", label=""];
+n13:e -> c22:p16:w [color="black", label=""];
+n14:e -> c22:p15:w [color="black", label=""];
+n2:e -> c18:p16:w [color="black", label=""];
+n3:e -> c18:p15:w [color="black", label=""];
+c19:p17:e -> n4:w [color="black", label=""];
+n5:e -> c19:p16:w [color="black", label=""];
+n6:e -> c19:p15:w [color="black", label=""];
+c20:p17:e -> n7:w [color="black", label=""];
+n8:e -> c20:p15:w [color="black", label=""];
+c21:p17:e -> n9:w [color="black", label=""];
+}

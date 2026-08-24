@@ -15,7 +15,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Enable CORS for frontend clients
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -24,20 +23,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ==========================================
-# 1. Path & AI Client Configuration
-# ==========================================
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 VERILOG_DIR = os.path.join(CURRENT_DIR, "Verilog")
 
-# Initialize Gemini Client with API key from environment
 api_key = os.environ.get("GEMINI_API_KEY")
 ai_client = genai.Client(api_key=api_key) if api_key else None
 
 
-# ==========================================
-# 2. Data Models (Defined BEFORE routes)
-# ==========================================
 class ModuleInfo(BaseModel):
     module: str
     files: List[str]
@@ -60,11 +52,19 @@ class ExplainRequest(BaseModel):
     simulation_log: str
 
 
-# ==========================================
-# 3. Helper Functions
-# ==========================================
+def get_module_path(module_name: str) -> Optional[str]:
+    """Resolves module folder from Verilog/ or directly under Documents/."""
+    path_in_verilog = os.path.join(VERILOG_DIR, module_name)
+    path_in_docs = os.path.join(CURRENT_DIR, module_name)
+
+    if os.path.isdir(path_in_verilog):
+        return path_in_verilog
+    if os.path.isdir(path_in_docs):
+        return path_in_docs
+    return None
+
+
 def parse_cocotb_results(results_xml_path: str):
-    """Parses cocotb / JUnit XML output for test pass/fail breakdown."""
     if not os.path.exists(results_xml_path):
         return None, None
     try:
@@ -81,65 +81,58 @@ def parse_cocotb_results(results_xml_path: str):
     return None, None
 
 
-# ==========================================
-# 4. API Endpoints
-# ==========================================
-@app.get("/api/debug")
-async def get_debug_info():
-    """Diagnostic route to inspect directory mapping and detected folders."""
-    exists = os.path.exists(VERILOG_DIR)
-    entries = []
-    if exists:
-        entries = [
-            d
-            for d in os.listdir(VERILOG_DIR)
-            if os.path.isdir(os.path.join(VERILOG_DIR, d)) and not d.startswith(".")
-        ]
-    return {
-        "current_file_location": CURRENT_DIR,
-        "resolved_verilog_directory": VERILOG_DIR,
-        "directory_exists": exists,
-        "available_modules": entries,
-        "ai_configured": ai_client is not None,
-    }
-
-
 @app.get("/api/modules", response_model=List[ModuleInfo])
 async def list_modules():
-    """Lists all available gate directories and their constituent files."""
-    if not os.path.exists(VERILOG_DIR):
-        raise HTTPException(
-            status_code=404,
-            detail=f"Verilog directory not found at '{VERILOG_DIR}'",
-        )
-
     modules = []
-    for entry in sorted(os.listdir(VERILOG_DIR)):
-        entry_path = os.path.join(VERILOG_DIR, entry)
-        if os.path.isdir(entry_path) and not entry.startswith((".", "__")):
-            files = [f for f in os.listdir(entry_path) if not f.startswith(".")]
-            has_runner = "run.bash" in files or "Makefile" in files
+    # 1. Scan Verilog/ folder
+    if os.path.exists(VERILOG_DIR):
+        for entry in sorted(os.listdir(VERILOG_DIR)):
+            entry_path = os.path.join(VERILOG_DIR, entry)
+            if os.path.isdir(entry_path) and not entry.startswith((".", "__")):
+                files = [
+                    f for f in os.listdir(entry_path) if not f.startswith(".")
+                ]
+                has_runner = "run.bash" in files or "Makefile" in files
+                modules.append(
+                    ModuleInfo(module=entry, files=files, has_script=has_runner)
+                )
+
+    # 2. Check for signed_alu directly in Documents/
+    signed_alu_path = os.path.join(CURRENT_DIR, "signed_alu")
+    if os.path.isdir(signed_alu_path):
+        files = [
+            f for f in os.listdir(signed_alu_path) if not f.startswith(".")
+        ]
+        has_runner = "run.bash" in files or "Makefile" in files
+        if not any(m.module == "signed_alu" for m in modules):
             modules.append(
-                ModuleInfo(module=entry, files=files, has_script=has_runner)
+                ModuleInfo(
+                    module="signed_alu", files=files, has_script=has_runner
+                )
             )
+
     return modules
 
 
 @app.get("/api/modules/{module_name}/files/{file_name}")
 async def get_file_content(module_name: str, file_name: str):
-    """Fetches source code or script contents (.sv, .py, .bash, Makefile)."""
-    module_folder = os.path.join(VERILOG_DIR, module_name)
+    module_folder = get_module_path(module_name)
+    if not module_folder:
+        raise HTTPException(
+            status_code=404, detail=f"Module '{module_name}' not found"
+        )
+
     file_path = os.path.join(module_folder, file_name)
 
-    # Security check: Prevent directory traversal
-    if not os.path.abspath(file_path).startswith(os.path.abspath(module_folder)):
-        raise HTTPException(status_code=400, detail="Forbidden file path")
-
+    # Fallback to shared all_gates.sv if file not found locally
     if not os.path.exists(file_path):
-        raise HTTPException(
-            status_code=404,
-            detail=f"File '{file_name}' not found in '{module_name}'",
-        )
+        shared_file = os.path.join(VERILOG_DIR, file_name)
+        if os.path.exists(shared_file):
+            file_path = shared_file
+        else:
+            raise HTTPException(
+                status_code=404, detail=f"File '{file_name}' not found"
+            )
 
     with open(file_path, "r", encoding="utf-8", errors="replace") as f:
         content = f.read()
@@ -147,12 +140,12 @@ async def get_file_content(module_name: str, file_name: str):
     return {"module": module_name, "file": file_name, "content": content}
 
 
-@app.post("/api/modules/{module_name}/run", response_model=GateExecutionResponse)
+@app.post(
+    "/api/modules/{module_name}/run", response_model=GateExecutionResponse
+)
 async def run_module_testbench(module_name: str):
-    """Executes the testbench inside the specified gate module directory."""
-    module_folder = os.path.join(VERILOG_DIR, module_name)
-
-    if not os.path.isdir(module_folder):
+    module_folder = get_module_path(module_name)
+    if not module_folder:
         raise HTTPException(
             status_code=404, detail=f"Module '{module_name}' not found"
         )
@@ -160,14 +153,13 @@ async def run_module_testbench(module_name: str):
     if os.path.exists(os.path.join(module_folder, "run.bash")):
         cmd = ["bash", "run.bash"]
     elif os.path.exists(os.path.join(module_folder, "Makefile")):
-        cmd = ["make"]
+        cmd = ["make", "-B"]
     else:
         raise HTTPException(
             status_code=400,
             detail=f"No 'run.bash' or 'Makefile' found in '{module_name}'",
         )
 
-    # Enforce SIM=icarus in environment
     env = os.environ.copy()
     env["SIM"] = "icarus"
     env["TOPLEVEL_LANG"] = "verilog"
@@ -211,51 +203,24 @@ async def run_module_testbench(module_name: str):
     )
 
 
-@app.get("/api/modules/{module_name}/waveform")
-async def get_waveform_file(module_name: str):
-    """Streams or downloads the generated .vcd waveform file."""
-    module_folder = os.path.join(VERILOG_DIR, module_name)
-    if not os.path.isdir(module_folder):
-        raise HTTPException(status_code=404, detail=f"Module '{module_name}' not found")
-
-    vcd_files = [
-        os.path.join(module_folder, f)
-        for f in os.listdir(module_folder)
-        if f.endswith(".vcd")
-    ]
-
-    if not vcd_files:
-        raise HTTPException(
-            status_code=404,
-            detail=f"No .vcd waveform found in '{module_name}'. Run simulation first.",
-        )
-
-    latest_vcd = max(vcd_files, key=os.path.getmtime)
-    return FileResponse(
-        path=latest_vcd,
-        filename=os.path.basename(latest_vcd),
-        media_type="application/octet-stream",
-    )
-
-
 @app.post("/api/ai/analyze")
 async def ai_analyze(req: ExplainRequest):
-    """AI explains test results or diagnoses simulation bugs."""
     if not ai_client:
         raise HTTPException(
-            status_code=500, detail="GEMINI_API_KEY is not configured on the server."
+            status_code=500,
+            detail="GEMINI_API_KEY is not configured on the server.",
         )
 
     prompt = f"""
     You are an expert Digital Design & SystemVerilog verification engineer.
-    Analyze the following hardware module and its Cocotb simulation run.
+    Analyze the following hardware module ({req.module_name}) and its Cocotb simulation run.
 
-    Module: {req.module_name}
+    Module Name: {req.module_name}
 
-    === Source Code ===
+    === RTL Source Code ===
     {req.code}
 
-    === Simulation Log ===
+    === Simulation Output Log ===
     {req.simulation_log}
 
     Provide:
@@ -268,7 +233,7 @@ async def ai_analyze(req: ExplainRequest):
     try:
         response = await asyncio.to_thread(
             ai_client.models.generate_content,
-            model="gemini-3.6-flash",  # <--- Updated model name
+            model="gemini-3.6-flash",
             contents=prompt,
         )
         return {"analysis": response.text}
@@ -278,9 +243,7 @@ async def ai_analyze(req: ExplainRequest):
             status_code=500, detail=f"Gemini API Error: {str(e)}"
         )
 
-# ==========================================
-# 5. Frontend Dashboard Route
-# ==========================================
+
 @app.get("/", response_class=HTMLResponse)
 async def serve_ui():
     return """
@@ -326,8 +289,8 @@ async def serve_ui():
           </div>
 
           <div class="card">
-            <h3 style="margin:0;">RTL Source Code</h3>
-            <pre id="code-output">// Module source code will load here...</pre>
+            <h3 id="code-header" style="margin:0;">RTL Source Code</h3>
+            <pre id="code-output">// Source code will load here...</pre>
           </div>
         </div>
 
@@ -359,6 +322,22 @@ async def serve_ui():
           });
         }
 
+        async function fetchSourceCode(moduleName) {
+          // Check for alu.sv, all_gates.sv, module-specific .sv or .v
+          const possibleFiles = ['alu.sv', `${moduleName}.sv`, 'all_gates.sv', `${moduleName}.v`];
+          for (const filename of possibleFiles) {
+            try {
+              const res = await fetch(`/api/modules/${moduleName}/files/${filename}`);
+              if (res.ok) {
+                const data = await res.json();
+                document.getElementById('code-header').innerText = `RTL Source Code (${filename})`;
+                return data.content;
+              }
+            } catch (e) {}
+          }
+          return '// Could not load RTL source file.';
+        }
+
         async function runModule(moduleName) {
           currentModule = moduleName;
           const out = document.getElementById('console-output');
@@ -373,24 +352,9 @@ async def serve_ui():
           badge.innerText = 'Running...';
           out.innerText = `Simulating ${moduleName}...`;
 
-          // 1. Fetch Source Code (.sv or .v)
-          try {
-            let codeRes = await fetch(`/api/modules/${moduleName}/files/${moduleName}.sv`);
-            if (!codeRes.ok) {
-              codeRes = await fetch(`/api/modules/${moduleName}/files/${moduleName}.v`);
-            }
-            if (codeRes.ok) {
-              const codeData = await codeRes.json();
-              lastCode = codeData.content;
-              codeEl.innerText = lastCode;
-            } else {
-              lastCode = '// Source code file not found';
-              codeEl.innerText = lastCode;
-            }
-          } catch(e) { 
-            lastCode = '// Failed to load code';
-            codeEl.innerText = lastCode; 
-          }
+          // 1. Fetch Source Code
+          lastCode = await fetchSourceCode(moduleName);
+          codeEl.innerText = lastCode;
 
           // 2. Execute Simulation
           try {

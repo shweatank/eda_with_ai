@@ -1,6 +1,6 @@
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += or_gate.sv
+VERILOG_SOURCES = $(PWD)/../all_gates.sv
 
 COCOTB_TOPLEVEL = or_gate
 

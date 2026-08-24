@@ -1,7 +1,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += and_gate.sv
+VERILOG_SOURCES = $(PWD)/../all_gates.sv
 
 COCOTB_TOPLEVEL = and_gate
 
