@@ -30,6 +30,7 @@ comparator:
 all:
 	$(MAKE) sim
 	$(MAKE) show
+
 # Clean build artifacts
 clean::
 	rm -rf sim_build *.vcd *.xml *.png *.dot *.vvp *_netlist.v

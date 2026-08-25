@@ -6,6 +6,7 @@ module logic_or_and (
     output wire y
 );
     assign y = (A & B) | C;
+
     initial begin
         $dumpfile("logic_or_and.vcd");
         $dumpvars(0, logic_or_and);

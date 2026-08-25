@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1787573115" />
-    <testcase name="test_dff_1bit" classname="testbench_flipflop" file="/home/mirafra/vlsi/eda_with_ai/d6flipflop/testbench_flipflop.py" lineno="6" time="0.001336812973022461" sim_time_ns="32.0" ratio_time="23937.529516675586" />
+    <property name="random_seed" value="1787592525" />
+    <testcase name="test_dff_1bit" classname="testbench_flipflop" file="/home/mirafra/vlsi/eda_with_ai/d6flipflop/testbench_flipflop.py" lineno="6" time="0.001795053482055664" sim_time_ns="32.0" ratio_time="17826.766901314917" />
   </testsuite>
 </testsuites>

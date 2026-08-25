@@ -9,15 +9,14 @@ import xml.etree.ElementTree as ET
 # PATH CONFIGURATION
 # ============================================================
 
-# backend/app.py directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Parent project directory: d6flipflop/
+# d6flipflop/
 PROJECT_DIR = os.path.abspath(
     os.path.join(BASE_DIR, "..")
 )
 
-# templates directory is directly under d6flipflop/
+# d6flipflop/templates/
 TEMPLATE_DIR = os.path.join(
     PROJECT_DIR,
     "templates"
@@ -25,7 +24,7 @@ TEMPLATE_DIR = os.path.join(
 
 
 # ============================================================
-# FLASK APPLICATION
+# FLASK APP
 # ============================================================
 
 app = Flask(
@@ -35,7 +34,7 @@ app = Flask(
 
 
 # ============================================================
-# PROJECT FILE PATHS
+# PROJECT FILES
 # ============================================================
 
 DESIGN_FILE = os.path.join(
@@ -53,10 +52,13 @@ SYNTH_FILE = os.path.join(
     "synth.ys"
 )
 
-MAKEFILE = os.path.join(
+MAKEFILE_PATH = os.path.join(
     PROJECT_DIR,
     "Makefile"
 )
+
+
+# Generated files
 
 RESULTS_FILE = os.path.join(
     PROJECT_DIR,
@@ -88,22 +90,30 @@ PNG_FILE = os.path.join(
 # OLLAMA CONFIGURATION
 # ============================================================
 
-OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
+OLLAMA_BASE_URL = "http://127.0.0.1:11434"
 
-# Change this if you use another Ollama model
+OLLAMA_GENERATE_URL = (
+    f"{OLLAMA_BASE_URL}/api/generate"
+)
+
+OLLAMA_TAGS_URL = (
+    f"{OLLAMA_BASE_URL}/api/tags"
+)
+
+# IMPORTANT:
+# Run: ollama list
+# Change this to your exact model name if required.
 OLLAMA_MODEL = "llama3.2"
 
 
 # ============================================================
-# HELPER: READ FILE
+# READ FILE
 # ============================================================
 
-def read_project_file(file_path):
-    """
-    Read a project file safely.
-    """
+def read_file(file_path):
 
     if not os.path.exists(file_path):
+
         raise FileNotFoundError(
             f"File not found: {file_path}"
         )
@@ -119,7 +129,7 @@ def read_project_file(file_path):
 
 
 # ============================================================
-# CHECK OLLAMA SERVER
+# CHECK OLLAMA
 # ============================================================
 
 def check_ollama():
@@ -127,7 +137,7 @@ def check_ollama():
     try:
 
         response = requests.get(
-            "http://127.0.0.1:11434/api/tags",
+            OLLAMA_TAGS_URL,
             timeout=10
         )
 
@@ -135,12 +145,16 @@ def check_ollama():
 
         data = response.json()
 
-        models = [
-            model.get("name", "")
-            for model in data.get("models", [])
-        ]
+        models = []
+
+        for model in data.get("models", []):
+
+            models.append(
+                model.get("name", "")
+            )
 
         return {
+            "status": "PASS",
             "available": True,
             "models": models
         }
@@ -148,6 +162,7 @@ def check_ollama():
     except Exception as error:
 
         return {
+            "status": "ERROR",
             "available": False,
             "models": [],
             "error": str(error)
@@ -161,65 +176,95 @@ def check_ollama():
 def ollama_review(
     file_name,
     code,
-    review_type
+    file_type
 ):
 
     prompt = f"""
-You are a senior VLSI RTL design, verification,
-SystemVerilog, Cocotb and Yosys expert.
+You are an expert VLSI engineer.
 
-Review the following file carefully.
+You specialize in:
+
+- Verilog
+- SystemVerilog
+- RTL Design
+- Digital Logic
+- Flip-Flops
+- Cocotb
+- Icarus Verilog
+- Yosys
+- RTL Simulation
+- RTL Synthesis
+- Hardware Verification
+
+Review this file carefully.
 
 FILE NAME:
 {file_name}
 
 FILE TYPE:
-{review_type}
+{file_type}
 
-You must check:
 
-1. Syntax correctness
-2. Functional correctness
+CHECK FOR:
+
+1. Syntax errors
+2. Functional errors
 3. RTL design issues
 4. Reset behavior
 5. Clock behavior
 6. Race conditions
-7. Simulation compatibility
-8. Synthesis compatibility
-9. Verification coverage
-10. Code quality
+7. Latch inference
+8. Simulation problems
+9. Synthesis problems
+10. Testbench quality
+11. Missing test cases
+12. Code quality
 
-Return your answer EXACTLY in this format:
+
+Return your answer in EXACTLY this format:
+
 
 STATUS: PASS or FAIL
 
 ISSUES:
-- List all problems found.
-- If no issue exists, write: No major issues found.
+- List all issues found.
+- If no issues exist write:
+  No major issues found.
 
 SUGGESTIONS:
 - List improvements.
 
 SUMMARY:
-Give a technical explanation of the review.
+- Give a short technical summary.
+
+
+If there is a major functional,
+syntax, simulation or synthesis problem,
+use:
+
+STATUS: FAIL
+
 
 FILE CONTENT:
-----------------------------------------
+
+------------------------------------------------
 
 {code}
 
-----------------------------------------
+------------------------------------------------
 """
 
     try:
 
+        payload = {
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False
+        }
+
         response = requests.post(
-            OLLAMA_URL,
-            json={
-                "model": OLLAMA_MODEL,
-                "prompt": prompt,
-                "stream": False
-            },
+            OLLAMA_GENERATE_URL,
+            json=payload,
             timeout=180
         )
 
@@ -227,23 +272,28 @@ FILE CONTENT:
 
         data = response.json()
 
-        review_text = data.get(
+        review = data.get(
             "response",
             "No response received from Ollama."
         )
 
-        review_upper = review_text.upper()
+        review_upper = review.upper()
 
-        # Default status
-        status = "PASS"
-
-        # Detect explicit FAIL
         if "STATUS: FAIL" in review_upper:
+
             status = "FAIL"
+
+        elif "STATUS: PASS" in review_upper:
+
+            status = "PASS"
+
+        else:
+
+            status = "PASS"
 
         return {
             "status": status,
-            "review": review_text
+            "review": review
         }
 
     except requests.exceptions.ConnectionError:
@@ -252,8 +302,7 @@ FILE CONTENT:
             "status": "ERROR",
             "review": (
                 "Cannot connect to Ollama.\n"
-                "Start Ollama using:\n"
-                "ollama serve"
+                "Run: ollama serve"
             )
         }
 
@@ -261,18 +310,14 @@ FILE CONTENT:
 
         return {
             "status": "ERROR",
-            "review": (
-                "Ollama request timed out."
-            )
+            "review": "Ollama request timed out."
         }
 
     except requests.exceptions.HTTPError as error:
 
         return {
             "status": "ERROR",
-            "review": (
-                f"Ollama HTTP error: {error}"
-            )
+            "review": f"Ollama HTTP error: {error}"
         }
 
     except Exception as error:
@@ -291,9 +336,7 @@ def review_systemverilog():
 
     try:
 
-        code = read_project_file(
-            DESIGN_FILE
-        )
+        code = read_file(DESIGN_FILE)
 
         result = ollama_review(
             "flipflop.sv",
@@ -319,16 +362,14 @@ def review_systemverilog():
 
 
 # ============================================================
-# COCOTB TESTBENCH REVIEW
+# TESTBENCH REVIEW
 # ============================================================
 
 def review_testbench():
 
     try:
 
-        code = read_project_file(
-            TESTBENCH_FILE
-        )
+        code = read_file(TESTBENCH_FILE)
 
         result = ollama_review(
             "testbench_flipflop.py",
@@ -354,16 +395,14 @@ def review_testbench():
 
 
 # ============================================================
-# YOSYS SCRIPT REVIEW
+# YOSYS REVIEW
 # ============================================================
 
 def review_yosys():
 
     try:
 
-        code = read_project_file(
-            SYNTH_FILE
-        )
+        code = read_file(SYNTH_FILE)
 
         result = ollama_review(
             "synth.ys",
@@ -396,14 +435,12 @@ def review_makefile():
 
     try:
 
-        code = read_project_file(
-            MAKEFILE
-        )
+        code = read_file(MAKEFILE_PATH)
 
         result = ollama_review(
             "Makefile",
             code,
-            "Makefile for Cocotb, Icarus and Yosys"
+            "Build file for Cocotb and Yosys"
         )
 
         return {
@@ -424,20 +461,20 @@ def review_makefile():
 
 
 # ============================================================
-# DELETE OLD GENERATED FILES
+# REMOVE OLD GENERATED FILES
 # ============================================================
 
 def remove_old_artifacts():
 
     files = [
+
         RESULTS_FILE,
         VCD_FILE,
         NETLIST_FILE,
         DOT_FILE,
         PNG_FILE
-    ]
 
-    removed_files = []
+    ]
 
     for file_path in files:
 
@@ -447,14 +484,9 @@ def remove_old_artifacts():
 
                 os.remove(file_path)
 
-                removed_files.append(
-                    os.path.basename(file_path)
-                )
-
             except Exception:
-                pass
 
-    return removed_files
+                pass
 
 
 # ============================================================
@@ -465,8 +497,6 @@ def run_make():
 
     try:
 
-        # Remove old generated files so validation
-        # does not incorrectly report old files.
         remove_old_artifacts()
 
         result = subprocess.run(
@@ -483,16 +513,14 @@ def run_make():
             + result.stderr
         )
 
-        if result.returncode == 0:
-
-            status = "PASS"
-
-        else:
-
-            status = "FAIL"
+        status = (
+            "PASS"
+            if result.returncode == 0
+            else "FAIL"
+        )
 
         return {
-            "stage": "Build, Simulation and Synthesis",
+            "stage": "Build and Simulation",
             "status": status,
             "return_code": result.returncode,
             "output": output
@@ -501,18 +529,16 @@ def run_make():
     except subprocess.TimeoutExpired:
 
         return {
-            "stage": "Build, Simulation and Synthesis",
+            "stage": "Build and Simulation",
             "status": "ERROR",
             "return_code": -1,
-            "output": (
-                "make command timed out."
-            )
+            "output": "make command timed out."
         }
 
     except Exception as error:
 
         return {
-            "stage": "Build, Simulation and Synthesis",
+            "stage": "Build and Simulation",
             "status": "ERROR",
             "return_code": -1,
             "output": str(error)
@@ -520,42 +546,30 @@ def run_make():
 
 
 # ============================================================
-# VALIDATE RESULTS.XML
+# VALIDATE COCOTB RESULTS
 # ============================================================
 
 def validate_simulation():
 
-    vcd_exists = os.path.exists(
-        VCD_FILE
-    )
+    vcd_exists = os.path.exists(VCD_FILE)
 
     if not os.path.exists(RESULTS_FILE):
 
         return {
-            "stage": "Cocotb Simulation Validation",
+            "stage": "Simulation Validation",
             "status": "FAIL",
-            "details": (
-                "results.xml was not generated."
-            ),
+            "details": "results.xml was not generated.",
             "tests": 0,
             "failures": 0,
             "errors": 0,
-            "vcd_file": "dff_waveform.vcd",
             "vcd_generated": vcd_exists
         }
 
     try:
 
-        tree = ET.parse(
-            RESULTS_FILE
-        )
+        tree = ET.parse(RESULTS_FILE)
 
         root = tree.getroot()
-
-        # results.xml may have either:
-        # <testsuite>
-        # or
-        # <testsuites>
 
         if root.tag == "testsuite":
 
@@ -563,35 +577,24 @@ def validate_simulation():
 
         else:
 
-            suites = root.findall(
-                ".//testsuite"
-            )
+            suites = root.findall(".//testsuite")
 
-        total_tests = 0
+        tests = 0
         failures = 0
         errors = 0
 
         for suite in suites:
 
-            total_tests += int(
-                suite.attrib.get(
-                    "tests",
-                    0
-                )
+            tests += int(
+                suite.attrib.get("tests", 0)
             )
 
             failures += int(
-                suite.attrib.get(
-                    "failures",
-                    0
-                )
+                suite.attrib.get("failures", 0)
             )
 
             errors += int(
-                suite.attrib.get(
-                    "errors",
-                    0
-                )
+                suite.attrib.get("errors", 0)
             )
 
         if failures > 0 or errors > 0:
@@ -599,10 +602,9 @@ def validate_simulation():
             status = "FAIL"
 
             details = (
-                f"Simulation completed with "
-                f"{failures} failure(s) and "
-                f"{errors} error(s) out of "
-                f"{total_tests} test(s)."
+                f"{failures} failure(s), "
+                f"{errors} error(s) "
+                f"out of {tests} test(s)."
             )
 
         else:
@@ -610,75 +612,81 @@ def validate_simulation():
             status = "PASS"
 
             details = (
-                f"All {total_tests} Cocotb "
+                f"All {tests} Cocotb "
                 f"test(s) passed successfully."
             )
 
         return {
-            "stage": "Cocotb Simulation Validation",
+
+            "stage": "Simulation Validation",
+
             "status": status,
+
             "details": details,
-            "tests": total_tests,
+
+            "tests": tests,
+
             "failures": failures,
+
             "errors": errors,
+
             "vcd_file": "dff_waveform.vcd",
+
             "vcd_generated": vcd_exists
         }
 
     except Exception as error:
 
         return {
-            "stage": "Cocotb Simulation Validation",
+
+            "stage": "Simulation Validation",
+
             "status": "ERROR",
+
             "details": str(error),
+
             "tests": 0,
+
             "failures": 0,
+
             "errors": 0,
-            "vcd_file": "dff_waveform.vcd",
+
             "vcd_generated": vcd_exists
         }
 
 
 # ============================================================
-# VALIDATE GENERATED ARTIFACTS
+# VALIDATE GENERATED FILES
 # ============================================================
 
 def validate_artifacts():
 
-    vcd_exists = os.path.exists(
-        VCD_FILE
-    )
+    vcd_exists = os.path.exists(VCD_FILE)
 
-    netlist_exists = os.path.exists(
-        NETLIST_FILE
-    )
+    netlist_exists = os.path.exists(NETLIST_FILE)
 
-    dot_exists = os.path.exists(
-        DOT_FILE
-    )
+    dot_exists = os.path.exists(DOT_FILE)
 
-    png_exists = os.path.exists(
-        PNG_FILE
-    )
+    png_exists = os.path.exists(PNG_FILE)
 
-    all_generated = (
+    all_exist = (
+
         vcd_exists
         and netlist_exists
         and dot_exists
         and png_exists
+
     )
 
-    if all_generated:
-
-        status = "PASS"
-
-    else:
-
-        status = "FAIL"
-
     return {
-        "stage": "Generated Artifacts Validation",
-        "status": status,
+
+        "stage": "Generated Files Validation",
+
+        "status": (
+            "PASS"
+            if all_exist
+            else "FAIL"
+        ),
 
         "vcd": {
             "file": "dff_waveform.vcd",
@@ -709,35 +717,28 @@ def validate_artifacts():
 @app.route("/")
 def index():
 
-    return render_template(
-        "index.html"
-    )
+    return render_template("index.html")
 
 
 # ============================================================
-# API: CHECK OLLAMA
+# API - OLLAMA STATUS
 # ============================================================
 
-@app.route(
-    "/api/ollama_status",
-    methods=["GET"]
-)
-def ollama_status():
+@app.route("/api/ollama_status")
+def api_ollama_status():
 
-    return jsonify(
-        check_ollama()
-    )
+    return jsonify(check_ollama())
 
 
 # ============================================================
-# API: REVIEW SYSTEMVERILOG
+# API - SYSTEMVERILOG REVIEW
 # ============================================================
 
 @app.route(
     "/api/review/systemverilog",
     methods=["POST"]
 )
-def api_review_systemverilog():
+def api_systemverilog_review():
 
     return jsonify(
         review_systemverilog()
@@ -745,14 +746,14 @@ def api_review_systemverilog():
 
 
 # ============================================================
-# API: REVIEW TESTBENCH
+# API - TESTBENCH REVIEW
 # ============================================================
 
 @app.route(
     "/api/review/testbench",
     methods=["POST"]
 )
-def api_review_testbench():
+def api_testbench_review():
 
     return jsonify(
         review_testbench()
@@ -760,14 +761,14 @@ def api_review_testbench():
 
 
 # ============================================================
-# API: REVIEW YOSYS
+# API - YOSYS REVIEW
 # ============================================================
 
 @app.route(
     "/api/review/yosys",
     methods=["POST"]
 )
-def api_review_yosys():
+def api_yosys_review():
 
     return jsonify(
         review_yosys()
@@ -775,14 +776,14 @@ def api_review_yosys():
 
 
 # ============================================================
-# API: REVIEW MAKEFILE
+# API - MAKEFILE REVIEW
 # ============================================================
 
 @app.route(
     "/api/review/makefile",
     methods=["POST"]
 )
-def api_review_makefile():
+def api_makefile_review():
 
     return jsonify(
         review_makefile()
@@ -790,7 +791,7 @@ def api_review_makefile():
 
 
 # ============================================================
-# API: RUN SIMULATION / MAKE
+# API - RUN MAKE
 # ============================================================
 
 @app.route(
@@ -799,25 +800,45 @@ def api_review_makefile():
 )
 def api_run():
 
-    make_result = run_make()
+    try:
 
-    simulation_result = validate_simulation()
+        make_result = run_make()
 
-    artifacts_result = validate_artifacts()
+        simulation_result = (
+            validate_simulation()
+        )
 
-    return jsonify({
+        artifacts_result = (
+            validate_artifacts()
+        )
 
-        "make_execution": make_result,
+        return jsonify({
 
-        "simulation": simulation_result,
+            "status": "SUCCESS",
 
-        "artifacts": artifacts_result
+            "make_execution":
+                make_result,
 
-    })
+            "simulation":
+                simulation_result,
+
+            "artifacts":
+                artifacts_result
+        })
+
+    except Exception as error:
+
+        return jsonify({
+
+            "status": "ERROR",
+
+            "error": str(error)
+
+        }), 500
 
 
 # ============================================================
-# API: RUN COMPLETE PIPELINE
+# API - COMPLETE PIPELINE
 # ============================================================
 
 @app.route(
@@ -826,74 +847,92 @@ def api_run():
 )
 def api_run_pipeline():
 
-    # Check Ollama first
-    ollama_info = check_ollama()
+    try:
 
-    # AI Reviews
-    systemverilog_review = review_systemverilog()
+        ollama_info = check_ollama()
 
-    testbench_review = review_testbench()
+        systemverilog_review = (
+            review_systemverilog()
+        )
 
-    yosys_review = review_yosys()
+        testbench_review = (
+            review_testbench()
+        )
 
-    makefile_review = review_makefile()
+        yosys_review = (
+            review_yosys()
+        )
 
-    # Execute simulation and synthesis
-    make_result = run_make()
+        makefile_review = (
+            review_makefile()
+        )
 
-    # Validate simulation
-    simulation_result = validate_simulation()
+        make_result = run_make()
 
-    # Validate generated files
-    artifacts_result = validate_artifacts()
+        simulation_result = (
+            validate_simulation()
+        )
 
-    return jsonify({
+        artifacts_result = (
+            validate_artifacts()
+        )
 
-        "ollama": ollama_info,
+        return jsonify({
 
-        "systemverilog_review":
-            systemverilog_review,
+            "status": "SUCCESS",
 
-        "testbench_review":
-            testbench_review,
+            "ollama": ollama_info,
 
-        "yosys_review":
-            yosys_review,
+            "systemverilog_review":
+                systemverilog_review,
 
-        "makefile_review":
-            makefile_review,
+            "testbench_review":
+                testbench_review,
 
-        "make_execution":
-            make_result,
+            "yosys_review":
+                yosys_review,
 
-        "simulation":
-            simulation_result,
+            "makefile_review":
+                makefile_review,
 
-        "artifacts":
-            artifacts_result
+            "make_execution":
+                make_result,
 
-    })
+            "simulation":
+                simulation_result,
+
+            "artifacts":
+                artifacts_result
+
+        })
+
+    except Exception as error:
+
+        return jsonify({
+
+            "status": "ERROR",
+
+            "error": str(error)
+
+        }), 500
 
 
 # ============================================================
-# START FLASK SERVER
+# START SERVER
 # ============================================================
 
 if __name__ == "__main__":
 
-    print()
-    print("==========================================")
+    print("\n==========================================")
     print(" AI EDA FLIP-FLOP VALIDATION SERVER")
-    print("==========================================")
-    print(f"Project Directory : {PROJECT_DIR}")
-    print(f"Template Directory: {TEMPLATE_DIR}")
-    print(f"Design File       : {DESIGN_FILE}")
-    print(f"Testbench File    : {TESTBENCH_FILE}")
-    print(f"Yosys File        : {SYNTH_FILE}")
-    print(f"Ollama URL        : {OLLAMA_URL}")
-    print(f"Ollama Model      : {OLLAMA_MODEL}")
-    print("==========================================")
-    print()
+    print("==========================================\n")
+
+    print("Project:", PROJECT_DIR)
+    print("Templates:", TEMPLATE_DIR)
+    print("Ollama Model:", OLLAMA_MODEL)
+
+    print("\nOpen:")
+    print("http://127.0.0.1:5000\n")
 
     app.run(
         host="127.0.0.1",

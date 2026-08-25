@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple RAM Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function runSim() {
+            let response = await fetch("/simulate", {method: "POST"});
+            let data = await response.json();
+            document.getElementById("output").innerText =
+                data.stdout || data.stderr || data.error || "No output";
+        }
+
+        async function askOllama() {
+            let query = document.getElementById("query").value;
+            let response = await fetch("/ollama", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({q: query})
+            });
+            let data = await response.json();
+            document.getElementById("ollama_output").innerText =
+                data.ollama_response || data.error || "No response";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ Simple RAM Simulation</h1>
+            <p class="subtitle">Interactive hardware testing with AI insights</p>
+        </header>
+
+        <section class="card">
+            <h2>Run Simulation</h2>
+            <button class="btn pulse" onclick="runSim()">▶ Run Simulation</button>
+            <pre id="output" class="console"></pre>
+        </section>
+
+        <section class="card">
+            <h2>Ask Ollama</h2>
+            <div class="input-group">
+                <input type="text" id="query" placeholder="Ask about RAM..." class="input">
+                <button class="btn glow" onclick="askOllama()">💡 Ask</button>
+            </div>
+            <pre id="ollama_output" class="console"></pre>
+        </section>
+    </div>
+</body>
+</html>

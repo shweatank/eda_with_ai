@@ -1,8 +1,11 @@
-// 2-to-4 decoder: one-hot output selected by 2-bit input
+// 2-to-4 decoder
+// One-hot output selected by 2-bit input
+
 module decoder_2to4 (
     input  wire [1:0] a,
     output reg  [3:0] y
 );
+
     always @(*) begin
         case (a)
             2'b00: y = 4'b0001;
@@ -17,4 +20,5 @@ module decoder_2to4 (
         $dumpfile("decoder_2to4.vcd");
         $dumpvars(0, decoder_2to4);
     end
+
 endmodule

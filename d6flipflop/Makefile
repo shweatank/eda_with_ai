@@ -6,21 +6,26 @@ VERILOG_SOURCES := $(CURDIR)/flipflop.sv
 
 TOPLEVEL := dff_1bit
 
-MODULE := testbench_flipflop
+COCOTB_TEST_MODULES := testbench_flipflop
 
 COMPILE_ARGS += -g2012
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
 
+
 .PHONY: all synth png clean-extra
 
+
 all: sim synth png
+
 
 synth:
 	yosys -s synth.ys
 
+
 png: synth
 	dot -Tpng dff_synth.dot -o dff_synth.png
+
 
 clean-extra:
 	rm -rf __pycache__

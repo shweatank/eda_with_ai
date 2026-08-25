@@ -4,7 +4,7 @@ from cocotb.triggers import Timer
 
 @cocotb.test()
 async def test_decoder_2to4(dut):
-    """Test all input combinations of a 2-to-4 decoder."""
+    """Test all possible inputs of 2-to-4 decoder."""
 
     expected_map = {
         0b00: 0b0001,
@@ -30,6 +30,7 @@ async def test_decoder_2to4(dut):
         )
 
         print(
-            f"PASS: a={a:02b} "
-            f"-> y={got:04b}"
+            f"PASS: "
+            f"a={a:02b} -> "
+            f"y={got:04b}"
         )
