@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787649863" />
+    <testcase name="test_rom_all_addresses" classname="test_rom" file="/home/mirafra/vlsi/rom/test_rom.py" lineno="8" time="0.0006771087646484375" sim_time_ns="8.0" ratio_time="11814.940845070423" />
+  </testsuite>
+</testsuites>

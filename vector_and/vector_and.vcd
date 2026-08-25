@@ -1,0 +1,73 @@
+$date
+	Tue Aug 25 17:09:06 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module waveform_tb $end
+$var wire 8 ! y [7:0] $end
+$var reg 8 " a [7:0] $end
+$var reg 8 # b [7:0] $end
+$scope module dut $end
+$var wire 8 $ a [7:0] $end
+$var wire 8 % b [7:0] $end
+$var wire 8 & y [7:0] $end
+$scope begin GEN_AND[0] $end
+$upscope $end
+$scope begin GEN_AND[1] $end
+$upscope $end
+$scope begin GEN_AND[2] $end
+$upscope $end
+$scope begin GEN_AND[3] $end
+$upscope $end
+$scope begin GEN_AND[4] $end
+$upscope $end
+$scope begin GEN_AND[5] $end
+$upscope $end
+$scope begin GEN_AND[6] $end
+$upscope $end
+$scope begin GEN_AND[7] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+b0 !
+$end
+#10000
+b11111111 "
+b11111111 $
+#20000
+b11111111 !
+b11111111 &
+b11111111 #
+b11111111 %
+#30000
+b0 !
+b0 &
+b1010101 #
+b1010101 %
+b10101010 "
+b10101010 $
+#40000
+b11110000 #
+b11110000 %
+b1111 "
+b1111 $
+#50000
+b100100 !
+b100100 &
+b10100101 #
+b10100101 %
+b111100 "
+b111100 $
+#60000

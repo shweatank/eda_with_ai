@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787657946" />
+    <testcase name="test_vector_and_all_patterns" classname="test_vector_and" file="/home/mirafra/vlsi/vector_and/test_vector_and.py" lineno="5" time="0.000484466552734375" sim_time_ns="6.0" ratio_time="12384.75590551181" />
+  </testsuite>
+</testsuites>

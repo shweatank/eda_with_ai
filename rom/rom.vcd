@@ -1,0 +1,61 @@
+$date
+	Tue Aug 25 14:38:38 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module waveform_tb $end
+$var wire 8 ! data [7:0] $end
+$var reg 3 " address [2:0] $end
+$scope module dut $end
+$var wire 3 # address [2:0] $end
+$var reg 8 $ data [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx $
+b0 #
+b0 "
+bx !
+$end
+#10000
+b100010 !
+b100010 $
+b1 "
+b1 #
+#20000
+b110011 !
+b110011 $
+b10 "
+b10 #
+#30000
+b1000100 !
+b1000100 $
+b11 "
+b11 #
+#40000
+b1010101 !
+b1010101 $
+b100 "
+b100 #
+#50000
+b1100110 !
+b1100110 $
+b101 "
+b101 #
+#60000
+b1110111 !
+b1110111 $
+b110 "
+b110 #
+#70000
+b10001000 !
+b10001000 $
+b111 "
+b111 #
+#80000

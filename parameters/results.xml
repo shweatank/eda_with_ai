@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787652540" />
+    <testcase name="test_counter" classname="test_parameters" file="/home/mirafra/vlsi/parameters/test_parameters.py" lineno="6" time="0.0019314289093017578" sim_time_ns="113.0" ratio_time="58505.90692507098" />
+  </testsuite>
+</testsuites>

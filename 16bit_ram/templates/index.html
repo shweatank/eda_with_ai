@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>16-bit RAM Verification</title>
+    <style>
+        :root { color-scheme: light; --ink: #172126; --muted: #5c6a6d; --line: #c9d5d4; --paper: #f4f1e8; --panel: #fffdf7; --accent: #2f6f72; --ok: #28745c; --fail: #a33428; }
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 85% 15%, #b9d8d1 0 12%, transparent 35%), linear-gradient(135deg, #e3ece8, var(--paper)); color: var(--ink); font: 16px/1.5 Georgia, serif; }
+        main { max-width: 900px; margin: auto; padding: 8vh 20px; }
+        h1 { margin: 0 0 8px; font: 700 clamp(2.2rem, 7vw, 5rem)/.95 Georgia, serif; letter-spacing: 0; }
+        .intro { color: var(--muted); max-width: 590px; margin: 0 0 30px; }
+        .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 26px; box-shadow: 12px 12px 0 rgba(23, 33, 38, .08); }
+        .topline { display: flex; justify-content: space-between; gap: 18px; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+        .badge { color: var(--accent); font: 700 12px/1.2 monospace; text-transform: uppercase; }
+        button { border: 0; border-radius: 4px; background: var(--accent); color: white; cursor: pointer; padding: 13px 20px; font: 700 15px Georgia, serif; }
+        button:disabled { opacity: .55; cursor: wait; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
+        .metric { border-left: 3px solid var(--line); padding: 8px 12px; }
+        .metric strong { display: block; font: 700 12px monospace; text-transform: uppercase; color: var(--muted); }
+        .metric span { font-size: 1.25rem; }
+        #result { margin-top: 22px; white-space: pre-wrap; background: #edf3ef; border-radius: 4px; padding: 18px; min-height: 90px; font: 14px/1.5 monospace; }
+        #test-output { margin: 12px 0 0; white-space: pre-wrap; background: #172126; color: #e3ece8; border-radius: 4px; padding: 18px; min-height: 90px; overflow-x: auto; font: 13px/1.5 monospace; }
+        .pass { color: var(--ok); } .fail { color: var(--fail); }
+        @media (max-width: 620px) { main { padding: 40px 16px; } .topline { align-items: flex-start; flex-direction: column; } button { width: 100%; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<main>
+    <h1>16-bit RAM</h1>
+    <p class="intro">Local RTL, artifact, netlist, and Ollama verification.</p>
+    <section class="panel">
+        <div class="topline"><span class="badge">256 words / 16 bits</span><button id="verify" type="button">Verify with Ollama</button></div>
+        <div class="grid">
+            <div class="metric"><strong>Functionality</strong><span id="functional">Not run</span></div>
+            <div class="metric"><strong>Artifacts</strong><span id="artifacts">Not run</span></div>
+            <div class="metric"><strong>Netlist</strong><span id="netlist">Not run</span></div>
+        </div>
+        <div id="result" role="status">Ready to run local and AI verification.</div>
+        <pre id="test-output">Cocotb testcase output will appear here.</pre>
+    </section>
+</main>
+<script>
+    const button = document.getElementById("verify");
+    const result = document.getElementById("result");
+    const labels = { functional: document.getElementById("functional"), artifacts: document.getElementById("artifacts"), netlist: document.getElementById("netlist") };
+    const mark = (element, value) => { element.textContent = value; element.className = value === "PASS" ? "pass" : "fail"; };
+    button.addEventListener("click", async () => {
+        button.disabled = true;
+        result.textContent = "Running local verification and asking Ollama to review the evidence...";
+        try {
+            const response = await fetch("/api/verify", { method: "POST" });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || "Verification failed");
+            mark(labels.functional, data.local.functional_test);
+            mark(labels.artifacts, data.local.artifact_generation);
+            mark(labels.netlist, data.local.netlist_check);
+            const ai = data.ai;
+            result.textContent = `Local verification: ${data.status}\n\nOllama: ${ai.verdict} (${ai.source})\nFunctionality: ${ai.functionality}\nNetlist: ${ai.netlist}\nSummary: ${ai.summary}\n\nNetlist checks:\n- ${data.local.details.join("\n- ")}`;
+            document.getElementById("test-output").textContent = data.local.test_output || "No cocotb output captured.";
+        } catch (error) { result.textContent = `Error: ${error.message}`; }
+        finally { button.disabled = false; }
+    });
+</script>
+</body>
+</html>

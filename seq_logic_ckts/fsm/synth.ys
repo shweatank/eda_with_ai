@@ -1,0 +1,5 @@
+read_verilog -sv fsm.sv
+hierarchy -check -top controller
+proc; opt; fsm; opt
+techmap; opt
+write_verilog -noattr fsm_netlist.v

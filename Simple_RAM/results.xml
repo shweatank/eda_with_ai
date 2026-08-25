@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787639799" />
+    <testcase name="test_simple_ram" classname="test_ram" file="/home/mirafra/vlsi/Simple_RAM/test_ram.py" lineno="6" time="0.0013098716735839844" sim_time_ns="51.0" ratio_time="38935.11175828176" />
+  </testsuite>
+</testsuites>
