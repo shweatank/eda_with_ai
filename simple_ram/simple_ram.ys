@@ -1,0 +1,33 @@
+# ============================================================
+# YOSYS SYNTHESIS SCRIPT
+# ============================================================
+
+# Read SystemVerilog RTL
+read_verilog -sv simple_ram.sv
+
+# Set top module
+hierarchy -top simple_ram
+
+# Convert behavioral processes
+proc
+
+# Optimize
+opt
+
+# Technology mapping
+techmap
+
+# Optimize
+opt
+
+# ABC logic optimization
+abc
+
+# Final optimization
+opt
+
+# Show synthesis statistics
+stat
+
+# Write synthesized netlist
+write_verilog -noattr netlist/simple_ram_netlist.v

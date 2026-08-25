@@ -1,0 +1,33 @@
+# ============================================================
+# YOSYS SYNTHESIS SCRIPT
+# ============================================================
+
+# Read RTL
+read_verilog -sv controller.sv
+
+# Set top module
+hierarchy -top controller
+
+# Convert processes
+proc
+
+# Optimize
+opt
+
+# Technology mapping
+techmap
+
+# Optimize
+opt
+
+# ABC optimization
+abc
+
+# Final optimization
+opt
+
+# Show statistics
+stat
+
+# Write synthesized netlist
+write_verilog -noattr netlist/controller_netlist.v

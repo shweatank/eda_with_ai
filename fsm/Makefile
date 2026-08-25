@@ -1,0 +1,126 @@
+# ============================================================
+# FSM EDA FLOW
+# ============================================================
+
+TOPLEVEL = controller
+SIM = icarus
+
+VERILOG = controller.sv
+TESTBENCH = test_controller
+
+NETLIST_DIR = netlist
+WAVE_DIR = waves
+
+
+# ============================================================
+# DEFAULT FLOW
+# ============================================================
+
+all: sim synth image
+
+	@echo ""
+	@echo "===================================="
+	@echo " EDA FLOW COMPLETED"
+	@echo "===================================="
+
+
+# ============================================================
+# RTL SIMULATION
+# ============================================================
+
+sim:
+	@echo "===================================="
+	@echo " RTL SIMULATION"
+	@echo "===================================="
+
+	mkdir -p $(WAVE_DIR)
+
+	$(MAKE) -f $(shell cocotb-config --makefiles)/Makefile.sim \
+		SIM=$(SIM) \
+		TOPLEVEL_LANG=verilog \
+		TOPLEVEL=$(TOPLEVEL) \
+		MODULE=$(TESTBENCH) \
+		VERILOG_SOURCES=$(PWD)/$(VERILOG) \
+		COMPILE_ARGS="-g2012 -DCOCOTB_SIM"
+
+	@echo "RTL simulation completed."
+
+
+# ============================================================
+# YOSYS SYNTHESIS
+# ============================================================
+
+synth:
+	@echo "===================================="
+	@echo " YOSYS SYNTHESIS"
+	@echo "===================================="
+
+	mkdir -p $(NETLIST_DIR)
+
+	yosys -s controller.ys \
+		2>&1 | tee $(NETLIST_DIR)/synthesis_report.txt
+
+	@test -f $(NETLIST_DIR)/controller_netlist.v
+
+	@echo ""
+	@echo "Synthesis completed."
+	@echo "Netlist generated:"
+	@echo "  $(NETLIST_DIR)/controller_netlist.v"
+
+
+# ============================================================
+# SCHEMATIC / IMAGE GENERATION
+# ============================================================
+
+image:
+	@echo "===================================="
+	@echo " SCHEMATIC GENERATION"
+	@echo "===================================="
+
+	mkdir -p $(NETLIST_DIR)
+
+	@echo "Generating RTL schematic..."
+
+	yosys -p "read_verilog -sv $(VERILOG); hierarchy -top $(TOPLEVEL); proc; opt; show -format svg -prefix $(NETLIST_DIR)/rtl"
+
+	@echo "Generating netlist schematic..."
+
+	@test -f $(NETLIST_DIR)/controller_netlist.v
+
+	yosys -p "read_verilog $(NETLIST_DIR)/controller_netlist.v; hierarchy -top $(TOPLEVEL); show -format svg -prefix $(NETLIST_DIR)/netlist"
+
+	@echo ""
+	@echo "Images generated:"
+	@echo "  $(NETLIST_DIR)/rtl.svg"
+	@echo "  $(NETLIST_DIR)/netlist.svg"
+
+
+# ============================================================
+# GTKWave
+# ============================================================
+
+wave:
+	gtkwave $(WAVE_DIR)/rtl.vcd
+
+
+# ============================================================
+# YOSYS STATISTICS
+# ============================================================
+
+stat:
+	yosys -p "read_verilog -sv $(VERILOG); hierarchy -top $(TOPLEVEL); proc; opt; stat"
+
+
+# ============================================================
+# CLEAN
+# ============================================================
+
+clean:
+	rm -rf sim_build
+	rm -rf $(NETLIST_DIR)
+	rm -rf $(WAVE_DIR)
+	rm -rf __pycache__
+	rm -f results.xml
+	rm -f *.vvp
+
+	@echo "Clean completed."

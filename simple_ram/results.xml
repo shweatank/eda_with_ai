@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787657406" />
+    <testcase name="test_16bit_ram" classname="test_simple_ram" file="/home/mirafra/Desktop/eda_with_ai/simple_ram/test_simple_ram.py" lineno="56" time="0.1559603214263916" sim_time_ns="1641.001" ratio_time="10521.913426387116" />
+  </testsuite>
+</testsuites>

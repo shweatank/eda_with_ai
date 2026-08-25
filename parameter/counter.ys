@@ -1,0 +1,33 @@
+# ============================================================
+# YOSYS SYNTHESIS SCRIPT
+# ============================================================
+
+# Read SystemVerilog RTL
+read_verilog -sv counter.sv
+
+# Set top module
+hierarchy -top counter
+
+# Convert behavioral processes
+proc
+
+# Optimize
+opt
+
+# Technology mapping
+techmap
+
+# Optimize
+opt
+
+# ABC logic optimization
+abc
+
+# Final optimization
+opt
+
+# Show synthesis statistics
+stat
+
+# Write synthesized netlist
+write_verilog -noattr netlist/counter_netlist.v
