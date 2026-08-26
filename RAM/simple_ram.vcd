@@ -1,0 +1,61 @@
+$date
+	Wed Aug 26 06:38:57 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module simple_ram $end
+$var wire 8 ! address [7:0] $end
+$var wire 1 " clk $end
+$var wire 8 # write_data [7:0] $end
+$var wire 1 $ write_enable $end
+$var reg 8 % read_data [7:0] $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx %
+1$
+b10101010 #
+1"
+b10000 !
+$end
+#5000
+0"
+#10000
+0$
+1"
+#15000
+0"
+#20000
+b10101010 %
+1"
+#21000
+b1010101 #
+b100000 !
+1$
+#25000
+0"
+#30000
+0$
+bx %
+1"
+#35000
+0"
+#40000
+b1010101 %
+1"
+#41000
+b10000 !
+#45000
+0"
+#50000
+b10101010 %
+1"
+#51000

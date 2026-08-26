@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787722754" />
+    <testcase name="dff_1bit" classname="dff_1bit" file="/home/sam/git_folder/eda_with_ai/d_flip_flop/dff_1bit.py" lineno="5" time="0.0022046566009521484" sim_time_ns="52.0" ratio_time="23586.439710176273" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787727094" />
+    <testcase name="test_rom" classname="test_rom" file="/home/sam/git_folder/eda_with_ai/ROM/test_rom.py" lineno="16" time="0.0008323192596435547" sim_time_ns="17.0" ratio_time="20424.854769407048" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,59 @@
+module fsm (
+    input  wire clk,
+    input  wire reset,
+    input  wire start,
+    input  wire finish,
+    output reg  busy,
+    output reg  done,
+    output reg [1:0] current_state
+);
+    parameter IDLE = 2'b00;
+    parameter LOAD = 2'b01;
+    parameter RUN  = 2'b10;
+    parameter DONE = 2'b11;
+
+    reg [1:0] next_state;
+
+    // State register
+    always @(posedge clk or posedge reset) begin
+        if (reset)
+            current_state <= IDLE;
+        else
+            current_state <= next_state;
+    end
+
+    // Next-state logic
+    always @(*) begin
+        next_state = current_state;
+        case (current_state)
+            IDLE:
+                if (start)
+                    next_state = LOAD;
+            LOAD:
+                next_state = RUN;
+            RUN:
+                if (finish)
+                    next_state = DONE;
+            DONE:
+                next_state = IDLE;
+            default:
+                next_state = IDLE;
+        endcase
+    end
+
+    // Output logic
+    always @(*) begin
+        busy = 1'b0;
+        done = 1'b0;
+        case (current_state)
+            LOAD: busy = 1'b1;
+            RUN:  busy = 1'b1;
+            DONE: done = 1'b1;
+        endcase
+    end
+
+    initial begin
+        $dumpfile("fsm.vcd");
+        $dumpvars(0, fsm);
+    end
+endmodule
