@@ -1,0 +1,14 @@
+# Generic synthesis. For real standard-cell mapping, replace the generic
+# mapping stage with dfflibmap/abc using the same Liberty file as OpenSTA.
+read_verilog rtl/and_ff.v
+
+hierarchy -top and_ff
+proc
+opt
+techmap
+opt
+abc -g AND
+opt
+
+write_verilog -noattr build/and_ff_netlist.v
+stat

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787657130" />
+    <testcase name="test_and_ff" classname="test_and_ff" file="/home/mirafra/Pictures/sta/tb/test_and_ff.py" lineno="16" time="0.0013356208801269531" sim_time_ns="40.001" ratio_time="29949.36706604784" />
+  </testsuite>
+</testsuites>
