@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787636302" />
+    <testcase name="test_controller_fsm" classname="test" file="/home/mirafra/Pictures/clk/test.py" lineno="27" time="0.0025281906127929688" sim_time_ns="91.0" ratio_time="35994.12146359864" />
+  </testsuite>
+</testsuites>
