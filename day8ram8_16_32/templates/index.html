@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RAM Simulation</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; padding: 20px; }
+        h1 { text-align: center; color: #333; }
+        .form-box { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        select, button { padding: 10px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result-card { padding: 15px; border-radius: 10px; margin: 10px 0; color: white; font-weight: bold; display: flex; justify-content: space-between; }
+        .pass { background: #28a745; }
+        .fail { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>RAM Simulation (8 / 16 / 32-bit)</h1>
+    <div class="form-box">
+        <form id="ramForm" method="POST" action="/run_ram">
+            <label for="data_width">Select Data Width:</label>
+            <select name="data_width" id="data_width">
+                <option value="8">8-bit</option>
+                <option value="16">16-bit</option>
+                <option value="32">32-bit</option>
+            </select>
+            <label for="addr_width">Select Address Width:</label>
+            <select name="addr_width" id="addr_width">
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+            </select>
+            <button type="submit">Run Simulation</button>
+        </form>
+    </div>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById("ramForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch("/run_ram", { method: "POST", body: formData });
+            const data = await response.json();
+
+            let resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            if (data.validation) {
+                let valBox = document.createElement("div");
+                valBox.className = "result-card " + (data.validation.status === "PASS" ? "pass" : "fail");
+                valBox.textContent = "Validation: " + data.validation.status;
+                resultsDiv.appendChild(valBox);
+            }
+
+            if (data.simulation) {
+                let simBox = document.createElement("div");
+                simBox.className = "result-card " + (data.simulation.status === 0 ? "pass" : "fail");
+                simBox.textContent = "Simulation: " + (data.simulation.status === 0 ? "PASS" : "FAIL") +
+                                     ` (DATA_WIDTH=${data.simulation.data_width}, ADDR_WIDTH=${data.simulation.addr_width})`;
+                resultsDiv.appendChild(simBox);
+            }
+        });
+    </script>
+</body>
+</html>

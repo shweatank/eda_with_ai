@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787654747" />
+    <testcase name="test_ram" classname="testbench_ramreadwrite" file="/home/mirafra/vlsi/eda_with_ai/day7ramreadwrite/testbench_ramreadwrite.py" lineno="31" time="0.0021126270294189453" sim_time_ns="111.0" ratio_time="52541.21927547681" />
+  </testsuite>
+</testsuites>

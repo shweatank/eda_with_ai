@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Vector AND Simulation Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <h1>🔗 Vector AND Dashboard</h1>
+    <ul>
+      <li><a href="#">Simulation</a></li>
+      <li><a href="#">Validation</a></li>
+      <li><a href="#">Artifacts</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h2>⚡ Parameterized Vector AND</h2>
+    <p>Run simulations, generate netlists, and validate with Copilot AI.</p>
+    <button class="btn glow" onclick="runSim()">▶ Start Simulation</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h3>Simulation Output</h3>
+      <button class="btn" onclick="runSim()">▶ Run</button>
+      <pre id="sim_output" class="console"></pre>
+    </section>
+
+    <section class="card">
+      <h3>Copilot Validation</h3>
+      <button class="btn glow" onclick="validate()">✅ Validate</button>
+      <pre id="val_output" class="console"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made by Rahul • Day7 Parameterized Vector AND Project</p>
+  </footer>
+
+  <script>
+    async function runSim() {
+      let res = await fetch("/simulate", {method:"POST"});
+      let data = await res.json();
+      document.getElementById("sim_output").innerText = data.stdout || data.stderr;
+    }
+    async function validate() {
+      let res = await fetch("/validate", {method:"POST"});
+      let data = await res.json();
+      document.getElementById("val_output").innerText = data.details || data.error;
+    }
+  </script>
+</body>
+</html>

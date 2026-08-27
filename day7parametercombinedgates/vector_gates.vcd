@@ -1,0 +1,97 @@
+$date
+	Wed Aug 26 10:27:04 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module vector_gates $end
+$var wire 8 ! a [7:0] $end
+$var wire 8 " b [7:0] $end
+$var wire 8 # y_xor [7:0] $end
+$var wire 8 $ y_xnor [7:0] $end
+$var wire 8 % y_or [7:0] $end
+$var wire 8 & y_not_b [7:0] $end
+$var wire 8 ' y_not_a [7:0] $end
+$var wire 8 ( y_nor [7:0] $end
+$var wire 8 ) y_nand [7:0] $end
+$var wire 8 * y_and [7:0] $end
+$scope begin GEN_GATES[0] $end
+$upscope $end
+$scope begin GEN_GATES[1] $end
+$upscope $end
+$scope begin GEN_GATES[2] $end
+$upscope $end
+$scope begin GEN_GATES[3] $end
+$upscope $end
+$scope begin GEN_GATES[4] $end
+$upscope $end
+$scope begin GEN_GATES[5] $end
+$upscope $end
+$scope begin GEN_GATES[6] $end
+$upscope $end
+$scope begin GEN_GATES[7] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b10001000 *
+b1110111 )
+b10001 (
+b1010101 '
+b110011 &
+b11101110 %
+b10011001 $
+b1100110 #
+b11001100 "
+b10101010 !
+$end
+#1000
+b11110000 )
+b0 (
+b1111 $
+b11110000 &
+b1111 *
+b11111111 %
+b11110000 #
+b0 '
+b1111 "
+b11111111 !
+#2000
+b11111111 )
+b0 $
+b0 &
+b0 *
+b11111111 #
+b11111111 '
+b11111111 "
+b0 !
+#3000
+b0 )
+b11111111 $
+b11111111 *
+b0 #
+b0 '
+b11111111 !
+#4000
+b11111111 )
+b11111111 (
+b11111111 &
+b0 *
+b0 %
+b11111111 '
+b0 "
+b0 !
+#5000
+b0 (
+b0 $
+b1011010 &
+b11111111 %
+b11111111 #
+b10100101 '
+b10100101 "
+b1011010 !
+#6000
