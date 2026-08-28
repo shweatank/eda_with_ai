@@ -1,0 +1,11 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787206161" />
+    <testcase name="test_and_gate" classname="merged_code.test_alu" file="/home/mirafra/vlsi/merged_code/test_alu.py" lineno="5" time="0.0011126995086669922" sim_time_ns="4.0" ratio_time="3594.8609385043924" />
+    <testcase name="test_nand_gate" classname="merged_code.test_alu" file="/home/mirafra/vlsi/merged_code/test_alu.py" lineno="52" time="0.0006220340728759766" sim_time_ns="3.999999999999999" ratio_time="6430.515906477576" />
+    <testcase name="test_nor_gate" classname="merged_code.test_alu" file="/home/mirafra/vlsi/merged_code/test_alu.py" lineno="98" time="0.00048041343688964844" sim_time_ns="4.0" ratio_time="8326.161786600496" />
+    <testcase name="test_not_gate" classname="merged_code.test_alu" file="/home/mirafra/vlsi/merged_code/test_alu.py" lineno="145" time="0.0002892017364501953" sim_time_ns="2.0" ratio_time="6915.587798845837" />
+    <testcase name="test_or_gate" classname="merged_code.test_alu" file="/home/mirafra/vlsi/merged_code/test_alu.py" lineno="168" time="0.0005514621734619141" sim_time_ns="4.000000000000002" ratio_time="7253.444012105494" />
+    <testcase name="test_xor_gate" classname="merged_code.test_alu" file="/home/mirafra/vlsi/merged_code/test_alu.py" lineno="215" time="0.0006823539733886719" sim_time_ns="4.0" ratio_time="5862.060097833682" />
+  </testsuite>
+</testsuites>

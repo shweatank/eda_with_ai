@@ -1,0 +1,166 @@
+$date
+	Thu Aug 27 17:20:00 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module waveform_tb $end
+$var wire 1 ! underflow $end
+$var wire 8 " read_data [7:0] $end
+$var wire 1 # overflow $end
+$var wire 1 $ full $end
+$var wire 1 % empty $end
+$var wire 4 & count [3:0] $end
+$var reg 1 ' clk $end
+$var reg 1 ( read_enable $end
+$var reg 1 ) reset $end
+$var reg 8 * write_data [7:0] $end
+$var reg 1 + write_enable $end
+$scope module dut $end
+$var wire 1 ' clk $end
+$var wire 4 , count [3:0] $end
+$var wire 1 ( read_enable $end
+$var wire 1 ) reset $end
+$var wire 8 - write_data [7:0] $end
+$var wire 1 + write_enable $end
+$var wire 1 $ full $end
+$var wire 1 % empty $end
+$var reg 4 . count_register [3:0] $end
+$var reg 1 # overflow $end
+$var reg 8 / read_data [7:0] $end
+$var reg 3 0 read_pointer [2:0] $end
+$var reg 1 ! underflow $end
+$var reg 3 1 write_pointer [2:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx 1
+bx 0
+bx /
+bx .
+b0 -
+bx ,
+0+
+b0 *
+1)
+0(
+0'
+bx &
+x%
+x$
+x#
+bx "
+x!
+$end
+#5000
+0!
+0#
+b0 "
+b0 /
+0$
+1%
+b0 &
+b0 ,
+b0 .
+b0 0
+b0 1
+1'
+#10000
+0'
+#12000
+0)
+#15000
+1'
+#20000
+0'
+b10001 *
+b10001 -
+1+
+#25000
+0%
+b1 &
+b1 ,
+b1 .
+b1 1
+1'
+#30000
+0'
+b100010 *
+b100010 -
+#35000
+b10 &
+b10 ,
+b10 .
+b10 1
+1'
+#40000
+0'
+b110011 *
+b110011 -
+#45000
+b11 &
+b11 ,
+b11 .
+b11 1
+1'
+#50000
+0'
+1(
+0+
+#55000
+b10 &
+b10 ,
+b10 .
+b1 0
+b10001 "
+b10001 /
+1'
+#60000
+0'
+#65000
+b1 &
+b1 ,
+b1 .
+b10 0
+b100010 "
+b100010 /
+1'
+#70000
+0'
+#75000
+1%
+b0 &
+b0 ,
+b0 .
+b11 0
+b110011 "
+b110011 /
+1'
+#80000
+0'
+#85000
+1!
+1'
+#90000
+0'
+#95000
+1'
+#100000
+0'
+#105000
+1'
+#110000
+0'
+#115000
+1'
+#120000
+0'
+#125000
+1'
+#130000
+0'

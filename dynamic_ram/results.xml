@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787814419" />
+    <testcase name="test_dynamic_ram" classname="test_dynamic_ram" file="/home/mirafra/vlsi/dynamic_ram/test_dynamic_ram.py" lineno="6" time="0.001207113265991211" sim_time_ns="61.0" ratio_time="50533.78313253012" />
+  </testsuite>
+</testsuites>

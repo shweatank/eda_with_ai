@@ -1,0 +1,229 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x60108b988d90 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x60108b988f20 .scope module, "combined_gates" "combined_gates" 3 1;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 16 "a";
+    .port_info 1 /INPUT 16 "b";
+    .port_info 2 /INPUT 16 "c";
+    .port_info 3 /OUTPUT 16 "y";
+P_0x60108b9890b0 .param/l "WIDTH" 0 3 2, +C4<00000000000000000000000000010000>;
+o0x7e8e4c3cfa98 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x60108b9f9dd0_0 .net "a", 15 0, o0x7e8e4c3cfa98;  0 drivers
+o0x7e8e4c3cfac8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x60108b9f9ed0_0 .net "b", 15 0, o0x7e8e4c3cfac8;  0 drivers
+o0x7e8e4c3cfaf8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v0x60108b9f9fb0_0 .net "c", 15 0, o0x7e8e4c3cfaf8;  0 drivers
+v0x60108b9fa070_0 .net "y", 15 0, L_0x60108b9fd430;  1 drivers
+L_0x60108b9fa200 .part o0x7e8e4c3cfa98, 0, 1;
+L_0x60108b9fa2d0 .part o0x7e8e4c3cfac8, 0, 1;
+L_0x60108b9fa510 .part o0x7e8e4c3cfa98, 1, 1;
+L_0x60108b9fa600 .part o0x7e8e4c3cfac8, 1, 1;
+L_0x60108b9fa830 .part o0x7e8e4c3cfa98, 2, 1;
+L_0x60108b9fa8d0 .part o0x7e8e4c3cfac8, 2, 1;
+L_0x60108b9faac0 .part o0x7e8e4c3cfa98, 3, 1;
+L_0x60108b9fab60 .part o0x7e8e4c3cfac8, 3, 1;
+L_0x60108b9fad80 .part o0x7e8e4c3cfa98, 4, 1;
+L_0x60108b9fae20 .part o0x7e8e4c3cfac8, 4, 1;
+L_0x60108b9fb0d0 .part o0x7e8e4c3cfaf8, 5, 1;
+L_0x60108b9fb260 .part o0x7e8e4c3cfa98, 6, 1;
+L_0x60108b9fb370 .part o0x7e8e4c3cfac8, 6, 1;
+L_0x60108b9fb640 .part o0x7e8e4c3cfa98, 7, 1;
+L_0x60108b9fb760 .part o0x7e8e4c3cfac8, 7, 1;
+L_0x60108b9fb8d0 .part o0x7e8e4c3cfaf8, 7, 1;
+L_0x60108b9fbb60 .part o0x7e8e4c3cfa98, 8, 1;
+L_0x60108b9fbd10 .part o0x7e8e4c3cfac8, 8, 1;
+L_0x60108b9fc070 .part o0x7e8e4c3cfa98, 9, 1;
+L_0x60108b9fc110 .part o0x7e8e4c3cfac8, 9, 1;
+L_0x60108b9fbec0 .part o0x7e8e4c3cfa98, 10, 1;
+L_0x60108b9fc3a0 .part o0x7e8e4c3cfac8, 10, 1;
+L_0x60108b9fc640 .part o0x7e8e4c3cfa98, 11, 1;
+L_0x60108b9fc6e0 .part o0x7e8e4c3cfac8, 11, 1;
+L_0x60108b9fca50 .part o0x7e8e4c3cfa98, 12, 1;
+L_0x60108b9fcaf0 .part o0x7e8e4c3cfac8, 12, 1;
+L_0x60108b9fce70 .part o0x7e8e4c3cfaf8, 13, 1;
+L_0x60108b9fcfd0 .part o0x7e8e4c3cfa98, 14, 1;
+L_0x60108b9fd160 .part o0x7e8e4c3cfac8, 14, 1;
+LS_0x60108b9fd430_0_0 .concat8 [ 1 1 1 1], L_0x60108b9fa3d0, L_0x60108b9fa720, L_0x60108b9fa9b0, L_0x60108b9facc0;
+LS_0x60108b9fd430_0_4 .concat8 [ 1 1 1 1], L_0x60108b9fb010, L_0x60108b9fb170, L_0x60108b9fb580, L_0x60108b9fba50;
+LS_0x60108b9fd430_0_8 .concat8 [ 1 1 1 1], L_0x60108b9fbf60, L_0x60108b9fc260, L_0x60108b9fc500, L_0x60108b9fc990;
+LS_0x60108b9fd430_0_12 .concat8 [ 1 1 1 1], L_0x60108b9fcdb0, L_0x60108b9fcf10, L_0x60108b9fd370, L_0x60108b9fde80;
+L_0x60108b9fd430 .concat8 [ 4 4 4 4], LS_0x60108b9fd430_0_0, LS_0x60108b9fd430_0_4, LS_0x60108b9fd430_0_8, LS_0x60108b9fd430_0_12;
+L_0x60108b9fda80 .part o0x7e8e4c3cfa98, 15, 1;
+L_0x60108b9fdb20 .part o0x7e8e4c3cfac8, 15, 1;
+L_0x60108b9fdde0 .part o0x7e8e4c3cfaf8, 15, 1;
+S_0x60108b9d20f0 .scope generate, "GEN_GATES[0]" "GEN_GATES[0]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9d22d0 .param/l "i" 0 3 11, +C4<00>;
+S_0x60108b9d2370 .scope generate, "GEN_AND" "GEN_AND" 3 12, 3 12 0, S_0x60108b9d20f0;
+ .timescale -9 -12;
+L_0x60108b9fa3d0 .functor AND 1, L_0x60108b9fa200, L_0x60108b9fa2d0, C4<1>, C4<1>;
+v0x60108b9b9090_0 .net *"_ivl_0", 0 0, L_0x60108b9fa200;  1 drivers
+v0x60108b9b81c0_0 .net *"_ivl_1", 0 0, L_0x60108b9fa2d0;  1 drivers
+v0x60108b9f2470_0 .net *"_ivl_2", 0 0, L_0x60108b9fa3d0;  1 drivers
+S_0x60108b9f2530 .scope generate, "GEN_GATES[1]" "GEN_GATES[1]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f2750 .param/l "i" 0 3 11, +C4<01>;
+S_0x60108b9f2810 .scope generate, "GEN_OR" "GEN_OR" 3 14, 3 14 0, S_0x60108b9f2530;
+ .timescale -9 -12;
+L_0x60108b9fa720 .functor OR 1, L_0x60108b9fa510, L_0x60108b9fa600, C4<0>, C4<0>;
+v0x60108b9f29f0_0 .net *"_ivl_0", 0 0, L_0x60108b9fa510;  1 drivers
+v0x60108b9f2af0_0 .net *"_ivl_1", 0 0, L_0x60108b9fa600;  1 drivers
+v0x60108b9f2bd0_0 .net *"_ivl_2", 0 0, L_0x60108b9fa720;  1 drivers
+S_0x60108b9f2cc0 .scope generate, "GEN_GATES[2]" "GEN_GATES[2]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f2ef0 .param/l "i" 0 3 11, +C4<010>;
+S_0x60108b9f2fb0 .scope generate, "GEN_XOR" "GEN_XOR" 3 16, 3 16 0, S_0x60108b9f2cc0;
+ .timescale -9 -12;
+L_0x60108b9fa9b0 .functor XOR 1, L_0x60108b9fa830, L_0x60108b9fa8d0, C4<0>, C4<0>;
+v0x60108b9f3190_0 .net *"_ivl_0", 0 0, L_0x60108b9fa830;  1 drivers
+v0x60108b9f3290_0 .net *"_ivl_1", 0 0, L_0x60108b9fa8d0;  1 drivers
+v0x60108b9f3370_0 .net *"_ivl_2", 0 0, L_0x60108b9fa9b0;  1 drivers
+S_0x60108b9f3460 .scope generate, "GEN_GATES[3]" "GEN_GATES[3]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f3660 .param/l "i" 0 3 11, +C4<011>;
+S_0x60108b9f3740 .scope generate, "GEN_NAND" "GEN_NAND" 3 18, 3 18 0, S_0x60108b9f3460;
+ .timescale -9 -12;
+L_0x60108b9fac50 .functor AND 1, L_0x60108b9faac0, L_0x60108b9fab60, C4<1>, C4<1>;
+L_0x60108b9facc0 .functor NOT 1, L_0x60108b9fac50, C4<0>, C4<0>, C4<0>;
+v0x60108b9f3920_0 .net *"_ivl_0", 0 0, L_0x60108b9faac0;  1 drivers
+v0x60108b9f3a20_0 .net *"_ivl_1", 0 0, L_0x60108b9fab60;  1 drivers
+v0x60108b9f3b00_0 .net *"_ivl_2", 0 0, L_0x60108b9fac50;  1 drivers
+v0x60108b9f3bf0_0 .net *"_ivl_4", 0 0, L_0x60108b9facc0;  1 drivers
+S_0x60108b9f3cd0 .scope generate, "GEN_GATES[4]" "GEN_GATES[4]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f3f20 .param/l "i" 0 3 11, +C4<0100>;
+S_0x60108b9f4000 .scope generate, "GEN_NOR" "GEN_NOR" 3 20, 3 20 0, S_0x60108b9f3cd0;
+ .timescale -9 -12;
+L_0x60108b9faf20 .functor OR 1, L_0x60108b9fad80, L_0x60108b9fae20, C4<0>, C4<0>;
+L_0x60108b9fb010 .functor NOT 1, L_0x60108b9faf20, C4<0>, C4<0>, C4<0>;
+v0x60108b9f41e0_0 .net *"_ivl_0", 0 0, L_0x60108b9fad80;  1 drivers
+v0x60108b9f42e0_0 .net *"_ivl_1", 0 0, L_0x60108b9fae20;  1 drivers
+v0x60108b9f43c0_0 .net *"_ivl_2", 0 0, L_0x60108b9faf20;  1 drivers
+v0x60108b9f4480_0 .net *"_ivl_4", 0 0, L_0x60108b9fb010;  1 drivers
+S_0x60108b9f4560 .scope generate, "GEN_GATES[5]" "GEN_GATES[5]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f4760 .param/l "i" 0 3 11, +C4<0101>;
+S_0x60108b9f4840 .scope generate, "GEN_NOT" "GEN_NOT" 3 22, 3 22 0, S_0x60108b9f4560;
+ .timescale -9 -12;
+L_0x60108b9fb170 .functor NOT 1, L_0x60108b9fb0d0, C4<0>, C4<0>, C4<0>;
+v0x60108b9f4a20_0 .net *"_ivl_0", 0 0, L_0x60108b9fb0d0;  1 drivers
+v0x60108b9f4b20_0 .net *"_ivl_1", 0 0, L_0x60108b9fb170;  1 drivers
+S_0x60108b9f4c00 .scope generate, "GEN_GATES[6]" "GEN_GATES[6]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f4e00 .param/l "i" 0 3 11, +C4<0110>;
+S_0x60108b9f4ee0 .scope generate, "GEN_XNOR" "GEN_XNOR" 3 24, 3 24 0, S_0x60108b9f4c00;
+ .timescale -9 -12;
+L_0x60108b9fb440 .functor XOR 1, L_0x60108b9fb260, L_0x60108b9fb370, C4<0>, C4<0>;
+L_0x60108b9fb580 .functor NOT 1, L_0x60108b9fb440, C4<0>, C4<0>, C4<0>;
+v0x60108b9f50c0_0 .net *"_ivl_0", 0 0, L_0x60108b9fb260;  1 drivers
+v0x60108b9f51c0_0 .net *"_ivl_1", 0 0, L_0x60108b9fb370;  1 drivers
+v0x60108b9f52a0_0 .net *"_ivl_2", 0 0, L_0x60108b9fb440;  1 drivers
+v0x60108b9f5390_0 .net *"_ivl_4", 0 0, L_0x60108b9fb580;  1 drivers
+S_0x60108b9f5470 .scope generate, "GEN_GATES[7]" "GEN_GATES[7]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f5670 .param/l "i" 0 3 11, +C4<0111>;
+S_0x60108b9f5750 .scope generate, "GEN_COMBINED" "GEN_COMBINED" 3 26, 3 26 0, S_0x60108b9f5470;
+ .timescale -9 -12;
+L_0x60108b9fb300 .functor AND 1, L_0x60108b9fb640, L_0x60108b9fb760, C4<1>, C4<1>;
+L_0x60108b9fba50 .functor OR 1, L_0x60108b9fb300, L_0x60108b9fb8d0, C4<0>, C4<0>;
+v0x60108b9f5930_0 .net *"_ivl_0", 0 0, L_0x60108b9fb640;  1 drivers
+v0x60108b9f5a30_0 .net *"_ivl_1", 0 0, L_0x60108b9fb760;  1 drivers
+v0x60108b9f5b10_0 .net *"_ivl_2", 0 0, L_0x60108b9fb300;  1 drivers
+v0x60108b9f5c00_0 .net *"_ivl_4", 0 0, L_0x60108b9fb8d0;  1 drivers
+v0x60108b9f5ce0_0 .net *"_ivl_5", 0 0, L_0x60108b9fba50;  1 drivers
+S_0x60108b9f5e10 .scope generate, "GEN_GATES[8]" "GEN_GATES[8]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f3ed0 .param/l "i" 0 3 11, +C4<01000>;
+S_0x60108b9f60a0 .scope generate, "GEN_AND" "GEN_AND" 3 12, 3 12 0, S_0x60108b9f5e10;
+ .timescale -9 -12;
+L_0x60108b9fbf60 .functor AND 1, L_0x60108b9fbb60, L_0x60108b9fbd10, C4<1>, C4<1>;
+v0x60108b9f6280_0 .net *"_ivl_0", 0 0, L_0x60108b9fbb60;  1 drivers
+v0x60108b9f6380_0 .net *"_ivl_1", 0 0, L_0x60108b9fbd10;  1 drivers
+v0x60108b9f6460_0 .net *"_ivl_2", 0 0, L_0x60108b9fbf60;  1 drivers
+S_0x60108b9f6520 .scope generate, "GEN_GATES[9]" "GEN_GATES[9]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f6720 .param/l "i" 0 3 11, +C4<01001>;
+S_0x60108b9f6800 .scope generate, "GEN_OR" "GEN_OR" 3 14, 3 14 0, S_0x60108b9f6520;
+ .timescale -9 -12;
+L_0x60108b9fc260 .functor OR 1, L_0x60108b9fc070, L_0x60108b9fc110, C4<0>, C4<0>;
+v0x60108b9f69e0_0 .net *"_ivl_0", 0 0, L_0x60108b9fc070;  1 drivers
+v0x60108b9f6ae0_0 .net *"_ivl_1", 0 0, L_0x60108b9fc110;  1 drivers
+v0x60108b9f6bc0_0 .net *"_ivl_2", 0 0, L_0x60108b9fc260;  1 drivers
+S_0x60108b9f6cb0 .scope generate, "GEN_GATES[10]" "GEN_GATES[10]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f6eb0 .param/l "i" 0 3 11, +C4<01010>;
+S_0x60108b9f6f90 .scope generate, "GEN_XOR" "GEN_XOR" 3 16, 3 16 0, S_0x60108b9f6cb0;
+ .timescale -9 -12;
+L_0x60108b9fc500 .functor XOR 1, L_0x60108b9fbec0, L_0x60108b9fc3a0, C4<0>, C4<0>;
+v0x60108b9f7170_0 .net *"_ivl_0", 0 0, L_0x60108b9fbec0;  1 drivers
+v0x60108b9f7270_0 .net *"_ivl_1", 0 0, L_0x60108b9fc3a0;  1 drivers
+v0x60108b9f7350_0 .net *"_ivl_2", 0 0, L_0x60108b9fc500;  1 drivers
+S_0x60108b9f7440 .scope generate, "GEN_GATES[11]" "GEN_GATES[11]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f7640 .param/l "i" 0 3 11, +C4<01011>;
+S_0x60108b9f7720 .scope generate, "GEN_NAND" "GEN_NAND" 3 18, 3 18 0, S_0x60108b9f7440;
+ .timescale -9 -12;
+L_0x60108b9fc850 .functor AND 1, L_0x60108b9fc640, L_0x60108b9fc6e0, C4<1>, C4<1>;
+L_0x60108b9fc990 .functor NOT 1, L_0x60108b9fc850, C4<0>, C4<0>, C4<0>;
+v0x60108b9f7900_0 .net *"_ivl_0", 0 0, L_0x60108b9fc640;  1 drivers
+v0x60108b9f7a00_0 .net *"_ivl_1", 0 0, L_0x60108b9fc6e0;  1 drivers
+v0x60108b9f7ae0_0 .net *"_ivl_2", 0 0, L_0x60108b9fc850;  1 drivers
+v0x60108b9f7bd0_0 .net *"_ivl_4", 0 0, L_0x60108b9fc990;  1 drivers
+S_0x60108b9f7cb0 .scope generate, "GEN_GATES[12]" "GEN_GATES[12]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f7eb0 .param/l "i" 0 3 11, +C4<01100>;
+S_0x60108b9f7f90 .scope generate, "GEN_NOR" "GEN_NOR" 3 20, 3 20 0, S_0x60108b9f7cb0;
+ .timescale -9 -12;
+L_0x60108b9fcc70 .functor OR 1, L_0x60108b9fca50, L_0x60108b9fcaf0, C4<0>, C4<0>;
+L_0x60108b9fcdb0 .functor NOT 1, L_0x60108b9fcc70, C4<0>, C4<0>, C4<0>;
+v0x60108b9f8170_0 .net *"_ivl_0", 0 0, L_0x60108b9fca50;  1 drivers
+v0x60108b9f8270_0 .net *"_ivl_1", 0 0, L_0x60108b9fcaf0;  1 drivers
+v0x60108b9f8350_0 .net *"_ivl_2", 0 0, L_0x60108b9fcc70;  1 drivers
+v0x60108b9f8440_0 .net *"_ivl_4", 0 0, L_0x60108b9fcdb0;  1 drivers
+S_0x60108b9f8520 .scope generate, "GEN_GATES[13]" "GEN_GATES[13]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f8720 .param/l "i" 0 3 11, +C4<01101>;
+S_0x60108b9f8800 .scope generate, "GEN_NOT" "GEN_NOT" 3 22, 3 22 0, S_0x60108b9f8520;
+ .timescale -9 -12;
+L_0x60108b9fcf10 .functor NOT 1, L_0x60108b9fce70, C4<0>, C4<0>, C4<0>;
+v0x60108b9f89e0_0 .net *"_ivl_0", 0 0, L_0x60108b9fce70;  1 drivers
+v0x60108b9f8ae0_0 .net *"_ivl_1", 0 0, L_0x60108b9fcf10;  1 drivers
+S_0x60108b9f8bc0 .scope generate, "GEN_GATES[14]" "GEN_GATES[14]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f8dc0 .param/l "i" 0 3 11, +C4<01110>;
+S_0x60108b9f8ea0 .scope generate, "GEN_XNOR" "GEN_XNOR" 3 24, 3 24 0, S_0x60108b9f8bc0;
+ .timescale -9 -12;
+L_0x60108b9fd230 .functor XOR 1, L_0x60108b9fcfd0, L_0x60108b9fd160, C4<0>, C4<0>;
+L_0x60108b9fd370 .functor NOT 1, L_0x60108b9fd230, C4<0>, C4<0>, C4<0>;
+v0x60108b9f9080_0 .net *"_ivl_0", 0 0, L_0x60108b9fcfd0;  1 drivers
+v0x60108b9f9180_0 .net *"_ivl_1", 0 0, L_0x60108b9fd160;  1 drivers
+v0x60108b9f9260_0 .net *"_ivl_2", 0 0, L_0x60108b9fd230;  1 drivers
+v0x60108b9f9350_0 .net *"_ivl_4", 0 0, L_0x60108b9fd370;  1 drivers
+S_0x60108b9f9430 .scope generate, "GEN_GATES[15]" "GEN_GATES[15]" 3 11, 3 11 0, S_0x60108b988f20;
+ .timescale -9 -12;
+P_0x60108b9f9630 .param/l "i" 0 3 11, +C4<01111>;
+S_0x60108b9f9710 .scope generate, "GEN_COMBINED" "GEN_COMBINED" 3 26, 3 26 0, S_0x60108b9f9430;
+ .timescale -9 -12;
+L_0x60108b9fdcd0 .functor AND 1, L_0x60108b9fda80, L_0x60108b9fdb20, C4<1>, C4<1>;
+L_0x60108b9fde80 .functor OR 1, L_0x60108b9fdcd0, L_0x60108b9fdde0, C4<0>, C4<0>;
+v0x60108b9f98f0_0 .net *"_ivl_0", 0 0, L_0x60108b9fda80;  1 drivers
+v0x60108b9f99f0_0 .net *"_ivl_1", 0 0, L_0x60108b9fdb20;  1 drivers
+v0x60108b9f9ad0_0 .net *"_ivl_2", 0 0, L_0x60108b9fdcd0;  1 drivers
+v0x60108b9f9bc0_0 .net *"_ivl_4", 0 0, L_0x60108b9fdde0;  1 drivers
+v0x60108b9f9ca0_0 .net *"_ivl_5", 0 0, L_0x60108b9fde80;  1 drivers
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/combined_gates/combined_gates.sv";

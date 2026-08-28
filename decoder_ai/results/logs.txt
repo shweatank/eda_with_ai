@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787548556" />
+    <testcase name="test_decoder_2to4" classname="testbench_decoder_2to4" file="/home/mirafra/vlsi/eda_with_ai/d5decoder/testbench_decoder_2to4.py" lineno="5" time="0.0007867813110351562" sim_time_ns="4.0" ratio_time="5084.0048484848485" />
+  </testsuite>
+</testsuites>

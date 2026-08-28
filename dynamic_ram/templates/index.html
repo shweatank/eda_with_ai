@@ -1,0 +1,61 @@
+</script>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Dynamic RAM Verification</title>
+	<style>
+		:root { --ink:#172126; --muted:#5c6a6d; --line:#c9d5d4; --paper:#f4f1e8; --panel:#fffdf7; --accent:#2f6f72; --ok:#28745c; --fail:#a33428; }
+		* { box-sizing:border-box; } body { margin:0; min-height:100vh; background:linear-gradient(135deg,#e3ece8,var(--paper)); color:var(--ink); font:16px/1.5 Georgia,serif; }
+		main { max-width:920px; margin:auto; padding:8vh 20px; } h1 { margin:0 0 8px; font-size:clamp(2.2rem,7vw,5rem); line-height:.95; } .intro { color:var(--muted); max-width:680px; margin:0 0 30px; }
+		.panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:26px; box-shadow:12px 12px 0 rgba(23,33,38,.08); } .topline { display:flex; justify-content:space-between; gap:18px; align-items:center; border-bottom:1px solid var(--line); padding-bottom:18px; } .badge { color:var(--accent); font:700 12px monospace; text-transform:uppercase; }
+		button { border:0; border-radius:4px; background:var(--accent); color:white; cursor:pointer; padding:12px 18px; font:700 15px Georgia,serif; } button:disabled { opacity:.55; cursor:wait; } .operation { padding:20px 0; border-bottom:1px solid var(--line); } .inputs { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; } label { display:grid; gap:5px; color:var(--muted); font:700 12px monospace; text-transform:uppercase; } input,select { width:100%; border:1px solid var(--line); border-radius:4px; padding:11px; background:white; color:var(--ink); font:16px Georgia,serif; } .operation button { margin:14px 8px 0 0; } #operation-result,#result,#test-output { margin-top:16px; padding:16px; border-radius:4px; white-space:pre-wrap; font:14px/1.6 monospace; } #operation-result,#result { background:#edf3ef; } #test-output { background:#172126; color:#e3ece8; overflow-x:auto; } .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; } .metric { border-left:3px solid var(--line); padding:8px 12px; } .metric strong { display:block; color:var(--muted); font:700 12px monospace; text-transform:uppercase; } .metric span { font-size:1.25rem; } .pass { color:var(--ok); } .fail { color:var(--fail); }
+		@media(max-width:620px) { main { padding:40px 16px; } .topline { align-items:flex-start; flex-direction:column; } button { width:100%; } .inputs,.grid { grid-template-columns:1fr; } }
+	</style>
+</head>
+<body>
+<main>
+	<h1>Dynamic RAM</h1>
+	<p class="intro">Select data width and address width. Write a word, then read it back from any address in the selected memory depth.</p>
+	<section class="panel">
+		<div class="topline"><span class="badge">8-64 DATA BITS / 8-16 ADDRESS BITS</span><button id="verify" type="button">Verify All Widths</button></div>
+		<div class="operation">
+			<div class="inputs">
+				<label>Data width<select id="width"><option>8</option><option>16</option><option>32</option><option>64</option></select></label>
+				<label>Address width<select id="address-width"><option>8</option><option>10</option><option>12</option><option>16</option></select></label>
+				<label>Address<input id="address" value="0x100"></label>
+				<label>Write data<input id="write-data" value="0xA55A"></label>
+			</div>
+			<button id="write" type="button">Write to Memory</button><button id="read" type="button">Read from Memory</button>
+			<div id="operation-result" role="status">Choose widths, write a word, then read the same address.</div>
+		</div>
+		<div class="grid"><div class="metric"><strong>Functionality</strong><span id="functional">Not run</span></div><div class="metric"><strong>Artifacts</strong><span id="artifacts">Not run</span></div><div class="metric"><strong>Netlist</strong><span id="netlist">Not run</span></div></div>
+		<div id="result" role="status">Ready to validate all selected RAM widths.</div><pre id="test-output">Cocotb output will appear here.</pre>
+	</section>
+</main>
+<script>
+const el = id => document.getElementById(id);
+const operationResult = el("operation-result");
+async function runOperation(operation) {
+	const button = el(operation);
+	button.disabled = true;
+	try {
+		const response = await fetch("/api/operate", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ operation, width:Number(el("width").value), address_width:Number(el("address-width").value), address:el("address").value, write_data:el("write-data").value }) });
+		const data = await response.json();
+		if (!response.ok) throw Error(data.error);
+		operationResult.textContent = `DATA_WIDTH=${data.width}  ADDRESS_WIDTH=${data.address_width}  DEPTH=${data.depth}\nAddress: ${data.address}\nWrite data: ${data.input_hex}\nStored value: ${data.stored_hex}\nBits: ${data.stored_binary}\n\n${data.operation_text}\n${data.output}\nOutput bits: ${data.output_binary}`;
+	} catch (error) { operationResult.textContent = `Error: ${error.message}`; }
+	finally { button.disabled = false; }
+}
+el("write").addEventListener("click", () => runOperation("write"));
+el("read").addEventListener("click", () => runOperation("read"));
+const verify = el("verify");
+const status = el("result");
+const labels = { functional:el("functional"), artifacts:el("artifacts"), netlist:el("netlist") };
+const mark = (node,value) => { node.textContent=value; node.className=value === "PASS" ? "pass" : "fail"; };
+verify.addEventListener("click", async () => { verify.disabled=true; status.textContent="Running cocotb for DATA_WIDTH 8, 16, 32, and 64..."; try { const response=await fetch("/api/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({widths:[8,16,32,64]})}); const data=await response.json(); if(!response.ok) throw Error(data.error); mark(labels.functional,data.local.functional_test); mark(labels.artifacts,data.local.artifact_generation); mark(labels.netlist,data.local.netlist_check); status.textContent=`Overall: ${data.status}\n\n${data.local.width_results.map(item=>`DATA_WIDTH=${item.width}: ${item.status}`).join("\n")}\n\nOllama: ${data.ai.verdict} (${data.ai.source})\n${data.ai.summary}`; el("test-output").textContent=data.local.test_output; } catch(error) { status.textContent=`Error: ${error.message}`; } finally { verify.disabled=false; } });
+</script>
+</body>
+</html>
+</script></body></html>

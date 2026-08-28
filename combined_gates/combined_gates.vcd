@@ -1,0 +1,107 @@
+$date
+	Wed Aug 26 14:30:35 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module waveform_tb $end
+$var wire 8 ! y [7:0] $end
+$var reg 8 " a [7:0] $end
+$var reg 8 # b [7:0] $end
+$var reg 8 $ c [7:0] $end
+$scope module dut $end
+$var wire 8 % a [7:0] $end
+$var wire 8 & b [7:0] $end
+$var wire 8 ' c [7:0] $end
+$var wire 8 ( y [7:0] $end
+$scope begin GEN_GATES[0] $end
+$scope begin GEN_AND $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[1] $end
+$scope begin GEN_OR $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[2] $end
+$scope begin GEN_XOR $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[3] $end
+$scope begin GEN_NAND $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[4] $end
+$scope begin GEN_NOR $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[5] $end
+$scope begin GEN_NOT $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[6] $end
+$scope begin GEN_XNOR $end
+$upscope $end
+$upscope $end
+$scope begin GEN_GATES[7] $end
+$scope begin GEN_COMBINED $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1111000 (
+b0 '
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+b1111000 !
+$end
+#10000
+b10001110 !
+b10001110 (
+b10101010 $
+b10101010 '
+b11111111 "
+b11111111 %
+#20000
+b11100011 !
+b11100011 (
+b1010101 $
+b1010101 '
+b11111111 #
+b11111111 &
+#30000
+b101110 !
+b101110 (
+b1111 $
+b1111 '
+b1010101 #
+b1010101 &
+b10101010 "
+b10101010 %
+#40000
+b10001110 !
+b10001110 (
+b11110000 $
+b11110000 '
+b11110000 #
+b11110000 &
+b1111 "
+b1111 %
+#50000
+b11101000 !
+b11101000 (
+b11000011 $
+b11000011 '
+b10100101 #
+b10100101 &
+b111100 "
+b111100 %
+#60000

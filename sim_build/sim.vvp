@@ -1,0 +1,84 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55e9b246ecf0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x55e9b246ee80 .scope module, "all_gates" "all_gates" 3 56;
+ .timescale -9 -12;
+v0x55e9b24c2490_0 .var "a", 0 0;
+v0x55e9b24c2530_0 .net "and_y", 0 0, L_0x55e9b24c2ad0;  1 drivers
+v0x55e9b24c2620_0 .var "b", 0 0;
+v0x55e9b24c26f0_0 .net "nand_y", 0 0, L_0x55e9b24c2ee0;  1 drivers
+v0x55e9b24c27c0_0 .net "nor_y", 0 0, L_0x55e9b24c3060;  1 drivers
+v0x55e9b24c2860_0 .net "not_y", 0 0, L_0x55e9b24c3270;  1 drivers
+v0x55e9b24c2930_0 .net "or_y", 0 0, L_0x55e9b24c2b90;  1 drivers
+v0x55e9b24c2a00_0 .net "xor_y", 0 0, L_0x55e9b24c3170;  1 drivers
+S_0x55e9b246f010 .scope module, "u_and" "and_gate" 3 68, 3 1 0, S_0x55e9b246ee80;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x55e9b24c2ad0 .functor AND 1, v0x55e9b24c2490_0, v0x55e9b24c2620_0, C4<1>, C4<1>;
+v0x55e9b24a8fd0_0 .net "a", 0 0, v0x55e9b24c2490_0;  1 drivers
+v0x55e9b24c0a00_0 .net "b", 0 0, v0x55e9b24c2620_0;  1 drivers
+v0x55e9b24c0ac0_0 .net "y", 0 0, L_0x55e9b24c2ad0;  alias, 1 drivers
+S_0x55e9b24c0be0 .scope module, "u_nand" "nand_gate" 3 70, 3 21 0, S_0x55e9b246ee80;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x55e9b24c2d60 .functor AND 1, v0x55e9b24c2490_0, v0x55e9b24c2620_0, C4<1>, C4<1>;
+L_0x55e9b24c2ee0 .functor NOT 1, L_0x55e9b24c2d60, C4<0>, C4<0>, C4<0>;
+v0x55e9b24c0e10_0 .net *"_ivl_0", 0 0, L_0x55e9b24c2d60;  1 drivers
+v0x55e9b24c0f10_0 .net "a", 0 0, v0x55e9b24c2490_0;  alias, 1 drivers
+v0x55e9b24c0fd0_0 .net "b", 0 0, v0x55e9b24c2620_0;  alias, 1 drivers
+v0x55e9b24c1070_0 .net "y", 0 0, L_0x55e9b24c2ee0;  alias, 1 drivers
+S_0x55e9b24c1130 .scope module, "u_nor" "nor_gate" 3 71, 3 30 0, S_0x55e9b246ee80;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x55e9b24c2ff0 .functor OR 1, v0x55e9b24c2490_0, v0x55e9b24c2620_0, C4<0>, C4<0>;
+L_0x55e9b24c3060 .functor NOT 1, L_0x55e9b24c2ff0, C4<0>, C4<0>, C4<0>;
+v0x55e9b24c1390_0 .net *"_ivl_0", 0 0, L_0x55e9b24c2ff0;  1 drivers
+v0x55e9b24c1470_0 .net "a", 0 0, v0x55e9b24c2490_0;  alias, 1 drivers
+v0x55e9b24c1580_0 .net "b", 0 0, v0x55e9b24c2620_0;  alias, 1 drivers
+v0x55e9b24c1670_0 .net "y", 0 0, L_0x55e9b24c3060;  alias, 1 drivers
+S_0x55e9b24c1770 .scope module, "u_not" "not_gate" 3 73, 3 48 0, S_0x55e9b246ee80;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /OUTPUT 1 "y";
+L_0x55e9b24c3270 .functor NOT 1, v0x55e9b24c2490_0, C4<0>, C4<0>, C4<0>;
+v0x55e9b24c1950_0 .net "a", 0 0, v0x55e9b24c2490_0;  alias, 1 drivers
+v0x55e9b24c1a10_0 .net "y", 0 0, L_0x55e9b24c3270;  alias, 1 drivers
+S_0x55e9b24c1b30 .scope module, "u_or" "or_gate" 3 69, 3 12 0, S_0x55e9b246ee80;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x55e9b24c2b90 .functor OR 1, v0x55e9b24c2490_0, v0x55e9b24c2620_0, C4<0>, C4<0>;
+v0x55e9b24c1db0_0 .net "a", 0 0, v0x55e9b24c2490_0;  alias, 1 drivers
+v0x55e9b24c1e70_0 .net "b", 0 0, v0x55e9b24c2620_0;  alias, 1 drivers
+v0x55e9b24c1f30_0 .net "y", 0 0, L_0x55e9b24c2b90;  alias, 1 drivers
+S_0x55e9b24c2030 .scope module, "u_xor" "xor_gate" 3 72, 3 39 0, S_0x55e9b246ee80;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x55e9b24c3170 .functor XOR 1, v0x55e9b24c2490_0, v0x55e9b24c2620_0, C4<0>, C4<0>;
+v0x55e9b24c2210_0 .net "a", 0 0, v0x55e9b24c2490_0;  alias, 1 drivers
+v0x55e9b24c22d0_0 .net "b", 0 0, v0x55e9b24c2620_0;  alias, 1 drivers
+v0x55e9b24c2390_0 .net "y", 0 0, L_0x55e9b24c3170;  alias, 1 drivers
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/merged_code/design_ALU.sv";
