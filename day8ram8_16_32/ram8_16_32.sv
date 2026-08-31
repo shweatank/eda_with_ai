@@ -13,6 +13,11 @@ module ram8_16_32 #(
 
     reg [DATA_WIDTH-1:0] mem [0:DEPTH-1];
 
+    // Synchronous, write-first single-port RAM:
+    //   - on we=1, mem[addr] is updated with din, and dout is forwarded
+    //     din directly on the same edge (so a simultaneous write+read of
+    //     the same address returns the NEW data, not the stale value).
+    //   - on we=0, dout is simply the registered read of mem[addr].
     always @(posedge clk) begin
         if (we) begin
             mem[addr] <= din;
