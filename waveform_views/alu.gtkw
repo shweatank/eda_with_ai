@@ -1,0 +1,26 @@
+[*] GTKWave save file for the 4-bit ALU
+[*] Load with:  gtkwave <waveform.vcd> waveform_views/alu.gtkw
+[timestart] 0
+[sst_width] 210
+[signals_width] 250
+[sst_expanded] 1
+[pattern_trace] 1
+[pattern_trace] 0
+@28
+alu_tb.clk
+@800200
+-INPUTS
+@22
+alu_tb.a[3:0]
+alu_tb.b[3:0]
+alu_tb.opcode[1:0]
+@800200
+-OUTPUT
+@22
+alu_tb.result[3:0]
+@800200
+-TESTBENCH SCOREBOARD
+@22
+alu_tb.passed_tests[31:0]
+alu_tb.failed_tests[31:0]
+[pattern_trace] 1

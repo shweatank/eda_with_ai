@@ -1,0 +1,22 @@
+# ===== AI-Powered RTL Verification & Debugging Platform =====
+# Python 3.10+ (3.11 recommended)
+
+# --- backend ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+strawberry-graphql[fastapi]==0.256.1
+pydantic==2.10.4
+python-dotenv==1.0.1
+
+# --- database ---
+neo4j==5.27.0
+
+# --- AI ---
+groq==0.13.1
+
+# --- frontend ---
+streamlit==1.41.1
+requests==2.32.3
+
+# --- testing ---
+pytest==8.3.4

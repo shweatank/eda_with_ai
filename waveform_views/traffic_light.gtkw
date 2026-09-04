@@ -1,0 +1,32 @@
+[*] GTKWave save file for the Traffic Light Controller
+[*] Load with:  gtkwave <waveform.vcd> waveform_views/traffic_light.gtkw
+[timestart] 0
+[sst_width] 210
+[signals_width] 250
+[sst_expanded] 1
+[pattern_trace] 1
+[pattern_trace] 0
+@28
+traffic_light_tb.clk
+traffic_light_tb.rst_n
+@800200
+-FSM
+@22
+traffic_light_tb.state_out[1:0]
+@28
+traffic_light_tb.a_green
+traffic_light_tb.a_yellow
+traffic_light_tb.b_green
+traffic_light_tb.b_yellow
+@800200
+-DWELL COUNTER
+@22
+traffic_light_tb.counter_out[2:0]
+traffic_light_tb.dut.limit[2:0]
+@800200
+-TESTBENCH SCOREBOARD
+@22
+traffic_light_tb.cycle_count[31:0]
+traffic_light_tb.passed_tests[31:0]
+traffic_light_tb.failed_tests[31:0]
+[pattern_trace] 1
