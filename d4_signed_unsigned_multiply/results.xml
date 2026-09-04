@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787225297" />
+    <testcase name="test_multiplier" classname="testbench_signed_unsigned_multiply" file="/home/mirafra/vlsi/eda_with_ai/d4_signed_unsigned_multiply/testbench_signed_unsigned_multiply.py" lineno="57" time="0.0020852088928222656" sim_time_ns="18.0" ratio_time="8632.228675966157" />
+  </testsuite>
+</testsuites>

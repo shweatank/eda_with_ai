@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+        AI EDA - 2 to 4 Decoder Validation
+    </title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        .skipped {
+            color: orange;
+            font-weight: bold;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <h1>
+        AI-Based EDA Validation
+    </h1>
+
+    <h2>
+        2-to-4 Decoder
+    </h2>
+
+
+    <button onclick="runDecoder()">
+
+        Run Decoder Validation
+
+    </button>
+
+
+    <div
+        id="result"
+        class="result"
+    >
+
+        Click the button to start validation.
+
+    </div>
+
+
+    <script>
+
+        function getStatusClass(status) {
+
+            if (status === "PASS") {
+                return "pass";
+            }
+
+            if (status === "FAIL") {
+                return "fail";
+            }
+
+            return "skipped";
+        }
+
+
+        async function runDecoder() {
+
+            const resultDiv =
+                document.getElementById(
+                    "result"
+                );
+
+            resultDiv.innerHTML =
+                "<p>Running AI review and simulation...</p>";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/run_decoder",
+                        {
+                            method: "POST"
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.error) {
+
+                    resultDiv.innerHTML =
+                        `<h3 class="fail">
+                            ERROR
+                        </h3>
+
+                        <pre>
+${data.error}
+                        </pre>`;
+
+                    return;
+                }
+
+
+                const design =
+                    data.design_review;
+
+                const testbench =
+                    data.testbench_review;
+
+                const simulation =
+                    data.simulation_validation;
+
+
+                resultDiv.innerHTML = `
+
+                    <h2>
+                        Design Review
+                    </h2>
+
+                    <p class="
+${getStatusClass(design.status)}
+                    ">
+
+                        ${design.status}
+
+                    </p>
+
+                    <pre>
+${design.details}
+                    </pre>
+
+
+                    <h2>
+                        Design Issues
+                    </h2>
+
+                    <pre>
+${JSON.stringify(
+    design.issues,
+    null,
+    2
+)}
+                    </pre>
+
+
+                    <hr>
+
+
+                    <h2>
+                        Testbench Review
+                    </h2>
+
+                    <p class="
+${getStatusClass(testbench.status)}
+                    ">
+
+                        ${testbench.status}
+
+                    </p>
+
+                    <pre>
+${testbench.details}
+                    </pre>
+
+
+                    <h2>
+                        Testbench Issues
+                    </h2>
+
+                    <pre>
+${JSON.stringify(
+    testbench.issues,
+    null,
+    2
+)}
+                    </pre>
+
+
+                    <hr>
+
+
+                    <h2>
+                        Simulation Validation
+                    </h2>
+
+                    <p class="
+${getStatusClass(simulation.status)}
+                    ">
+
+                        ${simulation.status}
+
+                    </p>
+
+                    <pre>
+${simulation.details}
+                    </pre>
+
+                `;
+
+            }
+
+            catch (error) {
+
+                resultDiv.innerHTML =
+                    `<h3 class="fail">
+
+                        ERROR
+
+                    </h3>
+
+                    <pre>
+${error}
+                    </pre>`;
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

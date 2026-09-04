@@ -1,0 +1,72 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x555e33a878c0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x555e33a87a50 .scope module, "subtractor_top" "subtractor_top" 3 34;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A_u";
+    .port_info 1 /INPUT 8 "B_u";
+    .port_info 2 /OUTPUT 8 "y_u";
+    .port_info 3 /INPUT 8 "A_s";
+    .port_info 4 /INPUT 8 "B_s";
+    .port_info 5 /OUTPUT 8 "y_s";
+o0x7faa3ec8c018 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x555e33a9b810_0 .net/s "A_s", 7 0, o0x7faa3ec8c018;  0 drivers
+o0x7faa3ec8c138 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x555e33a9b900_0 .net "A_u", 7 0, o0x7faa3ec8c138;  0 drivers
+o0x7faa3ec8c048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x555e33a9b9d0_0 .net/s "B_s", 7 0, o0x7faa3ec8c048;  0 drivers
+o0x7faa3ec8c168 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x555e33a9bad0_0 .net "B_u", 7 0, o0x7faa3ec8c168;  0 drivers
+v0x555e33a9bba0_0 .net/s "y_s", 7 0, L_0x555e33a9bf90;  1 drivers
+v0x555e33a9bc90_0 .net "y_u", 7 0, L_0x555e33a9bde0;  1 drivers
+S_0x555e33a4bcf0 .scope module, "u_sub_signed" "subtractor_signed" 3 49, 3 21 0, S_0x555e33a87a50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 8 "y";
+v0x555e33a4bf20_0 .net/s "A", 7 0, o0x7faa3ec8c018;  alias, 0 drivers
+v0x555e33a9b070_0 .net/s "B", 7 0, o0x7faa3ec8c048;  alias, 0 drivers
+v0x555e33a9b150_0 .net/s "y", 7 0, L_0x555e33a9bf90;  alias, 1 drivers
+L_0x555e33a9bf90 .arith/sub 8, o0x7faa3ec8c018, o0x7faa3ec8c048;
+S_0x555e33a9b290 .scope module, "u_sub_unsigned" "subtractor_unsigned" 3 43, 3 8 0, S_0x555e33a87a50;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 8 "y";
+v0x555e33a9b4c0_0 .net "A", 7 0, o0x7faa3ec8c138;  alias, 0 drivers
+v0x555e33a9b5c0_0 .net "B", 7 0, o0x7faa3ec8c168;  alias, 0 drivers
+v0x555e33a9b6a0_0 .net "y", 7 0, L_0x555e33a9bde0;  alias, 1 drivers
+L_0x555e33a9bde0 .arith/sub 8, o0x7faa3ec8c138, o0x7faa3ec8c168;
+    .scope S_0x555e33a9b290;
+T_0 ;
+    %vpi_call/w 3 16 "$dumpfile", "subtractor_unsigned.vcd" {0 0 0};
+    %vpi_call/w 3 17 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x555e33a9b290 {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x555e33a4bcf0;
+T_1 ;
+    %vpi_call/w 3 29 "$dumpfile", "subtractor_signed.vcd" {0 0 0};
+    %vpi_call/w 3 30 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x555e33a4bcf0 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x555e33a87a50;
+T_2 ;
+    %vpi_call/w 3 56 "$dumpfile", "subtractor_top.vcd" {0 0 0};
+    %vpi_call/w 3 57 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x555e33a87a50 {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/eda_with_ai/day4signed_unsigned_substraction/signed_unsigned_substact.sv";

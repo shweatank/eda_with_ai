@@ -1,0 +1,126 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x56449ae790e0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x56449ae79270 .scope module, "divider_top" "divider_top" 3 34;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A_u";
+    .port_info 1 /INPUT 8 "B_u";
+    .port_info 2 /OUTPUT 8 "quotient_u";
+    .port_info 3 /OUTPUT 8 "remainder_u";
+    .port_info 4 /INPUT 8 "A_s";
+    .port_info 5 /INPUT 8 "B_s";
+    .port_info 6 /OUTPUT 8 "quotient_s";
+    .port_info 7 /OUTPUT 8 "remainder_s";
+o0x7f76904bf018 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x56449ae95110_0 .net/s "A_s", 7 0, o0x7f76904bf018;  0 drivers
+o0x7f76904bf378 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x56449ae951f0_0 .net "A_u", 7 0, o0x7f76904bf378;  0 drivers
+o0x7f76904bf048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x56449ae95290_0 .net/s "B_s", 7 0, o0x7f76904bf048;  0 drivers
+o0x7f76904bf3a8 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x56449ae95360_0 .net "B_u", 7 0, o0x7f76904bf3a8;  0 drivers
+v0x56449ae95430_0 .net/s "quotient_s", 7 0, L_0x56449aea6730;  1 drivers
+v0x56449ae954d0_0 .net "quotient_u", 7 0, L_0x56449aea5c30;  1 drivers
+v0x56449ae955a0_0 .net/s "remainder_s", 7 0, L_0x56449aea6c80;  1 drivers
+v0x56449ae95670_0 .net "remainder_u", 7 0, L_0x56449aea61e0;  1 drivers
+S_0x56449ae3bcf0 .scope module, "u_div_signed" "divider_signed" 3 52, 3 19 0, S_0x56449ae79270;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 8 "quotient";
+    .port_info 3 /OUTPUT 8 "remainder";
+v0x56449ae3bf40_0 .net/s "A", 7 0, o0x7f76904bf018;  alias, 0 drivers
+v0x56449ae93420_0 .net/s "B", 7 0, o0x7f76904bf048;  alias, 0 drivers
+v0x56449ae93500_0 .net/s *"_ivl_0", 31 0, L_0x56449aea6410;  1 drivers
+v0x56449ae935c0_0 .net/s *"_ivl_12", 31 0, L_0x56449aea6940;  1 drivers
+L_0x7f7690476258 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae936a0_0 .net/2s *"_ivl_14", 31 0, L_0x7f7690476258;  1 drivers
+v0x56449ae937d0_0 .net *"_ivl_16", 0 0, L_0x56449aea6b00;  1 drivers
+v0x56449ae93890_0 .net/s *"_ivl_18", 7 0, L_0x56449aea6be0;  1 drivers
+L_0x7f76904761c8 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae93970_0 .net/2s *"_ivl_2", 31 0, L_0x7f76904761c8;  1 drivers
+L_0x7f76904762a0 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae93a50_0 .net/2s *"_ivl_20", 7 0, L_0x7f76904762a0;  1 drivers
+v0x56449ae93b30_0 .net *"_ivl_4", 0 0, L_0x56449aea6500;  1 drivers
+v0x56449ae93bf0_0 .net/s *"_ivl_6", 7 0, L_0x56449aea6640;  1 drivers
+L_0x7f7690476210 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae93cd0_0 .net/2s *"_ivl_8", 7 0, L_0x7f7690476210;  1 drivers
+v0x56449ae93db0_0 .net/s "quotient", 7 0, L_0x56449aea6730;  alias, 1 drivers
+v0x56449ae93e90_0 .net/s "remainder", 7 0, L_0x56449aea6c80;  alias, 1 drivers
+L_0x56449aea6410 .extend/s 32, o0x7f76904bf048;
+L_0x56449aea6500 .cmp/ne 32, L_0x56449aea6410, L_0x7f76904761c8;
+L_0x56449aea6640 .arith/div.s 8, o0x7f76904bf018, o0x7f76904bf048;
+L_0x56449aea6730 .functor MUXZ 8, L_0x7f7690476210, L_0x56449aea6640, L_0x56449aea6500, C4<>;
+L_0x56449aea6940 .extend/s 32, o0x7f76904bf048;
+L_0x56449aea6b00 .cmp/ne 32, L_0x56449aea6940, L_0x7f7690476258;
+L_0x56449aea6be0 .arith/mod.s 8, o0x7f76904bf018, o0x7f76904bf048;
+L_0x56449aea6c80 .functor MUXZ 8, L_0x7f76904762a0, L_0x56449aea6be0, L_0x56449aea6b00, C4<>;
+S_0x56449ae93ff0 .scope module, "u_div_unsigned" "divider_unsigned" 3 45, 3 4 0, S_0x56449ae79270;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 8 "quotient";
+    .port_info 3 /OUTPUT 8 "remainder";
+v0x56449ae94210_0 .net "A", 7 0, o0x7f76904bf378;  alias, 0 drivers
+v0x56449ae942f0_0 .net "B", 7 0, o0x7f76904bf3a8;  alias, 0 drivers
+v0x56449ae943d0_0 .net *"_ivl_0", 31 0, L_0x56449ae95850;  1 drivers
+L_0x7f76904760a8 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae94490_0 .net/2u *"_ivl_10", 7 0, L_0x7f76904760a8;  1 drivers
+v0x56449ae94570_0 .net *"_ivl_14", 31 0, L_0x56449aea5e40;  1 drivers
+L_0x7f76904760f0 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae946a0_0 .net *"_ivl_17", 23 0, L_0x7f76904760f0;  1 drivers
+L_0x7f7690476138 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae94780_0 .net/2u *"_ivl_18", 31 0, L_0x7f7690476138;  1 drivers
+v0x56449ae94860_0 .net *"_ivl_20", 0 0, L_0x56449aea5fc0;  1 drivers
+v0x56449ae94920_0 .net *"_ivl_22", 7 0, L_0x56449aea6140;  1 drivers
+L_0x7f7690476180 .functor BUFT 1, C4<00000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae94a90_0 .net/2u *"_ivl_24", 7 0, L_0x7f7690476180;  1 drivers
+L_0x7f7690476018 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae94b70_0 .net *"_ivl_3", 23 0, L_0x7f7690476018;  1 drivers
+L_0x7f7690476060 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x56449ae94c50_0 .net/2u *"_ivl_4", 31 0, L_0x7f7690476060;  1 drivers
+v0x56449ae94d30_0 .net *"_ivl_6", 0 0, L_0x56449aea59d0;  1 drivers
+v0x56449ae94df0_0 .net *"_ivl_8", 7 0, L_0x56449aea5b40;  1 drivers
+v0x56449ae94ed0_0 .net "quotient", 7 0, L_0x56449aea5c30;  alias, 1 drivers
+v0x56449ae94fb0_0 .net "remainder", 7 0, L_0x56449aea61e0;  alias, 1 drivers
+L_0x56449ae95850 .concat [ 8 24 0 0], o0x7f76904bf3a8, L_0x7f7690476018;
+L_0x56449aea59d0 .cmp/ne 32, L_0x56449ae95850, L_0x7f7690476060;
+L_0x56449aea5b40 .arith/div 8, o0x7f76904bf378, o0x7f76904bf3a8;
+L_0x56449aea5c30 .functor MUXZ 8, L_0x7f76904760a8, L_0x56449aea5b40, L_0x56449aea59d0, C4<>;
+L_0x56449aea5e40 .concat [ 8 24 0 0], o0x7f76904bf3a8, L_0x7f76904760f0;
+L_0x56449aea5fc0 .cmp/ne 32, L_0x56449aea5e40, L_0x7f7690476138;
+L_0x56449aea6140 .arith/mod 8, o0x7f76904bf378, o0x7f76904bf3a8;
+L_0x56449aea61e0 .functor MUXZ 8, L_0x7f7690476180, L_0x56449aea6140, L_0x56449aea5fc0, C4<>;
+    .scope S_0x56449ae93ff0;
+T_0 ;
+    %vpi_call/w 3 14 "$dumpfile", "divider_unsigned.vcd" {0 0 0};
+    %vpi_call/w 3 15 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x56449ae93ff0 {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x56449ae3bcf0;
+T_1 ;
+    %vpi_call/w 3 29 "$dumpfile", "divider_signed.vcd" {0 0 0};
+    %vpi_call/w 3 30 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x56449ae3bcf0 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x56449ae79270;
+T_2 ;
+    %vpi_call/w 3 60 "$dumpfile", "divider_top.vcd" {0 0 0};
+    %vpi_call/w 3 61 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x56449ae79270 {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/eda_with_ai/day4signed_unsigned_divsion/signed_unsigned_divsion.sv";

@@ -1,0 +1,14 @@
+digraph "uart" {
+label="uart";
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="clk", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="data_in", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="data_out", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="rst", color="black", fontcolor="black" ];
+c9 [ shape=record, label="{{<p5> ARST|<p6> CLK|<p7> D}|$2\n$adff|{<p8> Q}}" ];
+n1:e -> c9:p6:w [color="black", label=""];
+n2:e -> c9:p7:w [color="black", label=""];
+c9:p8:e -> n3:w [color="black", label=""];
+n4:e -> c9:p5:w [color="black", label=""];
+}

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787223004" />
+    <testcase name="test_divider" classname="testbench_signed_unsigned_divsion" file="/home/mirafra/vlsi/eda_with_ai/day4signed_unsigned_divsion/testbench_signed_unsigned_divsion.py" lineno="85" time="0.0026738643646240234" sim_time_ns="21.0" ratio_time="7853.801515827017" />
+  </testsuite>
+</testsuites>

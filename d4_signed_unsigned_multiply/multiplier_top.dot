@@ -1,0 +1,19 @@
+digraph "multiplier_top" {
+label="multiplier_top";
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="A_s", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="A_u", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="B_s", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="B_u", color="black", fontcolor="black" ];
+n5 [ shape=octagon, label="product_s", color="black", fontcolor="black" ];
+n6 [ shape=octagon, label="product_u", color="black", fontcolor="black" ];
+c10 [ shape=record, label="{{<p7> A|<p8> B}|u_mul_signed\nmultiplier_signed|{<p9> product}}" ];
+c11 [ shape=record, label="{{<p7> A|<p8> B}|u_mul_unsigned\nmultiplier_unsigned|{<p9> product}}" ];
+n1:e -> c10:p7:w [color="black", style="setlinewidth(3)", label=""];
+n2:e -> c11:p7:w [color="black", style="setlinewidth(3)", label=""];
+n3:e -> c10:p8:w [color="black", style="setlinewidth(3)", label=""];
+n4:e -> c11:p8:w [color="black", style="setlinewidth(3)", label=""];
+c10:p9:e -> n5:w [color="black", style="setlinewidth(3)", label=""];
+c11:p9:e -> n6:w [color="black", style="setlinewidth(3)", label=""];
+}

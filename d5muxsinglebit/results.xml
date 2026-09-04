@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787303472" />
+    <testcase name="test_mux_singlebit" classname="testbench_singlebit_mux" file="/home/mirafra/vlsi/eda_with_ai/d5muxsinglebit/testbench_singlebit_mux.py" lineno="5" time="0.0012888908386230469" sim_time_ns="8.0" ratio_time="6206.887162412135" />
+  </testsuite>
+</testsuites>

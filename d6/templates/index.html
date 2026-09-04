@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>AI EDA Validation Platform</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        #111827;
+
+    color:
+        #e5e7eb;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+
+    padding:
+        30px;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e3a8a,
+            #6d28d9
+        );
+
+    border-bottom:
+        1px solid #475569;
+}
+
+
+header h1 {
+
+    margin:
+        0;
+
+    font-size:
+        32px;
+}
+
+
+header p {
+
+    color:
+        #d1d5db;
+
+    margin-top:
+        10px;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.container {
+
+    width:
+        90%;
+
+    max-width:
+        1200px;
+
+    margin:
+        40px auto;
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        );
+
+    gap:
+        20px;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card {
+
+    background:
+        #1f2937;
+
+    border:
+        1px solid #334155;
+
+    border-radius:
+        18px;
+
+    padding:
+        25px;
+
+    transition:
+        0.3s;
+}
+
+
+.card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        #8b5cf6;
+
+    box-shadow:
+        0px 10px 30px
+        rgba(
+            0,
+            0,
+            0,
+            0.3
+        );
+}
+
+
+.icon {
+
+    font-size:
+        40px;
+
+    margin-bottom:
+        10px;
+}
+
+
+.card h2 {
+
+    margin-top:
+        0;
+
+    font-size:
+        20px;
+}
+
+
+.card p {
+
+    color:
+        #94a3b8;
+
+    line-height:
+        1.6;
+
+    min-height:
+        75px;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+button {
+
+    width:
+        100%;
+
+    border:
+        none;
+
+    padding:
+        14px;
+
+    border-radius:
+        10px;
+
+    font-size:
+        15px;
+
+    font-weight:
+        bold;
+
+    color:
+        white;
+
+    cursor:
+        pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    transition:
+        0.3s;
+}
+
+
+button:hover {
+
+    transform:
+        scale(1.03);
+
+    opacity:
+        0.9;
+}
+
+
+button:disabled {
+
+    background:
+        #475569;
+
+    cursor:
+        not-allowed;
+}
+
+
+/* =========================================
+   COMPLETE VALIDATION
+========================================= */
+
+.complete {
+
+    margin-top:
+        35px;
+
+    padding:
+        35px;
+
+    text-align:
+        center;
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e3a5f,
+            #3b1f63
+        );
+
+    border:
+        1px solid #475569;
+}
+
+
+.complete h2 {
+
+    font-size:
+        28px;
+}
+
+
+.validate-button {
+
+    max-width:
+        500px;
+
+    margin:
+        20px auto;
+
+    display:
+        block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #059669,
+            #22c55e
+        );
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-container {
+
+    margin-top:
+        30px;
+
+    background:
+        #1f2937;
+
+    border:
+        1px solid #334155;
+
+    border-radius:
+        15px;
+
+    padding:
+        20px;
+}
+
+
+.status-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+}
+
+
+.badge {
+
+    padding:
+        8px 15px;
+
+    border-radius:
+        20px;
+
+    font-weight:
+        bold;
+
+    font-size:
+        13px;
+}
+
+
+.PASS {
+
+    background:
+        #166534;
+
+    color:
+        #dcfce7;
+}
+
+
+.FAIL {
+
+    background:
+        #991b1b;
+
+    color:
+        #fee2e2;
+}
+
+
+.ERROR {
+
+    background:
+        #991b1b;
+
+    color:
+        white;
+}
+
+
+.WARNING {
+
+    background:
+        #92400e;
+
+    color:
+        #fef3c7;
+}
+
+
+/* =========================================
+   RESULT
+========================================= */
+
+.result {
+
+    margin-top:
+        20px;
+
+    padding:
+        20px;
+
+    background:
+        #111827;
+
+    border-radius:
+        12px;
+
+    border-left:
+        5px solid #6366f1;
+
+    white-space:
+        pre-wrap;
+
+    line-height:
+        1.6;
+
+    max-height:
+        500px;
+
+    overflow:
+        auto;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading {
+
+    color:
+        #facc15;
+
+    font-weight:
+        bold;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (
+    max-width: 600px
+) {
+
+    header h1 {
+
+        font-size:
+            24px;
+    }
+
+    .container {
+
+        width:
+            95%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        🚀 AI-Powered EDA Validation Platform
+    </h1>
+
+    <p>
+        SystemVerilog • Cocotb • Icarus • Yosys • Ollama AI
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- =====================================
+         CARDS
+    ====================================== -->
+
+    <div class="grid">
+
+
+        <!-- SYSTEMVERILOG -->
+
+        <div class="card">
+
+            <div class="icon">
+                💻
+            </div>
+
+            <h2>
+                RTL Review
+            </h2>
+
+            <p>
+                Ollama analyzes your SystemVerilog decoder
+                for syntax, logic, synthesizability and
+                functional issues.
+            </p>
+
+            <button
+                onclick="callAPI('/review/systemverilog')"
+            >
+                Review SystemVerilog
+            </button>
+
+        </div>
+
+
+        <!-- TESTBENCH -->
+
+        <div class="card">
+
+            <div class="icon">
+                🧪
+            </div>
+
+            <h2>
+                Testbench Review
+            </h2>
+
+            <p>
+                Ollama checks Cocotb logic, expected values,
+                assertions and verification coverage.
+            </p>
+
+            <button
+                onclick="callAPI('/review/testbench')"
+            >
+                Review Testbench
+            </button>
+
+        </div>
+
+
+        <!-- MAKEFILE -->
+
+        <div class="card">
+
+            <div class="icon">
+                ⚙️
+            </div>
+
+            <h2>
+                Makefile Review
+            </h2>
+
+            <p>
+                Ollama reviews the EDA flow including
+                Cocotb, Icarus and Yosys configuration.
+            </p>
+
+            <button
+                onclick="callAPI('/review/makefile')"
+            >
+                Review Makefile
+            </button>
+
+        </div>
+
+
+        <!-- SIMULATION -->
+
+        <div class="card">
+
+            <div class="icon">
+                ▶️
+            </div>
+
+            <h2>
+                Run Simulation
+            </h2>
+
+            <p>
+                Run the actual Cocotb and Icarus Verilog
+                simulation.
+            </p>
+
+            <button
+                onclick="callAPI('/run/simulation')"
+            >
+                Run Simulation
+            </button>
+
+        </div>
+
+
+        <!-- VCD -->
+
+        <div class="card">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h2>
+                Validate Waveform
+            </h2>
+
+            <p>
+                Verify that the VCD waveform file was
+                successfully generated.
+            </p>
+
+            <button
+                onclick="callAPI('/validate/vcd')"
+            >
+                Validate VCD
+            </button>
+
+        </div>
+
+
+        <!-- NETLIST -->
+
+        <div class="card">
+
+            <div class="icon">
+                🔧
+            </div>
+
+            <h2>
+                Review Netlist
+            </h2>
+
+            <p>
+                Generate and review the synthesized Verilog
+                netlist using Yosys and Ollama.
+            </p>
+
+            <button
+                onclick="reviewNetlist()"
+            >
+                Review Netlist
+            </button>
+
+        </div>
+
+
+        <!-- PNG -->
+
+        <div class="card">
+
+            <div class="icon">
+                🖼️
+            </div>
+
+            <h2>
+                Validate Schematic
+            </h2>
+
+            <p>
+                Generate and validate the Yosys schematic
+                PNG output.
+            </p>
+
+            <button
+                onclick="generateAndValidatePNG()"
+            >
+                Validate PNG
+            </button>
+
+        </div>
+
+
+        <!-- GENERATE ALL -->
+
+        <div class="card">
+
+            <div class="icon">
+                🏗️
+            </div>
+
+            <h2>
+                Generate All Files
+            </h2>
+
+            <p>
+                Run the complete Makefile flow and generate
+                simulation, VCD, netlist and schematic.
+            </p>
+
+            <button
+                onclick="callAPI('/generate/all')"
+            >
+                Generate All
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================
+         COMPLETE VALIDATION
+    ====================================== -->
+
+    <div class="complete">
+
+        <h2>
+            🚀 Complete AI Validation
+        </h2>
+
+        <p>
+            Run all AI reviews and the complete EDA flow.
+        </p>
+
+        <button
+            class="validate-button"
+            onclick="validateEverything()"
+        >
+            🚀 Validate Everything
+        </button>
+
+    </div>
+
+
+    <!-- =====================================
+         STATUS
+    ====================================== -->
+
+    <div
+        class="status-container"
+    >
+
+        <div class="status-header">
+
+            <h3>
+                Pipeline Status
+            </h3>
+
+            <span
+                id="statusBadge"
+                class="badge WARNING"
+            >
+                READY
+            </span>
+
+        </div>
+
+
+        <div
+            id="result"
+            class="result"
+        >
+
+Click any button to start validation.
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+// =========================================
+// DISPLAY RESULT
+// =========================================
+
+function displayResult(data) {
+
+    const resultBox =
+        document.getElementById("result");
+
+    const statusBadge =
+        document.getElementById("statusBadge");
+
+
+    let status = "WARNING";
+
+
+    // Single API result
+
+    if (data.status) {
+
+        status = data.status;
+
+    }
+
+
+    // Multiple API result
+
+    else {
+
+        const values =
+            Object.values(data);
+
+        const hasError =
+            values.some(
+                item =>
+                item.status === "ERROR"
+            );
+
+        const hasFail =
+            values.some(
+                item =>
+                item.status === "FAIL"
+            );
+
+        if (hasError) {
+
+            status = "ERROR";
+
+        }
+
+        else if (hasFail) {
+
+            status = "FAIL";
+
+        }
+
+        else {
+
+            status = "PASS";
+
+        }
+
+    }
+
+
+    statusBadge.textContent =
+        status;
+
+
+    statusBadge.className =
+        "badge " + status;
+
+
+    resultBox.textContent =
+        JSON.stringify(
+            data,
+            null,
+            2
+        );
+
+}
+
+
+// =========================================
+// API CALL
+// =========================================
+
+async function callAPI(url) {
+
+    const resultBox =
+        document.getElementById("result");
+
+
+    resultBox.innerHTML =
+        '<span class="loading">⏳ Processing... Please wait.</span>';
+
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                {
+                    method: "POST"
+                }
+            );
+
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            );
+
+
+        // Important:
+        // Prevent JSON.parse error if Flask
+        // returns an HTML error page.
+
+        if (
+            !contentType ||
+            !contentType.includes(
+                "application/json"
+            )
+        ) {
+
+            const text =
+                await response.text();
+
+
+            throw new Error(
+                "Server returned non-JSON response:\n\n"
+                + text
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        displayResult(data);
+
+    }
+
+
+    catch (error) {
+
+        const errorData = {
+
+            status:
+                "ERROR",
+
+            details:
+                error.message
+
+        };
+
+
+        displayResult(errorData);
+
+    }
+
+}
+
+
+// =========================================
+// REVIEW NETLIST
+// =========================================
+
+async function reviewNetlist() {
+
+    document.getElementById(
+        "result"
+    ).innerHTML =
+        '<span class="loading">⏳ Generating netlist...</span>';
+
+
+    try {
+
+        const generationResponse =
+            await fetch(
+                "/generate/all",
+                {
+                    method: "POST"
+                }
+            );
+
+
+        const generationData =
+            await generationResponse.json();
+
+
+        if (
+            generationData.status !== "PASS"
+        ) {
+
+            displayResult(
+                generationData
+            );
+
+            return;
+        }
+
+
+        callAPI(
+            "/review/netlist"
+        );
+
+    }
+
+    catch (error) {
+
+        displayResult({
+
+            status:
+                "ERROR",
+
+            details:
+                error.message
+
+        });
+
+    }
+
+}
+
+
+// =========================================
+// GENERATE + VALIDATE PNG
+// =========================================
+
+async function generateAndValidatePNG() {
+
+    document.getElementById(
+        "result"
+    ).innerHTML =
+        '<span class="loading">⏳ Generating schematic...</span>';
+
+
+    try {
+
+        const generationResponse =
+            await fetch(
+                "/generate/all",
+                {
+                    method: "POST"
+                }
+            );
+
+
+        const generationData =
+            await generationResponse.json();
+
+
+        if (
+            generationData.status !== "PASS"
+        ) {
+
+            displayResult(
+                generationData
+            );
+
+            return;
+
+        }
+
+
+        callAPI(
+            "/validate/png"
+        );
+
+    }
+
+    catch (error) {
+
+        displayResult({
+
+            status:
+                "ERROR",
+
+            details:
+                error.message
+
+        });
+
+    }
+
+}
+
+
+// =========================================
+// VALIDATE EVERYTHING
+// =========================================
+
+async function validateEverything() {
+
+    const resultBox =
+        document.getElementById("result");
+
+
+    resultBox.innerHTML =
+        '<span class="loading">🚀 Running complete AI and EDA validation... This may take some time.</span>';
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/validate_all",
+                {
+                    method:
+                        "POST"
+                }
+            );
+
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            );
+
+
+        if (
+            !contentType ||
+            !contentType.includes(
+                "application/json"
+            )
+        ) {
+
+            const text =
+                await response.text();
+
+
+            throw new Error(
+                text
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        displayResult(
+            data
+        );
+
+    }
+
+    catch (error) {
+
+        displayResult({
+
+            status:
+                "ERROR",
+
+            details:
+                error.message
+
+        });
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

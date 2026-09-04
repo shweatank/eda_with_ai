@@ -1,0 +1,36 @@
+# ============================================================
+# SIMPLE STA - YOSYS SYNTHESIS SCRIPT
+# ============================================================
+
+# Read RTL
+read_verilog rtl/simple_sta.v
+
+# Select and check top-level module
+hierarchy -check -top simple_sta
+
+# Convert behavioral processes
+proc
+
+# Optimize
+opt
+fsm
+opt
+
+# Memory optimization
+memory
+opt
+
+# Map flip-flops using Liberty library
+dfflibmap -liberty lib/cells.lib
+
+# Map combinational logic
+abc -liberty lib/cells.lib
+
+# Final cleanup
+clean
+
+# Display synthesis statistics
+stat -liberty lib/cells.lib
+
+# Write gate-level netlist
+write_verilog -noattr -noexpr netlist/simple_sta_netlist.v

@@ -1,0 +1,53 @@
+$date
+	Tue Aug 25 17:08:38 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module vector_and $end
+$var wire 8 ! a [7:0] $end
+$var wire 8 " b [7:0] $end
+$var wire 8 # y [7:0] $end
+$scope begin GEN_AND[0] $end
+$upscope $end
+$scope begin GEN_AND[1] $end
+$upscope $end
+$scope begin GEN_AND[2] $end
+$upscope $end
+$scope begin GEN_AND[3] $end
+$upscope $end
+$scope begin GEN_AND[4] $end
+$upscope $end
+$scope begin GEN_AND[5] $end
+$upscope $end
+$scope begin GEN_AND[6] $end
+$upscope $end
+$scope begin GEN_AND[7] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1111 #
+b1111 "
+b11111111 !
+$end
+#1000
+b0 #
+b1010101 "
+b10101010 !
+#2000
+b11000000 #
+b11001100 "
+b11110000 !
+#3000
+b0 #
+b11111111 "
+b0 !
+#4000
+b11111111 #
+b11111111 !
+#5000

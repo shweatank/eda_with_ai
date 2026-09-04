@@ -1,0 +1,9 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787743960" />
+    <testcase name="test_write_then_read_back" classname="testbench_ram8_16_32" file="/home/mirafra/vlsi/eda_with_ai/day8ram8_16_32/testbench_ram8_16_32.py" lineno="66" time="0.00267791748046875" sim_time_ns="101.0" ratio_time="37715.874643874646" />
+    <testcase name="test_write_first_same_cycle_forwarding" classname="testbench_ram8_16_32" file="/home/mirafra/vlsi/eda_with_ai/day8ram8_16_32/testbench_ram8_16_32.py" lineno="98" time="0.0009016990661621094" sim_time_ns="51.0" ratio_time="56559.89000528821" />
+    <testcase name="test_address_sweep" classname="testbench_ram8_16_32" file="/home/mirafra/vlsi/eda_with_ai/day8ram8_16_32/testbench_ram8_16_32.py" lineno="147" time="0.07053279876708984" sim_time_ns="5131.0" ratio_time="72746.29802998959" />
+    <testcase name="test_random_stress" classname="testbench_ram8_16_32" file="/home/mirafra/vlsi/eda_with_ai/day8ram8_16_32/testbench_ram8_16_32.py" lineno="181" time="0.05877327919006348" sim_time_ns="4251.000000000001" ratio_time="72328.787139015" />
+  </testsuite>
+</testsuites>

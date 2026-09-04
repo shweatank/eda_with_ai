@@ -1,0 +1,16 @@
+digraph "logic_or_and" {
+label="logic_or_and";
+rankdir="LR";
+remincross=true;
+n2 [ shape=octagon, label="A", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="B", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="C", color="black", fontcolor="black" ];
+n5 [ shape=octagon, label="y", color="black", fontcolor="black" ];
+c7 [ shape=record, label="{{<p2> A|<p3> B}|$51\n$_AND_|{<p6> Y}}" ];
+c8 [ shape=record, label="{{<p2> A|<p3> B}|$52\n$_OR_|{<p6> Y}}" ];
+c7:p6:e -> c8:p2:w [color="black", label=""];
+n2:e -> c7:p3:w [color="black", label=""];
+n3:e -> c7:p2:w [color="black", label=""];
+n4:e -> c8:p3:w [color="black", label=""];
+c8:p6:e -> n5:w [color="black", label=""];
+}

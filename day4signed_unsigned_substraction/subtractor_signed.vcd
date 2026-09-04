@@ -1,0 +1,53 @@
+$date
+	Thu Aug 20 17:14:33 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module subtractor_signed $end
+$var wire 8 ! A [7:0] $end
+$var wire 8 " B [7:0] $end
+$var wire 8 # y [7:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b101 #
+b101 "
+b1010 !
+$end
+#1000
+b1010 "
+b11111011 #
+b101 !
+#2000
+b101 "
+b11110001 #
+b11110110 !
+#3000
+b11111011 "
+b1111 #
+b1010 !
+#4000
+b11111011 #
+b11110110 !
+#5000
+b0 "
+b0 #
+b0 !
+#6000
+b1 "
+b1111111 #
+b10000000 !
+#7000
+b11111111 "
+b10000000 #
+b1111111 !
+#8000
+b10000000 "
+b0 #
+b10000000 !
+#9000

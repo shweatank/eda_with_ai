@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Counter Simulation Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    async function runSim() {
+      let res = await fetch("/simulate", {method:"POST"});
+      let data = await res.json();
+      document.getElementById("sim_output").innerText = data.stdout || data.stderr;
+    }
+    async function validate() {
+      let res = await fetch("/validate", {method:"POST"});
+      let data = await res.json();
+      document.getElementById("val_output").innerText = data.details || data.error;
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>⚡ Counter Simulation Dashboard</h1>
+    <section class="card">
+      <h2>Run Simulation</h2>
+      <button class="btn" onclick="runSim()">▶ Run</button>
+      <pre id="sim_output" class="console"></pre>
+    </section>
+    <section class="card">
+      <h2>Validate with Copilot AI</h2>
+      <button class="btn glow" onclick="validate()">✅ Validate</button>
+      <pre id="val_output" class="console"></pre>
+    </section>
+  </div>
+</body>
+</html>

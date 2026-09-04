@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VCD Signal Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #3498db;
+      color: white;
+    }
+
+    tr:hover {
+      background: #f1f1f1;
+    }
+
+    .signal-name {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #ecf0f1;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VCD Signal Viewer</h1>
+    <p>See how your circuit signals change over time</p>
+  </header>
+
+  <div class="container">
+    <h2>Signals</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Signal Name</th>
+          <th>Time</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example rows (replace with JSON data dynamically) -->
+        <tr>
+          <td class="signal-name">A</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td class="signal-name">A</td>
+          <td>10</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td class="signal-name">B</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td class="signal-name">B</td>
+          <td>20</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td class="signal-name">Y</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td class="signal-name">Y</td>
+          <td>20</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    &copy; 2026 VCD Viewer | Designed for simplicity
+  </footer>
+</body>
+</html>

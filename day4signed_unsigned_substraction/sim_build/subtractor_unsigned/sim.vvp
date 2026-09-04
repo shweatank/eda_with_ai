@@ -1,0 +1,35 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55a6b1beb8c0 .scope package, "$unit" "$unit" 2 1;
+ .timescale -9 -12;
+S_0x55a6b1beba50 .scope module, "subtractor_unsigned" "subtractor_unsigned" 3 8;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 8 "A";
+    .port_info 1 /INPUT 8 "B";
+    .port_info 2 /OUTPUT 8 "y";
+o0x7f3b2d437018 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55a6b1bc1bd0_0 .net "A", 7 0, o0x7f3b2d437018;  0 drivers
+o0x7f3b2d437048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55a6b1bfbd30_0 .net "B", 7 0, o0x7f3b2d437048;  0 drivers
+v0x55a6b1bfbe10_0 .net "y", 7 0, L_0x55a6b1bfbf50;  1 drivers
+L_0x55a6b1bfbf50 .arith/sub 8, o0x7f3b2d437018, o0x7f3b2d437048;
+    .scope S_0x55a6b1beba50;
+T_0 ;
+    %vpi_call/w 3 16 "$dumpfile", "subtractor_unsigned.vcd" {0 0 0};
+    %vpi_call/w 3 17 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55a6b1beba50 {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/mirafra/vlsi/eda_with_ai/day4signed_unsigned_substraction/signed_unsigned_substact.sv";

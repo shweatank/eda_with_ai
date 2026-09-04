@@ -1,0 +1,7 @@
+VCD info: dumpfile multiplier_unsigned.vcd opened for output.
+VCD warning: /home/mirafra/vlsi/eda_with_ai/d4_signed_unsigned_ $dumpfile called after $dumpvars started,
+                                                                using existing file (multiplier_unsigned.vcd).
+VCD warning: /home/mirafra/vlsi/eda_with_ai/d4_signed_unsigned_ $dumpfile called after $dumpvars started,
+                                                                using existing file (multiplier_unsigned.vcd).
+VCD warning: ignoring signals in previously scanned scope multiplier_top.u_mul_signed.
+VCD warning: ignoring signals in previously scanned scope multiplier_top.u_mul_unsigned.

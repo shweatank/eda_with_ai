@@ -1,0 +1,7 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787740285" />
+    <testcase name="test_all_gates_always_present" classname="testbench_parameter_combinedgate" file="/home/mirafra/vlsi/eda_with_ai/day7parametercombinedgates/testbench_parameter_combinedgate.py" lineno="104" time="0.0012938976287841797" sim_time_ns="6.0" ratio_time="4637.152017689331" />
+    <testcase name="test_sel_matches_corresponding_all_gates_output" classname="testbench_parameter_combinedgate" file="/home/mirafra/vlsi/eda_with_ai/day7parametercombinedgates/testbench_parameter_combinedgate.py" lineno="125" time="0.005961179733276367" sim_time_ns="48.0" ratio_time="8052.097428308603" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,28 @@
+# Read SystemVerilog RTL
+read_verilog -sv -D SYNTHESIS flipflop.sv
+
+# Select top module
+hierarchy -check -top dff_1bit
+
+# Convert processes
+proc
+
+# Optimize
+opt
+
+# Optimize FSMs
+fsm
+opt
+
+# Technology mapping
+techmap
+opt
+
+# Print statistics
+stat
+
+# Generate synthesized Verilog netlist
+write_verilog -noattr dff_netlist.v
+
+# Generate schematic
+show -format dot -prefix dff_synth

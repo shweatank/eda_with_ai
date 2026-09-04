@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ALU Simulator</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #f4f6f9;
+        }
+
+        .container {
+            width: 500px;
+            max-width: 90%;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .input-group {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .simulate-button {
+            background: #059669;
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .simulation-output {
+            margin-top: 20px;
+            background: #111827;
+            color: #22c55e;
+            padding: 15px;
+            border-radius: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>ALU Simulator</h1>
+
+
+    <label>Select Operation</label>
+
+    <select id="operation">
+
+        <option value="add_unsigned">
+            Unsigned Addition
+        </option>
+
+        <option value="add_signed">
+            Signed Addition
+        </option>
+
+        <option value="sub_unsigned">
+            Unsigned Subtraction
+        </option>
+
+        <option value="sub_signed">
+            Signed Subtraction
+        </option>
+
+        <option value="mul_unsigned">
+            Unsigned Multiplication
+        </option>
+
+        <option value="mul_signed">
+            Signed Multiplication
+        </option>
+
+        <option value="div_unsigned">
+            Unsigned Division
+        </option>
+
+        <option value="div_signed">
+            Signed Division
+        </option>
+
+    </select>
+
+
+    <div class="input-row">
+
+        <div class="input-group">
+
+            <label>Input A</label>
+
+            <input
+                type="number"
+                id="inputA"
+                placeholder="Enter A"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Input B</label>
+
+            <input
+                type="number"
+                id="inputB"
+                placeholder="Enter B"
+            >
+
+        </div>
+
+    </div>
+
+
+    <button onclick="calculateALU()">
+        Calculate
+    </button>
+
+
+    <button
+        class="simulate-button"
+        onclick="runSimulation()"
+    >
+        Run Cocotb Simulation
+    </button>
+
+
+    <div class="output">
+
+        <h3>Output</h3>
+
+        <div id="result" class="result">
+            --
+        </div>
+
+    </div>
+
+
+    <div
+        id="simulationOutput"
+        class="simulation-output"
+    >
+        Simulation output will appear here...
+    </div>
+
+</div>
+
+
+<script>
+
+async function calculateALU() {
+
+    const operation =
+        document.getElementById("operation").value;
+
+    const a =
+        parseInt(
+            document.getElementById("inputA").value
+        );
+
+    const b =
+        parseInt(
+            document.getElementById("inputB").value
+        );
+
+    const resultElement =
+        document.getElementById("result");
+
+
+    if (isNaN(a) || isNaN(b)) {
+
+        resultElement.innerText =
+            "Enter A and B";
+
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch("/alu/calculate", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    operation: operation,
+                    a: a,
+                    b: b
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            resultElement.innerText =
+                "Error: " +
+                (data.error || "Unknown error");
+
+            return;
+        }
+
+
+        if (typeof data.result === "object") {
+
+            resultElement.innerText =
+                "Q = " +
+                data.result.quotient +
+                " | R = " +
+                data.result.remainder;
+
+        } else {
+
+            resultElement.innerText =
+                data.result;
+
+        }
+
+    }
+
+    catch (error) {
+
+        resultElement.innerText =
+            "Backend connection error";
+
+        console.error(error);
+
+    }
+
+}
+
+
+async function runSimulation() {
+
+    const operation =
+        document.getElementById("operation").value;
+
+    const output =
+        document.getElementById(
+            "simulationOutput"
+        );
+
+
+    output.innerText =
+        "Running Cocotb simulation...";
+
+
+    try {
+
+        const response =
+            await fetch("/simulate", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    operation: operation
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        output.innerText =
+
+            "Operation: " +
+            data.operation +
+
+            "\n\nSuccess: " +
+            data.success +
+
+            "\n\n----- STDOUT -----\n" +
+            (data.stdout || "") +
+
+            "\n\n----- STDERR -----\n" +
+            (data.stderr || data.error || "");
+
+
+    }
+
+    catch (error) {
+
+        output.innerText =
+            "Simulation Error: " + error;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

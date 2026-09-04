@@ -1,0 +1,61 @@
+# Directories
+SRC_DIR = src
+TB_DIR = tb
+RESULTS_DIR = results
+SCRIPTS_DIR = scripts
+
+# Automatically pick the latest .sv file in src/
+DESIGN = $(shell ls -t $(SRC_DIR)/*.sv 2>/dev/null | head -n1)
+
+# Outputs
+NETLIST = $(RESULTS_DIR)/design_netlist.v
+VCD = $(RESULTS_DIR)/design.vcd
+PROFILE_REPORT = $(RESULTS_DIR)/profile_report.html
+
+# Default target
+all: sim synth profile wave
+
+# Run Cocotb simulation
+sim:
+    @echo "▶ Running Cocotb simulation..."
+    @mkdir -p $(RESULTS_DIR)
+    @if [ -f $(DESIGN) ]; then \
+        cocotb-run --module tb.test_$(basename $(notdir $(DESIGN))) || (echo "Simulation failed" && ollama run llama2:7b "Fix simulation errors"); \
+    else \
+        echo "No RTL design found in $(SRC_DIR). Generate a design first."; \
+    fi
+
+# Run Yosys synthesis
+synth:
+    @echo "⚙ Running Yosys synthesis..."
+    @mkdir -p $(RESULTS_DIR)
+    @if [ -f $(DESIGN) ]; then \
+        yosys -p "read_verilog $(DESIGN); synth; write_verilog $(NETLIST)" || (echo "Synthesis failed" && ollama run llama2:7b "Fix synthesis errors"); \
+    else \
+        echo "No RTL design found in $(SRC_DIR). Generate a design first."; \
+    fi
+
+# Run profiling
+profile:
+    @echo "📊 Running profiling..."
+    @if [ -f $(NETLIST) ] && [ -f $(VCD) ]; then \
+        python $(SCRIPTS_DIR)/profile.py $(NETLIST) $(VCD) results/sta.rpt || (echo "Profiling failed" && ollama run llama2:7b "Optimize RTL"); \
+    else \
+        echo "Missing netlist or VCD file. Run simulation and synthesis first."; \
+    fi
+
+# Open waveform
+wave:
+    @echo "🌊 Opening GTKWave..."
+    @if [ -f $(VCD) ]; then \
+        gtkwave $(VCD); \
+    else \
+        echo "Waveform file not found. Run simulation first."; \
+    fi
+
+# Clean results and database
+clean:
+    @echo "🧹 Cleaning results directory..."
+    @rm -rf $(RESULTS_DIR)/*
+    @echo "🗑 Cleaning database entries..."
+    @sqlite3 veriopt.db "DELETE FROM designs;"

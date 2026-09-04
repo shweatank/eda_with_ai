@@ -1,0 +1,8 @@
+flask
+cocotb
+matplotlib
+pytest
+sqlite3-binary
+graphql-core
+neo4j
+

@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787302603" />
+    <testcase name="test_logic_gates" classname="testbench_logic_gates" file="/home/mirafra/vlsi/eda_with_ai/d5mux_logic_gates/testbench_logic_gates.py" lineno="5" time="0.0009174346923828125" sim_time_ns="4.0" ratio_time="4359.983367983368" />
+  </testsuite>
+</testsuites>
