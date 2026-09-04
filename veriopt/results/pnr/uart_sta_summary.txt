@@ -1,0 +1,18 @@
+Post-route static timing analysis summary
+=========================================
+
+Result: setup met, hold met
+
+Timing (signoff, post-route)
+  parasitics               extracted SPEF
+  worst setup slack        7.327 ns
+  worst hold slack         1.813 ns
+  WNS                      0.000 ns
+  TNS                      0.000 ns
+  clock skew               n/a (no register-to-register paths)
+  min clock period         n/a (no register-to-register paths)
+  max clock frequency      n/a (no register-to-register paths)
+
+Checks
+  slew/cap/fanout violations 0
+  total power              4.8182e-06 W

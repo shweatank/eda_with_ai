@@ -1,0 +1,22 @@
+OpenROAD place-and-route summary
+================================
+
+Result: timing met, DRC clean
+
+Floorplan
+  die                      65.32 x 68.00 um
+  core                     55.20 x 57.12 um
+  std cells placed         2
+  design area              73 u^2
+  utilization              2%
+
+Timing (post-route estimate)
+  worst setup slack        7.316 ns
+  worst hold slack         1.841 ns
+  WNS                      0.000 ns
+  TNS                      0.000 ns
+
+Route
+  routing DRC errors       0
+  SPEF extracted           yes
+  total power              4.798e-06 W

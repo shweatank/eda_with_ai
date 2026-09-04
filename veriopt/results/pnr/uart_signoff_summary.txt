@@ -1,0 +1,24 @@
+Physical design signoff summary
+===============================
+
+Result: all physical checks clean
+
+Physical checks
+  placement legality       PASS
+  unrouted nets            0
+  routing DRC errors       0
+  antenna violations       0
+  unconnected PG pins      0
+  slew/cap/fanout violations 0
+
+Area
+  die                      65.32 x 68.00 um
+  core                     55.20 x 57.12 um
+  design area              73 u^2
+  utilization              2%
+  total power              4.7294e-06 W
+
+Not covered here
+  Foundry DRC deck and LVS need KLayout or Magic plus the full
+  sky130A PDK and a GDS stream, none of which is installed. The
+  checks above are everything verifiable from the OpenDB database.

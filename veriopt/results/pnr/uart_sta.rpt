@@ -1,0 +1,210 @@
+OpenSTA 3.1.0 737b52f33b Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Annotated parasitics from uart.spef
+
+==========================================================
+== Post-route STA: uart
+==   library    sky130_fd_sc_hd__tt_025C_1v80.lib
+==   netlist    uart_sta.v
+==   parasitics uart.spef
+==========================================================
+
+---- Parasitic annotation coverage ----
+Found 2 unannotated drivers.
+Found 0 partially unannotated drivers.
+
+---- Clocks ----
+Clock                   Period          Waveform
+----------------------------------------------------
+core_clk                 10.00        0.00      5.00
+
+---- Setup: 5 worst paths ----
+Warning 503: sta.tcl line 1, report_checks -group_count is deprecated. Use -group_path_count instead.
+Startpoint: _2_ (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: data_out (output port clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock source latency
+   0.000    0.000 ^ clk (in)
+   0.000    0.000 ^ _2_/CLK (sky130_fd_sc_hd__dfrtp_2)
+   0.423    0.423 v _2_/Q (sky130_fd_sc_hd__dfrtp_2)
+   0.000    0.423 v data_out (out)
+            0.423   data arrival time
+
+  10.000   10.000   clock core_clk (rise edge)
+   0.000   10.000   clock network delay (propagated)
+  -0.250    9.750   clock uncertainty
+   0.000    9.750   clock reconvergence pessimism
+  -2.000    7.750   output external delay
+            7.750   data required time
+-----------------------------------------------------------
+            7.750   data required time
+           -0.423   data arrival time
+-----------------------------------------------------------
+            7.327   slack (MET)
+
+
+Startpoint: data_in (input port clocked by core_clk)
+Endpoint: _2_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   2.000    2.000 v input external delay
+   0.018    2.018 v data_in (in)
+   0.000    2.018 v _2_/D (sky130_fd_sc_hd__dfrtp_2)
+            2.018   data arrival time
+
+  10.000   10.000   clock core_clk (rise edge)
+   0.000   10.000   clock source latency
+   0.000   10.000 ^ clk (in)
+   0.000   10.000 ^ _2_/CLK (sky130_fd_sc_hd__dfrtp_2)
+  -0.250    9.750   clock uncertainty
+   0.000    9.750   clock reconvergence pessimism
+  -0.118    9.632   library setup time
+            9.632   data required time
+-----------------------------------------------------------
+            9.632   data required time
+           -2.018   data arrival time
+-----------------------------------------------------------
+            7.614   slack (MET)
+
+
+
+---- Hold: 5 worst paths ----
+Warning 503: sta.tcl line 1, report_checks -group_count is deprecated. Use -group_path_count instead.
+Startpoint: data_in (input port clocked by core_clk)
+Endpoint: _2_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   2.000    2.000 v input external delay
+   0.018    2.018 v data_in (in)
+   0.000    2.018 v _2_/D (sky130_fd_sc_hd__dfrtp_2)
+            2.018   data arrival time
+
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock source latency
+   0.000    0.000 ^ clk (in)
+   0.000    0.000 ^ _2_/CLK (sky130_fd_sc_hd__dfrtp_2)
+   0.250    0.250   clock uncertainty
+   0.000    0.250   clock reconvergence pessimism
+  -0.045    0.205   library hold time
+            0.205   data required time
+-----------------------------------------------------------
+            0.205   data required time
+           -2.018   data arrival time
+-----------------------------------------------------------
+            1.813   slack (MET)
+
+
+Startpoint: _2_ (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: data_out (output port clocked by core_clk)
+Path Group: core_clk
+Path Type: min
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock source latency
+   0.000    0.000 ^ clk (in)
+   0.000    0.000 ^ _2_/CLK (sky130_fd_sc_hd__dfrtp_2)
+   0.390    0.390 ^ _2_/Q (sky130_fd_sc_hd__dfrtp_2)
+   0.000    0.391 ^ data_out (out)
+            0.391   data arrival time
+
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   0.250    0.250   clock uncertainty
+   0.000    0.250   clock reconvergence pessimism
+  -2.000   -1.750   output external delay
+           -1.750   data required time
+-----------------------------------------------------------
+           -1.750   data required time
+           -0.391   data arrival time
+-----------------------------------------------------------
+            2.141   slack (MET)
+
+
+
+---- Unconstrained paths ----
+Startpoint: _2_ (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: data_out (output port clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock core_clk (rise edge)
+   0.000    0.000   clock network delay (propagated)
+   0.000    0.000 ^ _2_/CLK (sky130_fd_sc_hd__dfrtp_2)
+   0.423    0.423 v _2_/Q (sky130_fd_sc_hd__dfrtp_2)
+   0.000    0.423 v data_out (out)
+            0.423   data arrival time
+
+  10.000   10.000   clock core_clk (rise edge)
+   0.000   10.000   clock network delay (propagated)
+  -0.250    9.750   clock uncertainty
+   0.000    9.750   clock reconvergence pessimism
+  -2.000    7.750   output external delay
+            7.750   data required time
+-----------------------------------------------------------
+            7.750   data required time
+           -0.423   data arrival time
+-----------------------------------------------------------
+            7.327   slack (MET)
+
+
+
+---- Slack summary ----
+worst slack max 7.327
+worst slack min 1.813
+tns max 0.000
+wns max 0.000
+
+---- Clock skew ----
+Clock core_clk
+No launch/capture paths found.
+
+
+---- Minimum clock period achievable ----
+core_clk period_min = 0.00 fmax = inf
+
+---- Design rule violations (slew / capacitance / fanout) ----
+
+---- Pulse width checks ----
+                                     Required   Actual
+Pin                                     Width    Width    Slack
+---------------------------------------------------------------
+_2_/CLK (low)                           0.199    5.000    4.801 (MET)
+
+
+---- Power ----
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential           4.3698e-06 3.5306e-07 1.0658e-11 4.7229e-06  98.0%
+Combinational        3.3145e-08 6.2170e-08 5.3266e-12 9.5320e-08   2.0%
+Clock                0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00   0.0%
+Macro                0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00   0.0%
+Pad                  0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00   0.0%
+----------------------------------------------------------------
+Total                4.4029e-06 4.1523e-07 1.5985e-11 4.8182e-06 100.0%
+                          91.4%       8.6%       0.0%
+
+STA complete for uart

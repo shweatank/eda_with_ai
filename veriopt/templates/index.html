@@ -1,136 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>VeriOpt Dashboard</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 20px;
-      color: #333;
+<meta charset="UTF-8">
+<title>EDA Flow Dashboard</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+label { display: block; margin-top: 10px; }
+input { margin: 6px; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+button {
+margin: 6px;
+padding: 10px 18px;
+border-radius: 6px;
+border: none;
+background-color: #0078d4;
+color: white;
+cursor: pointer;
     }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
-      margin-bottom: 30px;
+button:hover { background-color: #005a9e; }
+#report {
+background: #f7f7f7;
+border: 1px solid #ccc;
+border-radius: 6px;
+padding: 12px;
+margin-top: 10px;
+font-family: monospace;
+white-space: pre;
+overflow-x: auto;
+display: none;
     }
-    .card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-bottom: 20px;
+.stage { margin-top: 18px; }
+.stage h3 { margin-bottom: 4px; }
+.stage p.hint { margin: 0 0 6px 0; color: #555; font-size: 0.9em; }
+button.backend { background-color: #6b2fa0; }
+button.backend:hover { background-color: #521f7d; }
+#console {
+background: #111;
+color: #0f0;
+padding: 10px;
+height: 250px;
+overflow-y: auto;
+font-family: monospace;
+margin-top: 20px;
+border-radius: 6px;
     }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: bold;
-    }
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background: #3498db;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 15px;
-      margin: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #2980b9;
-    }
-    .actions {
-      text-align: center;
-      margin-top: 20px;
-    }
-    #log {
-      background: #1e1e1e;
-      color: #0f0;
-      font-family: monospace;
-      padding: 15px;
-      border-radius: 6px;
-      height: 300px;
-      overflow-y: auto;
-    }
-    pre {
-      margin: 0;
-    }
-  </style>
+</style>
 </head>
 <body>
-  <h1>⚡ VeriOpt Dashboard ⚡</h1>
+<h2>🚀 EDA Flow Controls</h2>
 
-  <!-- Generate RTL -->
-  <div class="card">
-    <h2>Generate RTL</h2>
-    <form id="rtlForm">
-      <label>Design Type</label>
-      <input type="text" name="design_type" placeholder="e.g. comparator" required>
-      <button type="submit">Generate RTL</button>
-    </form>
-  </div>
+<label for="designName">Design Name:</label>
+<input type="text" id="designName" placeholder="e.g. uart, and_gate">
+<button id="genDesign">Generate Design</button>
 
-  <!-- Generate Testbench -->
-  <div class="card">
-    <h2>Generate Testbench</h2>
-    <form id="tbForm">
-      <label>Design Type</label>
-      <input type="text" name="design_type" placeholder="e.g. comparator" required>
-      <label>Testbench Type</label>
-      <select name="tb_type">
-        <option value="python">Cocotb (Python)</option>
-        <option value="uvm">UVM (SystemVerilog)</option>
-      </select>
-      <button type="submit">Generate Testbench</button>
-    </form>
-  </div>
+<label for="tbName">Testbench Name:</label>
+<input type="text" id="tbName" placeholder="e.g. uart">
+<label for="tbType">Testbench Type:</label>
+<input type="text" id="tbType" placeholder="python or sv">
+<button id="genTB">Generate Testbench</button>
 
-  <!-- Flow buttons -->
-  <div class="card actions">
-    <h2>EDA Flow</h2>
-    <button onclick="trigger('/simulate')">▶ Simulate</button>
-    <button onclick="trigger('/synthesize')">⚙ Synthesize</button>
-    <button onclick="trigger('/profile')">📊 Profile</button>
-    <button onclick="trigger('/gds')">🏗 Generate GDSII</button>
-    <button onclick="trigger('/analyze_gds')">🧠 AI Analysis</button>
-  </div>
+<br>
+<button id="runSim">Run Simulation</button>
+<button id="runSynth">Run Synthesis</button>
+<button id="viewWave">View Waveform (GTKWave)</button>
+<button id="genSchematic">Generate Schematic (PNG)</button>
+<button id="viewSchematicPng">View Schematic PNG</button>
+<button id="viewWavePng">View Waveform PNG</button>
 
-  <!-- Log output -->
-  <div class="card">
-    <h2>Console Log</h2>
-    <div id="log"></div>
-  </div>
+<div class="stage">
+<h3>🏗️ Physical Design (OpenROAD + Sky130HD)</h3>
+<p class="hint">Place &amp; route runs the full backend and takes a minute or two. STA and signoff read back what it produced, so run them after it.</p>
+<button class="backend" id="runPnr">Run Place &amp; Route</button>
+<button class="backend" id="runSta">Run STA</button>
+<button class="backend" id="runSignoff">Run Physical Signoff</button>
+<button class="backend" id="viewLayoutPng">View Layout PNG</button>
+</div>
 
-  <script>
-    async function postForm(formId, url) {
-      const form = document.getElementById(formId);
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const response = await fetch(url, { method: "POST", body: formData });
-        const result = await response.json();
-        document.getElementById("log").innerHTML += "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
-      });
+<div id="report"></div>
+
+<h3>🖼️ Image Viewer</h3>
+<div id="png-viewer-wrapper" style="display:none;">
+    <img id="png-viewer" style="max-width:100%; border:1px solid #ccc; border-radius:6px;">
+</div>
+
+<h3>📜 Console Log</h3>
+<div id="console"></div>
+
+<script>
+const consoleLog = document.getElementById("console");
+
+async function triggerGraphQL(query, label) {
+consoleLog.innerHTML += `▶ ${label} started...\n`;
+try {
+const res = await fetch("/graphql", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ query })
+        });
+const data = await res.json();
+consoleLog.innerHTML += `${JSON.stringify(data)}\n`;
+      } catch (err) {
+consoleLog.innerHTML += `❌ ${label} failed: ${err}\n`;
+      }
+consoleLog.scrollTop = consoleLog.scrollHeight;
     }
 
-    async function trigger(url) {
-      const response = await fetch(url, { method: "POST" });
-      const result = await response.json();
-      document.getElementById("log").innerHTML += "<pre>" + JSON.stringify(result, null, 2) + "</pre>";
+async function triggerRest(url, label) {
+consoleLog.innerHTML += `▶ ${label} started...\n`;
+try {
+const res = await fetch(url, { method: "POST" });
+const data = await res.json();
+consoleLog.innerHTML += `${JSON.stringify(data)}\n`;
+      } catch (err) {
+consoleLog.innerHTML += `❌ ${label} failed: ${err}\n`;
+      }
+consoleLog.scrollTop = consoleLog.scrollHeight;
     }
 
-    // Wire forms to correct routes
-    postForm("rtlForm", "/generate_design");
-    postForm("tbForm", "/generate_testbench");
-  </script>
+document.getElementById("genDesign").onclick = () => {
+const name = document.getElementById("designName").value || "uart";
+triggerGraphQL(`mutation { generateDesign(name: "${name}") { filePath status } }`, "Generate Design");
+    };
+
+document.getElementById("genTB").onclick = () => {
+const name = document.getElementById("tbName").value || "uart";
+const tbType = document.getElementById("tbType").value || "python";
+triggerGraphQL(`mutation { generateTestbench(name: "${name}", tbType: "${tbType}") { filePath status } }`, "Generate Testbench");
+    };
+
+document.getElementById("runSim").onclick = () =>
+triggerGraphQL('mutation { simulate { filePath status } }', "Simulation");
+
+document.getElementById("runSynth").onclick = () =>
+triggerGraphQL('mutation { synthesize { filePath status } }', "Synthesis");
+
+document.getElementById("viewWave").onclick = () =>
+triggerRest("/api/view-waveform", "View Waveform");
+
+document.getElementById("genSchematic").onclick = () =>
+triggerGraphQL('mutation { schematic { filePath status } }', "Generate Schematic");
+
+function showPng(filename, label) {
+const viewerWrapper = document.getElementById("png-viewer-wrapper");
+const viewer = document.getElementById("png-viewer");
+consoleLog.innerHTML += `▶ ${label}...\n`;
+// cache-bust so repeated generations always show the latest image
+viewer.src = `/results/${filename}?t=${Date.now()}`;
+viewer.onload = () => {
+viewerWrapper.style.display = "block";
+consoleLog.innerHTML += `Loaded ${filename}\n`;
+consoleLog.scrollTop = consoleLog.scrollHeight;
+    };
+viewer.onerror = () => {
+viewerWrapper.style.display = "none";
+consoleLog.innerHTML += `❌ Could not load ${filename}. Generate it first.\n`;
+consoleLog.scrollTop = consoleLog.scrollHeight;
+    };
+    }
+
+const reportPane = document.getElementById("report");
+
+// The backend stages return a `report` field holding the stage summary --
+// die size, slack, violation counts. Dumping that as raw JSON into the
+// console log makes it unreadable, so render it in its own pane and leave
+// only the pass/fail status in the log.
+async function triggerBackendStage(mutation, label) {
+consoleLog.innerHTML += `▶ ${label} started... (this can take a few minutes)\n`;
+consoleLog.scrollTop = consoleLog.scrollHeight;
+try {
+const res = await fetch("/graphql", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ query: `mutation { ${mutation} { name filePath status report } }` })
+        });
+const data = await res.json();
+const stage = data && data.data ? Object.values(data.data)[0] : null;
+if (!stage) {
+consoleLog.innerHTML += `❌ ${label}: ${JSON.stringify(data)}\n`;
+        } else {
+consoleLog.innerHTML += `${stage.status}${stage.filePath ? " -> " + stage.filePath : ""}\n`;
+if (stage.report) {
+reportPane.textContent = stage.report;
+reportPane.style.display = "block";
+            }
+        }
+      } catch (err) {
+consoleLog.innerHTML += `❌ ${label} failed: ${err}\n`;
+      }
+consoleLog.scrollTop = consoleLog.scrollHeight;
+    }
+
+document.getElementById("runPnr").onclick = () =>
+triggerBackendStage("placeAndRoute", "Place & Route");
+
+document.getElementById("runSta").onclick = () =>
+triggerBackendStage("staticTimingAnalysis", "Static Timing Analysis");
+
+document.getElementById("runSignoff").onclick = () =>
+triggerBackendStage("physicalSignoff", "Physical Signoff");
+
+document.getElementById("viewSchematicPng").onclick = () => {
+const name = document.getElementById("designName").value || "uart";
+showPng(`${name}.png`, "Loading schematic PNG");
+    };
+
+document.getElementById("viewWavePng").onclick = () => {
+showPng("design.png", "Loading waveform PNG");
+    };
+
+// The layout lives under results/pnr/, named after the design that was run.
+document.getElementById("viewLayoutPng").onclick = () => {
+const name = document.getElementById("designName").value || "uart";
+showPng(`pnr/${name}_layout.png`, "Loading routed layout PNG");
+    };
+</script>
 </body>
 </html>
